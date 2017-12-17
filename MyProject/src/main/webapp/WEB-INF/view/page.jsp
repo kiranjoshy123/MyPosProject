@@ -56,6 +56,12 @@
 			<c:if test="${userClickedContact == true }">
 				<%@include file="contact.jsp"%>
 			</c:if>
+			
+			<!-- All products/list products handling -->
+			<c:if test="${userClickedAllProducts == true or userClickedCategoryProducts == true }">
+				<%@include file="listProducts.jsp"%>
+			</c:if>
+			
 
 		</div>
 
