@@ -10,8 +10,8 @@
    http://www.springframework.org/schema/mvc/spring-mvc.xsd
    ">
 
-	<context:component-scan base-package="net.mypos.MyProject.Controller "></context:component-scan>
-	<context:component-scan base-package="net.mypos.MyProjectBackend.daoimpl "></context:component-scan>
+	<context:component-scan base-package="net.mypos.MyProject.Controller"></context:component-scan>
+	<context:component-scan base-package="net.mypos.MyProjectBackend"></context:component-scan>
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

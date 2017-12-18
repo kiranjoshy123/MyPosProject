@@ -16,7 +16,7 @@ public class PageController {
 	@Autowired
 	private CatergoryDAO categoryDAO;
 	
-	@RequestMapping(value = { "/", "/home", "/index" },method=RequestMethod.GET)
+	@RequestMapping(value = { "/", "/home", "/index" })
 	public ModelAndView index() {
 		ModelAndView mv = new ModelAndView("page");
 		mv.addObject("title", "Home");
