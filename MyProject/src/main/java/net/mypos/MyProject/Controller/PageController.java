@@ -4,17 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.mypos.MyProjectBackend.dao.CatergoryDAO;
+import net.mypos.MyProjectBackend.dao.ProductDAO;
 import net.mypos.MyProjectBackend.dto.Category;
+import net.mypos.MyProjectBackend.dto.Product;
 
 @Controller
 public class PageController {
 
 	@Autowired
 	private CatergoryDAO categoryDAO;
+	
+	@Autowired
+	private ProductDAO productDAO;
 	
 	@RequestMapping(value = { "/", "/home", "/index" })
 	public ModelAndView index() {
@@ -74,4 +78,19 @@ public class PageController {
 		mv.addObject("userClickedCategoryProducts", true);
 		return mv;
 	}
+	
+	/*
+	 * Viewing a single product
+	 **/
+	 @RequestMapping(value= {"/show/{id}/product"})
+	 public ModelAndView showSingleProduct(@PathVariable("id") int id) {
+		 
+		 ModelAndView mv = new ModelAndView("page");
+		 Product product = productDAO.get(id);
+		 
+		 mv.addObject("title", product.getName());
+		 mv.addObject("product", product);
+		 mv.addObject("userClickedShowProduct", true);
+		 return mv;
+	 }
 }
