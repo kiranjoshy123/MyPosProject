@@ -84,7 +84,7 @@
 						</div>
 						
 						<div class="form-group">
-							<div class="col-md-offset-4 col-md-8">
+							<div class="col-md-offset-5 col-md-7">
 								<input type="submit" name="submit" id="submit" value="Submit" class="btn btn-primary"/>
 								
 								<!-- Hidden fields for product -->
@@ -124,7 +124,7 @@
 					class="table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th>Id</th>
+							<th>Category</th>
 							<th>Name</th>
 							<th>Brand</th>
 							<th>Quantity</th>

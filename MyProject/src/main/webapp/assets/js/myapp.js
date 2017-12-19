@@ -95,7 +95,7 @@ $(function() {
 	}
 	
 	//-----------------------------------
-	$('.switch input[type="checkbox"').on( 'change', function(){
+	/*$('.switch input[type="checkbox"').on( 'change', function(){
 		var checkbox = $(this);
 		var checked = checkbox.prop('checked');
 		var msg = (checked) ? 'You want to active the product ?' : 'You want to deactivate the product ?'
@@ -108,19 +108,13 @@ $(function() {
 			callback : function(confirmed)
 			{
 				if(confirmed){
-					
-					/*bootbox.alert({
-						size:'medium',
-						title:'Information',
-						message:'You are going to perform operation on product' + value
-					})*/
 				}
 				else{
 					checkbox.prop('checked', !checked);
 				}
 			}
 		})
-	});
+	});*/
 	
 	
 	// -----------------------------Data table for admin-----------------------
@@ -141,7 +135,7 @@ $(function() {
 			},
 			columns : [
 				{
-					data : 'id',
+					data : 'category_id',
 				},
 				{
 					data : 'name',

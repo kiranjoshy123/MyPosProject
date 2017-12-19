@@ -36,7 +36,6 @@ public class Product {
 	private int quantity;
 	private boolean is_active;
 	
-	@JsonIgnore
 	private int category_id;
 	@JsonIgnore
 	private int supplier_id;
