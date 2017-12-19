@@ -10,9 +10,14 @@ CREATE TABLE category (
 
 );
 
-INSERT INTO category (name, description,image_url,is_active) VALUES ('Laptop', 'This is description for Laptop category!', 'CAT_1.png', true);
-INSERT INTO category (name, description,image_url,is_active) VALUES ('Television', 'This is description for Television category!', 'CAT_2.png', true);
-INSERT INTO category (name, description,image_url,is_active) VALUES ('Mobile', 'This is description for Mobile category!', 'CAT_3.png', true);
+INSERT INTO category (name, description,image_url,is_active) VALUES ('Grocery', 'This is description for Grocery category!', 'CAT_1.png', true);
+INSERT INTO category (name, description,image_url,is_active) VALUES ('Electronic', 'This is description for Electronic category!', 'CAT_2.png', true);
+INSERT INTO category (name, description,image_url,is_active) VALUES ('Vegetables', 'This is description for Vegetables category!', 'CAT_3.png', true);
+INSERT INTO category (name, description,image_url,is_active) VALUES ('Fruits', 'This is description for Fruits category!', 'CAT_4.png', true);
+INSERT INTO category (name, description,image_url,is_active) VALUES ('Dress', 'This is description for Dress category!', 'CAT_5.png', true);
+INSERT INTO category (name, description,image_url,is_active) VALUES ('Bakery', 'This is description for Bakery category!', 'CAT_6.png', true);
+INSERT INTO category (name, description,image_url,is_active) VALUES ('Liquor', 'This is description for Liquor category!', 'CAT_7.png', true);
+INSERT INTO category (name, description,image_url,is_active) VALUES ('Misc', 'This is description for Misc category!', 'CAT_8.png', true);
 
 CREATE TABLE user_detail (
 	id IDENTITY,
@@ -54,12 +59,52 @@ CREATE TABLE product (
 	CONSTRAINT fk_product_supplier_id FOREIGN KEY (supplier_id) REFERENCES user_detail(id),	
 );	
 INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
-VALUES ('PRDABC123DEFX', 'iPhone 5s', 'apple', 'This is one of the best phone available in the market right now!', 18000, 5, true, 3, 2 );
+VALUES ('PRDABC123DEFX', 'Tata-Tea-500g', 'Tata', 'This is one of the best tea available in the market right now!', 100, 50, true, 1, 2 );
 INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
-VALUES ('PRDDEF123DEFX', 'Samsung s7', 'samsung', 'A smart phone by samsung!', 32000, 2, true, 3, 3 );
+VALUES ('PRDDEF123DEFX', 'Tata-Salt-1kg', 'Tata', 'Tata Salt!', 20, 20, true, 1, 2 );
 INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
-VALUES ('PRDPQR123WGTX', 'Google Pixel', 'google', 'This is one of the best android smart phone available in the market right now!', 57000, 5, true, 3, 2 );
+VALUES ('PRDPQR123WGTX', 'Nescafe Classic-500g', 'Nestle', 'Nestle Coffee!', 500, 50, true, 1, 2 );
+
 INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
-VALUES ('PRDMNO123PQRX', ' Macbook Pro', 'apple', 'This is one of the best laptops available in the market right now!', 54000, 3, true, 1, 2 );
+VALUES ('PRDMNO123PQRX', ' Macbook Pro', 'apple', 'This is one of the best laptops available in the market right now!', 54000, 3, true, 2, 2 );
 INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
-VALUES ('PRDABCXYZDEFX', 'Dell Latitude E6510', 'dell', 'This is one of the best laptop series from dell that can be used!', 48000, 5, true, 1, 3 );
+VALUES ('PRDABC1YZDEFX', 'Dell Latitude E6510', 'dell', 'This is one of the best laptop series from dell that can be used!', 48000, 5, true, 2, 3 );
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
+VALUES ('PRDABC123DEFY', 'iPhone 5s', 'apple', 'This is one of the best phone available in the market right now!', 18000, 5, true, 2, 2 );
+
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
+VALUES ('PRDMNO124PQRX', 'Onion-1kg', 'STORE1', 'Onion-1kg!', 40, 30, true, 3, 2 );
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
+VALUES ('PRDABC2YZDEFX', 'Potato-1kg', 'STORE1', 'Potato-1kg!', 20, 50, true, 3, 3 );
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
+VALUES ('PRDABC124DEFY', 'Tomato-2kg', 'STORE1', 'Tomato-2kg!', 40, 50, true, 3, 2 );
+
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
+VALUES ('PRDMNO125PQRX', 'Banana-1kg', 'STORE1', 'Banana-1kg!', 30, 100, true, 4, 2 );
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
+VALUES ('PRDABC3YZDEFX', 'Apple-1kg', 'STORE1', 'Apple-1kg!', 150, 500, true, 4, 3 );
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
+VALUES ('PRDABC125DEFY', 'Orange-2kg', 'STORE1', 'Orange-2kg!', 180, 500, true, 4, 2 );
+
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
+VALUES ('PRDMNO126PQRX', 'Men White Regular Fit Shirt', 'Arrow', 'Men White Regular Fit Shirt!', 800, 100, true, 5, 2 );
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
+VALUES ('PRDABC4YZDEFX', 'Men Red Regular Casual Shirt', 'Tommy Hilfiger', 'Men Red Regular Casual Shirt!', 2000, 50, true, 5, 3 );
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
+VALUES ('PRDABC126DEFY', 'Basics Red & Blue Sweater', 'Basics', 'Basics Red & Blue Sweater!', 900, 500, true, 5, 2 );
+
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
+VALUES ('PRDMNO127PQRX', 'Tea Cake-Marble-250gm', 'STORE1', 'Tea Cake-Marble!', 100, 10, true, 6, 2 );
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
+VALUES ('PRDABC5YZDEFX', 'Plum Cake-Rich Fruit-500 gm', 'STORE1', 'Plum Cake-Rich Fruit-500 gm!', 300, 50, true, 6, 3 );
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
+VALUES ('PRDABC127DEFY', 'Cup Cakes-Assorted-6 pcs', 'STORE1', 'Cup Cakes-Assorted-6 pcs!', 300, 10, true, 6, 2 );
+
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
+VALUES ('PRDMNO128PQRX', 'Chivas Regal 12Year', 'STORE1', 'Chivas Regal 12Year!', 4000, 10, true, 7, 2 );
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
+VALUES ('PRDABC6YZDEFX', 'Bira 91 White', 'Bira', 'Bira 91 White!', 200, 50, true, 7, 3 );
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
+VALUES ('PRDABC128DEFY', 'Kingfisher Premium', 'UBL', 'Kingfisher Premium!', 230, 10, true, 7, 2 );
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
+VALUES ('PRDABC129DEFY', 'Carlsberg Premium', 'Carlsberg', 'Carlsberg Premium!', 230, 0, true, 7, 2 );
