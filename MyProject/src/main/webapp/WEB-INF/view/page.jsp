@@ -31,6 +31,7 @@
 <link href="${css}/bootstrap.min.css" rel="stylesheet">
 
 <!-- Theme goes here -->
+<link href="${css}/bootstrap-readable-theme.css" rel="stylesheet">
 
 <!-- Data table Bootstrap CSS -->
 <link href="${css}/dataTables.bootstrap.css" rel="stylesheet">
@@ -44,12 +45,14 @@
 <body>
 
 	<div class="wrapper">
+	
 		<!-- Navigation -->
 		<%@include file="./shared/navbar.jsp"%>
 
 		<!-- Page Content -->
-
 		<div class="content">
+		
+			<!-- Loading the Home contents -->
 			<c:if test="${userClickedHome == true }">
 				<%@include file="home.jsp"%>
 			</c:if>
