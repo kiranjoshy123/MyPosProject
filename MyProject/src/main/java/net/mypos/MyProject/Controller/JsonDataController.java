@@ -18,10 +18,18 @@ public class JsonDataController {
 	@Autowired
 	private ProductDAO productDAO;
 	
+	// Returning only the active products - For user.
 	@RequestMapping("/all/products")
 	@ResponseBody	
 	public List<Product> getAllProducts(){
 		return productDAO.listActiveProducts();
+	}
+	
+	// Returning all the products( active/inactive) - For Admin
+	@RequestMapping("/admin/all/products")
+	@ResponseBody	
+	public List<Product> getAllProductsForAdmin(){
+		return productDAO.list();
 	}
 	
 	@RequestMapping("/category/{id}/products")

@@ -110,4 +110,37 @@
 	</div>
 
 
+	<!-- List of all Products -->
+	<div class="row">
+		<div class="col-xs-12">
+			<h3>Available Products</h3>
+		</div>
+		
+		
+		<div class="col-xs-12" >
+			<div style="overflow:auto">
+				
+				<table id="adminProductTable"
+					class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Name</th>
+							<th>Brand</th>
+							<th>Quantity</th>
+							<th>Unit Price</th>
+							<th>Active</th>
+							<th>Edit</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+	
+		
+	
+	</div>
+	
+	
+
 </div>

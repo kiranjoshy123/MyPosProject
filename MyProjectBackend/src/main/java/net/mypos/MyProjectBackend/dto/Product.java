@@ -34,8 +34,6 @@ public class Product {
 	private double unit_price;
 	
 	private int quantity;
-	
-	@JsonIgnore
 	private boolean is_active;
 	
 	@JsonIgnore

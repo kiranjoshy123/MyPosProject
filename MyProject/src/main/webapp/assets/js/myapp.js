@@ -19,7 +19,6 @@ $(function() {
 	
 	// Code for jquery dataTable
 	
-	
 	var $table = $('#productlistTable');
 	// Execute only when products are to be displayed.
 	if($table.length){
@@ -51,9 +50,9 @@ $(function() {
 				},
 				{
 					data : 'unit_price',
-					mRender : function(data,type,row){
+					/*mRender : function(data,type,row){
 						return '&#8377;' + data
-					}
+					}*/
 				},
 				{
 					data : 'quantity',
@@ -94,4 +93,140 @@ $(function() {
 			$alert.fadeOut('slow');
 		}, 3000)
 	}
+	
+	//-----------------------------------
+	$('.switch input[type="checkbox"').on( 'change', function(){
+		var checkbox = $(this);
+		var checked = checkbox.prop('checked');
+		var msg = (checked) ? 'You want to active the product ?' : 'You want to deactivate the product ?'
+		var value = checkbox.prop('value');
+		
+		bootbox.confirm({
+			size:'medium',
+			title:'Product Activation & Deactivation',
+			message : msg,
+			callback : function(confirmed)
+			{
+				if(confirmed){
+					
+					/*bootbox.alert({
+						size:'medium',
+						title:'Information',
+						message:'You are going to perform operation on product' + value
+					})*/
+				}
+				else{
+					checkbox.prop('checked', !checked);
+				}
+			}
+		})
+	});
+	
+	
+	// -----------------------------Data table for admin-----------------------
+	var $adminProductsTable = $('#adminProductTable');
+	// Execute only when products are to be displayed.
+	if($adminProductsTable.length){
+		console.log("Inside the table!");
+		console.log(window.contextRoot);
+		
+		var jsonURL = window.contextRoot + '/json/data/admin/all/products';
+		
+		$adminProductsTable.DataTable({
+			lengthMenu : [[10,30,50,-1],['10','30','50','All']],
+			pageLength : 30,
+			ajax :{
+				url : jsonURL,
+				dataSrc : ''
+			},
+			columns : [
+				{
+					data : 'id',
+				},
+				{
+					data : 'name',
+				},
+				{
+					data : 'brand',
+				},
+				{
+					data : 'quantity',
+					mRender : function(data,type,row){
+						if(data < 1)
+						{
+							return '<span style="color:red">Out of Stock!</span>';
+						}
+						
+						return data;
+					}
+				},
+				{
+					data : 'unit_price',
+					/*mRender : function(data,type,row){
+						return '&#8377;' + data
+					}*/
+				},
+				{
+					data : 'is_active',
+					bSortable : false,
+					mRender : function(data,type,row){
+						var str = '';
+						str += '<label class="switch">';
+						
+						if(data){
+							str += '<input type="checkbox" checked="checked" value="' + row.id + '"/>';
+						}
+						else{
+							str += '<input type="checkbox" value="' + row.id + '"/>';
+						}
+						
+						str += '<div class="slider"></div></label>';
+						return str;
+					}
+					
+				},
+				{
+					data : 'id',
+					bSortable : false,
+					mRender : function(data, type, row){
+						var str = '';
+						str += '<a href="${contextRoot}/manage/' + data + '/product" class="btn btn-warning" >';
+						str += '<span class="glyphicon glyphicon-pencil" ></span></a>';
+						return str;
+					
+					}
+				}
+				
+			],
+			
+			initComplete : function(){
+				var api = this.api();
+				api.$('.switch input[type="checkbox"]').on( 'change', function(){
+					var checkbox = $(this);
+					var checked = checkbox.prop('checked');
+					var msg = (checked) ? 'You want to active the product ?' : 'You want to deactivate the product ?'
+					var value = checkbox.prop('value');
+					
+					bootbox.confirm({
+						size:'medium',
+						title:'Product Activation & Deactivation',
+						message : msg,
+						callback : function(confirmed)
+						{
+							if(confirmed){
+							}
+							else{
+								checkbox.prop('checked', !checked);
+							}
+						}
+					})
+				});
+			}
+			
+			
+		});
+	}
+	
+	//------------------------------Data table for Admin-------------------------
+	
 });
