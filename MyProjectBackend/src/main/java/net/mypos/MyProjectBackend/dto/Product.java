@@ -6,6 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -15,14 +19,25 @@ public class Product {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String code;
+	
+	@NotBlank(message = "Please enter the Product Name!")
 	private String name;
+	
+	@NotBlank(message = "Please enter the Product Brand!")
 	private String brand;
+	
 	@JsonIgnore
+	@NotBlank(message = "Please enter the Product Details!")
 	private String description;
+	
+	@Min(value=1, message="The Price cannot be less than 1.")
 	private double unit_price;
+	
 	private int quantity;
+	
 	@JsonIgnore
 	private boolean is_active;
+	
 	@JsonIgnore
 	private int category_id;
 	@JsonIgnore
@@ -95,6 +110,7 @@ public class Product {
 	public void setSupplier_id(int supplier_id) {
 		this.supplier_id = supplier_id;
 	}
+	
 	public int getPurchases() {
 		return purchases;
 	}
@@ -106,5 +122,13 @@ public class Product {
 	}
 	public void setViews(int views) {
 		this.views = views;
+	}
+	
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", code=" + code + ", name=" + name + ", brand=" + brand + ", description="
+				+ description + ", unit_price=" + unit_price + ", quantity=" + quantity + ", is_active=" + is_active
+				+ ", category_id=" + category_id + ", supplier_id=" + supplier_id + ", purchases=" + purchases
+				+ ", views=" + views + "]";
 	}
 }
