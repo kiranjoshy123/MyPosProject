@@ -21,18 +21,29 @@
 					<a href="${contextRoot}/manage/products">Manage Products</a>
 				</li>
 				<li id="manageCategory">
-					<a href="${contextRoot}/manage/category">Manage Category</a>
+					<a href="${contextRoot}/manage/categories">Manage Category</a>
 				</li>
 				<li id="manageUsers">
 					<a href="${contextRoot}/manage/users">Manage Users</a>
 				</li>
+				
+			</ul>
+			
+			<ul class="nav navbar-nav navbar-right">
 				<li id="about">
 					<a href="${contextRoot}/about">About</a>
 				</li>
 				<li id="contact">
 					<a href="${contextRoot}/contact">Contact</a>
 				</li>
+				<li id="register">
+					<a href="${contextRoot}/register">Sing Up</a>
+				</li>
+				<li id="login">
+					<a href="${contextRoot}/login">Login</a>
+				</li>
 			</ul>
+			
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>

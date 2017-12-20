@@ -62,6 +62,7 @@ public class HibernateConfig {
 		prop.put("hibernate.dialect", DATABASE_DIALECT);
 		prop.put("hibernate.show_sql", "true");
 		prop.put("hibernate.format_sql", "true");
+		prop.put("hibernate.hbm2ddl.auto", "create");
 		return prop;
 	}
 }

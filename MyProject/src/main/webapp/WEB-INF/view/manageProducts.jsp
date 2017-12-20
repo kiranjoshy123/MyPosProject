@@ -85,7 +85,7 @@
 						
 						<div class="form-group">
 							<div class="col-md-offset-5 col-md-7">
-								<input type="submit" name="submit" id="submit" value="Submit" class="btn btn-primary"/>
+								<input type="submit" name="submit" id="submit" value="Save" class="btn btn-primary"/>
 								
 								<!-- Hidden fields for product -->
 								<sf:hidden path="id"/>

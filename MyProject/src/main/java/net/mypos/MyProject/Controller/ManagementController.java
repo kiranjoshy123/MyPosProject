@@ -50,7 +50,7 @@ public class ManagementController {
 		
 		if(operation != null) {
 			if(operation.equals("product")){
-				mv.addObject("message", "Product submitted successfully!");
+				mv.addObject("message", "Product saved successfully..");
 			}
 		}
 		
@@ -82,7 +82,7 @@ public class ManagementController {
 		if(results.hasErrors()) {
 			model.addAttribute("userClickedManageProducts",true);
 			model.addAttribute("title","Manage Products");
-			model.addAttribute("message","Validation failed for Product Submission!");
+			model.addAttribute("message","Validation failed for Product Submited!!");
 			return "page";
 		}
 		
@@ -118,7 +118,7 @@ public class ManagementController {
 
 	
 	//-------------------------- Manage Categories -----------------------------------------
-	@RequestMapping(value="/category", method=RequestMethod.GET)
+	@RequestMapping(value="/categories", method=RequestMethod.GET)
 	public ModelAndView showManageCategory(@RequestParam(name="operation", required=false) String operation) {
 		// Create a new category.
 		Category newCategory = new Category();
@@ -131,14 +131,14 @@ public class ManagementController {
 		
 		if(operation != null) {
 			if(operation.equals("category")){
-				mv.addObject("message", "Category submitted successfully!");
+				mv.addObject("message", "Category saved successfully..");
 			}
 		}
 		
 		return mv;
 	}
 	
-	@RequestMapping(value="/category", method=RequestMethod.POST)
+	@RequestMapping(value="/categories", method=RequestMethod.POST)
 	public String handleCategorySubmission(@Valid @ModelAttribute("category") Category modifiedCategory, BindingResult results, Model model) {
 		
 		logger.info(modifiedCategory.toString());
@@ -147,7 +147,7 @@ public class ManagementController {
 		if(results.hasErrors()) {
 			model.addAttribute("userClickedManageCategory",true);
 			model.addAttribute("title","Manage Category");
-			model.addAttribute("message","Validation failed for Category Submission!");
+			model.addAttribute("message","Validation failed for Category Submited!!");
 			return "page";
 		}
 		
@@ -159,11 +159,11 @@ public class ManagementController {
 			categoryDAO.udpate(modifiedCategory);
 		}
 		
-		return "redirect:/manage/category?operation=category";
+		return "redirect:/manage/categories?operation=category";
 	}
 	
 	
-	@RequestMapping(value="/{id}/category", method=RequestMethod.GET)
+	@RequestMapping(value="/{id}/categories", method=RequestMethod.GET)
 	public ModelAndView showEditCategory(@PathVariable int id) {	
 		// Create a new Category.
 		Category newCategory = categoryDAO.get(id);
