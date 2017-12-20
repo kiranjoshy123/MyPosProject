@@ -6,6 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Category {
 	
@@ -53,10 +57,14 @@ public class Category {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@NotBlank(message = "Please enter the Category Name!")
 	private String name;
+	
+	@NotBlank(message = "Please enter the Category description!")
 	private String description;
 	
 	@Column(name = "image_url")
+	@JsonIgnore
 	private String imageURL;
 	
 	@Column(name = "is_active")

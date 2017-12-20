@@ -82,6 +82,11 @@
 				<%@include file="manageProducts.jsp"%>
 			</c:if>
 			
+			<!-- Show only when user clicks a manage categories -->
+			<c:if test="${userClickedManageCategory == true }">
+				<%@include file="manageCategories.jsp"%>
+			</c:if>
+			
 
 		</div>
 

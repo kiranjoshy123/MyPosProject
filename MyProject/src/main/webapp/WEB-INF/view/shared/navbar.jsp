@@ -20,6 +20,12 @@
 				<li id="manageProducts">
 					<a href="${contextRoot}/manage/products">Manage Products</a>
 				</li>
+				<li id="manageCategory">
+					<a href="${contextRoot}/manage/category">Manage Category</a>
+				</li>
+				<li id="manageUsers">
+					<a href="${contextRoot}/manage/users">Manage Users</a>
+				</li>
 				<li id="about">
 					<a href="${contextRoot}/about">About</a>
 				</li>

@@ -60,17 +60,17 @@ public class ManagementController {
 	@RequestMapping(value="/{id}/product", method=RequestMethod.GET)
 	public ModelAndView showEditProduct(@PathVariable int id) {
 			
-			// Create a new Product.
-			Product newProduct = productDAO.get(id);
-			
-			ModelAndView mv = new ModelAndView("page");
-			mv.addObject("userClickedManageProducts",true);
-			mv.addObject("title","Manage Products");
-			
-			// set the product fetch from database
-			mv.addObject("product", newProduct);
-			return mv;
-		} 
+		// Create a new Product.
+		Product newProduct = productDAO.get(id);
+		
+		ModelAndView mv = new ModelAndView("page");
+		mv.addObject("userClickedManageProducts",true);
+		mv.addObject("title","Manage Products");
+		
+		// set the product fetch from database
+		mv.addObject("product", newProduct);
+		return mv;
+	} 
 	
 	
 	@RequestMapping(value="/products", method=RequestMethod.POST)
@@ -115,5 +115,68 @@ public class ManagementController {
 	public List<Category> getCategories(){
 		return categoryDAO.list();
 	}
+
 	
+	//-------------------------- Manage Categories -----------------------------------------
+	@RequestMapping(value="/category", method=RequestMethod.GET)
+	public ModelAndView showManageCategory(@RequestParam(name="operation", required=false) String operation) {
+		// Create a new category.
+		Category newCategory = new Category();
+		newCategory.setActive(true);
+		
+		ModelAndView mv = new ModelAndView("page");
+		mv.addObject("userClickedManageCategory",true);
+		mv.addObject("title","Manage Category");
+		mv.addObject("category", newCategory);
+		
+		if(operation != null) {
+			if(operation.equals("category")){
+				mv.addObject("message", "Category submitted successfully!");
+			}
+		}
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/category", method=RequestMethod.POST)
+	public String handleCategorySubmission(@Valid @ModelAttribute("category") Category modifiedCategory, BindingResult results, Model model) {
+		
+		logger.info(modifiedCategory.toString());
+		
+		// Check for errors.
+		if(results.hasErrors()) {
+			model.addAttribute("userClickedManageCategory",true);
+			model.addAttribute("title","Manage Category");
+			model.addAttribute("message","Validation failed for Category Submission!");
+			return "page";
+		}
+		
+		if(modifiedCategory.getId() == 0) {
+			// id = 0 means, product doesn't exists. Hence add a new one. 
+			categoryDAO.add(modifiedCategory);
+		}
+		else {
+			categoryDAO.udpate(modifiedCategory);
+		}
+		
+		return "redirect:/manage/category?operation=category";
+	}
+	
+	
+	@RequestMapping(value="/{id}/category", method=RequestMethod.GET)
+	public ModelAndView showEditCategory(@PathVariable int id) {	
+		// Create a new Category.
+		Category newCategory = categoryDAO.get(id);
+		
+		ModelAndView mv = new ModelAndView("page");
+		mv.addObject("userClickedManageCategory",true);
+		mv.addObject("title","Manage Category");
+		
+		// set the product fetch from database
+		mv.addObject("category", newCategory);
+		return mv;
+	} 
+	
+	
+	//-------------------------- Manage Users -----------------------------------------
 }

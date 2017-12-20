@@ -117,12 +117,10 @@ $(function() {
 	});*/
 	
 	
-	// -----------------------------Data table for admin-----------------------
+	// -----------------------------Data table for Product. Available only for admin-----------------------
 	var $adminProductsTable = $('#adminProductTable');
 	// Execute only when products are to be displayed.
 	if($adminProductsTable.length){
-		console.log("Inside the table!");
-		console.log(window.contextRoot);
 		
 		var jsonURL = window.contextRoot + '/json/data/admin/all/products';
 		
@@ -231,6 +229,48 @@ $(function() {
 		});
 	}
 	
-	//------------------------------Data table for Admin-------------------------
+	//------------------------------Data table for Product - Admin -------------------------
+	
+	
+	//------------------------------Data table for Category - Admin -------------------------
+	
+	var $table = $('#adminCategoryTable');
+	// Execute only when categories are to be displayed.
+	if($table.length){
+		var jsonURL = window.contextRoot + '/json/data/admin/all/categories';
+		
+		$table.DataTable({
+			lengthMenu : [[10,30,50,-1],['10','30','50','All']],
+			pageLength : 30,
+			ajax :{
+				url : jsonURL,
+				dataSrc : ''
+			},
+			columns : [
+				{
+					data : 'name',
+				},
+				{
+					data : 'description',
+				}
+				,
+				{
+					data : 'id',
+					bSortable : false,
+					mRender : function(data, type, row){
+						var str = '';
+						str += '<a href="'+ window.contextRoot +'/manage/' + data + '/category" class="btn btn-warning" >';
+						str += '<span class="glyphicon glyphicon-pencil" ></span></a>';
+						return str;
+					
+					}
+				}
+				
+			]
+		});
+	}
+	
+	//------------------------------Data table for Category - Admin -------------------------
+	
 	
 });
