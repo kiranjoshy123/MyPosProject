@@ -184,7 +184,7 @@ $(function() {
 					bSortable : false,
 					mRender : function(data, type, row){
 						var str = '';
-						str += '<a href="${contextRoot}/manage/' + data + '/product" class="btn btn-warning" >';
+						str += '<a href="'+ window.contextRoot +'/manage/' + data + '/product" class="btn btn-warning" >';
 						str += '<span class="glyphicon glyphicon-pencil" ></span></a>';
 						return str;
 					
@@ -208,12 +208,22 @@ $(function() {
 						callback : function(confirmed)
 						{
 							if(confirmed){
+								
+								var actURL = window.contextRoot + '/manage/product/' + value + '/activation';
+								$.post(actURL, function( data ){
+									console.log("post returned" + data);
+									/*bootbox.confirm({
+										size:'medium',
+										title:'Information',
+										message : data
+									});*/
+								});
 							}
 							else{
 								checkbox.prop('checked', !checked);
 							}
 						}
-					})
+					});
 				});
 			}
 			

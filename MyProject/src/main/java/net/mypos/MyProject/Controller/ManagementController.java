@@ -11,9 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.mypos.MyProjectBackend.dao.CatergoryDAO;
@@ -55,6 +57,22 @@ public class ManagementController {
 		return mv;
 	}
 	
+	@RequestMapping(value="/{id}/product", method=RequestMethod.GET)
+	public ModelAndView showEditProduct(@PathVariable int id) {
+			
+			// Create a new Product.
+			Product newProduct = productDAO.get(id);
+			
+			ModelAndView mv = new ModelAndView("page");
+			mv.addObject("userClickedManageProducts",true);
+			mv.addObject("title","Manage Products");
+			
+			// set the product fetch from database
+			mv.addObject("product", newProduct);
+			return mv;
+		} 
+	
+	
 	@RequestMapping(value="/products", method=RequestMethod.POST)
 	public String handleProductSubmission(@Valid @ModelAttribute("product") Product modifiedProduct, BindingResult results, Model model) {
 		
@@ -68,9 +86,30 @@ public class ManagementController {
 			return "page";
 		}
 		
-		productDAO.add(modifiedProduct);
+		if(modifiedProduct.getId() == 0) {
+			// id = 0 means, product doesn't exists. Hence add a new one. 
+			productDAO.add(modifiedProduct);
+		}
+		else {
+			productDAO.update(modifiedProduct);
+		}
+		
 		return "redirect:/manage/products?operation=product";
 	}
+	
+	
+	@RequestMapping(value="/product/{id}/activation", method=RequestMethod.POST)
+	@ResponseBody
+	public String handleProductActivation(@PathVariable int id) {
+		
+		Product extProduct = productDAO.get(id);
+		boolean isAlredyActive = extProduct.isIs_active();
+		extProduct.setIs_active(!isAlredyActive);
+		productDAO.update(extProduct);
+		
+		return isAlredyActive ? "You have succesfully Deactivated the product with id " + id : "You have succesfully Aactivated the product with id " + id; 
+	}
+	
 	
 	@ModelAttribute("categories")
 	public List<Category> getCategories(){
