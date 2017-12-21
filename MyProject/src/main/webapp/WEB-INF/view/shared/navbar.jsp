@@ -36,12 +36,6 @@
 				<li id="contact">
 					<a href="${contextRoot}/contact">Contact</a>
 				</li>
-				<li id="register">
-					<a href="${contextRoot}/register">Sing Up</a>
-				</li>
-				<li id="login">
-					<a href="${contextRoot}/login">Login</a>
-				</li>
 			</ul>
 			
 		</div>

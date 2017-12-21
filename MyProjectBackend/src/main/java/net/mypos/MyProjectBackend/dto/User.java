@@ -1,16 +1,12 @@
 package net.mypos.MyProjectBackend.dto;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="user_detail")
 public class User {
 
 	@Id
@@ -28,13 +24,13 @@ public class User {
 	private String password;
 	private String email;
 	
+	@Column(name="user_name")
+	private String userName;
+	
 	@Column(name="contact_number")
 	private String contactNumber;
 
-	private boolean enaled = true;
-	
-	@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
-	private Cart cart;
+	private boolean enabled = true;
 	
 	
 	// Getter - setter methods.
@@ -78,12 +74,12 @@ public class User {
 		this.role = role;
 	}
 
-	public boolean isEnaled() {
-		return enaled;
+	public boolean isEnabled() {
+		return enabled;
 	}
 
-	public void setEnaled(boolean enaled) {
-		this.enaled = enaled;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public String getPassword() {
@@ -102,6 +98,14 @@ public class User {
 		this.email = email;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public String getContactNumber() {
 		return contactNumber;
 	}
@@ -109,18 +113,11 @@ public class User {
 	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
-	public Cart getCart() {
-		return cart;
-	}
-
-	public void setCart(Cart cart) {
-		this.cart = cart;
-	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", LastName=" + LastName + ", role=" + role + ", enaled="
-				+ enaled + ", password=" + password + ", email=" + email + ", contactNumber=" + contactNumber + "]";
+		return "User [id=" + id + ", firstName=" + firstName + ", LastName=" + LastName + ", role=" + role + ", enabled="
+				+ enabled + ", password=" + password + ", email=" + email + ", contactNumber=" + contactNumber + "]";
 	}
 	
 	

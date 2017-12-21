@@ -22,7 +22,7 @@ public class ProductDAOImpl implements ProductDAO {
 	public List<Product> list() {
 		return sessFactory.getCurrentSession()
 				.createQuery("FROM Product", Product.class)
-				.getResultList();
+					.getResultList();
 	}
 
 	@Override

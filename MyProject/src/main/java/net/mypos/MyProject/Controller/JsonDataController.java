@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.mypos.MyProjectBackend.dao.CatergoryDAO;
 import net.mypos.MyProjectBackend.dao.ProductDAO;
+import net.mypos.MyProjectBackend.dao.UserDAO;
 import net.mypos.MyProjectBackend.dto.Category;
 import net.mypos.MyProjectBackend.dto.Product;
+import net.mypos.MyProjectBackend.dto.User;
 
 @Controller
 @RequestMapping("/json/data")
@@ -22,6 +24,9 @@ public class JsonDataController {
 	
 	@Autowired
 	private CatergoryDAO categoryDAO;
+	
+	@Autowired
+	private UserDAO userDAO;
 	
 	// Returning only the active products - For user.
 	@RequestMapping("/all/products")
@@ -48,5 +53,12 @@ public class JsonDataController {
 	@ResponseBody	
 	public List<Category> getAllCategoriesForAdmin(){
 		return categoryDAO.list();
+	}
+	
+	// Returning all the categories - For Admin
+	@RequestMapping("/admin/all/users")
+	@ResponseBody	
+	public List<User> getAllUsersForAdmin(){
+		return userDAO.list();
 	}
 }

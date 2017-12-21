@@ -22,6 +22,7 @@ import net.mypos.MyProjectBackend.dao.CatergoryDAO;
 import net.mypos.MyProjectBackend.dao.ProductDAO;
 import net.mypos.MyProjectBackend.dto.Category;
 import net.mypos.MyProjectBackend.dto.Product;
+import net.mypos.MyProjectBackend.dto.User;
 
 @Controller
 @RequestMapping("/manage")
@@ -179,4 +180,23 @@ public class ManagementController {
 	
 	
 	//-------------------------- Manage Users -----------------------------------------
+	@RequestMapping(value="/users", method=RequestMethod.GET)
+	public ModelAndView showManageUsers(@RequestParam(name="operation", required=false) String operation) {
+		// Create a new category.
+		User newUser = new User();
+		//newUser.setEnabled(true);
+		
+		ModelAndView mv = new ModelAndView("page");
+		mv.addObject("userClickedManageUser",true);
+		mv.addObject("title","Manage Users");
+		mv.addObject("user", newUser);
+		
+		if(operation != null) {
+			if(operation.equals("user")){
+				mv.addObject("message", "User saved successfully..");
+			}
+		}
+		
+		return mv;
+	}
 }

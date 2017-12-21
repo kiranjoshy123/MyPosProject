@@ -1,5 +1,7 @@
 package net.mypos.MyProjectBackend.daoimpl;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,9 +20,27 @@ public class UserDAOImpl implements UserDAO {
 	private SessionFactory sessFactory;
 	
 	@Override
+	public List<User> list() {
+		return sessFactory.getCurrentSession()
+				.createQuery("FROM USER_DETAIL", User.class)
+					.getResultList();
+	}
+	
+	@Override
 	public boolean addUser(User user) {
 		try {
 			sessFactory.getCurrentSession().persist(user);
+			return true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+	
+	@Override
+	public boolean addCart(Cart cart) {
+		try {
+			sessFactory.getCurrentSession().persist(cart);
 			return true;
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -53,5 +73,4 @@ public class UserDAOImpl implements UserDAO {
 			return null;
 		}
 	}
-
 }

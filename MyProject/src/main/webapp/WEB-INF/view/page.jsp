@@ -23,8 +23,8 @@
 <title>POS Home</title>
 
 <script>
-    	window.menu = '$(title)';
-    	window.contextRoot = '${contextRoot}';
+   	window.menu = '$(title)';
+   	window.contextRoot = '${contextRoot}';
 </script>
 
 <!-- Bootstrap core CSS -->
@@ -48,6 +48,8 @@
 	
 		<!-- Navigation -->
 		<%@include file="./shared/navbar.jsp"%>
+		
+		
 
 		<!-- Page Content -->
 		<div class="content">
@@ -87,6 +89,10 @@
 				<%@include file="manageCategories.jsp"%>
 			</c:if>
 			
+			<!-- Show only when user clicks a manage categories -->
+			<c:if test="${userClickedManageUser == true }">
+				<%@include file="manageUsers.jsp"%>
+			</c:if>
 
 		</div>
 

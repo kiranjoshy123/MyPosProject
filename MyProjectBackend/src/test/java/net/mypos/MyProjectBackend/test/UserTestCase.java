@@ -35,32 +35,21 @@ public class UserTestCase {
 		user.setFirstName("Hrithik");
 		user.setLastName("Roshan");
 		user.setEmail("hr@gmail.com");
+		user.setUserName("HrithikRoshan");
 		user.setContactNumber("7953453422");
 		user.setRole("USER");
 		user.setPassword("123456");
 		user.setAddress("101 B Jadoo Society, Krish Nagar, Mumbai, Maharashtra");
 		
+		assertEquals("Failed to add user!", true,userDAO.addUser(user));
+		
 		if(user.getRole().equals("USER"))
 		{
 			cart = new Cart();
-			cart.setUser(user);
-			user.setCart(cart);
+			cart.setGrandTotal(2000);
+			cart.setCartLines(2);
 
-			//assertEquals("Failed to add cart!", true, userDAO.addCart(cart));
+			assertEquals("Failed to add cart!", true, userDAO.addCart(cart));
 		}
-		
-		assertEquals("Failed to add user!", true,userDAO.addUser(user));
 	}
-	
-	@Test
-	public void testUpdateCart() {
-		user = userDAO.getByEmail("hr@gmail.com");
-		
-		cart = user.getCart();
-		
-		cart.setGrandTotal(5555);
-		cart.setCartLines(2);
-		assertEquals("", true, userDAO.updateCart(cart));
-	}
-	
 }

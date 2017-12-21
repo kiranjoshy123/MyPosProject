@@ -10,15 +10,6 @@ CREATE TABLE category (
 
 );
 
-INSERT INTO category (name, description,image_url,is_active) VALUES ('Grocery', 'This is description for Grocery category!', 'CAT_1.png', true);
-INSERT INTO category (name, description,image_url,is_active) VALUES ('Electronic', 'This is description for Electronic category!', 'CAT_2.png', true);
-INSERT INTO category (name, description,image_url,is_active) VALUES ('Vegetables', 'This is description for Vegetables category!', 'CAT_3.png', true);
-INSERT INTO category (name, description,image_url,is_active) VALUES ('Fruits', 'This is description for Fruits category!', 'CAT_4.png', true);
-INSERT INTO category (name, description,image_url,is_active) VALUES ('Dress', 'This is description for Dress category!', 'CAT_5.png', true);
-INSERT INTO category (name, description,image_url,is_active) VALUES ('Bakery', 'This is description for Bakery category!', 'CAT_6.png', true);
-INSERT INTO category (name, description,image_url,is_active) VALUES ('Liquor', 'This is description for Liquor category!', 'CAT_7.png', true);
-INSERT INTO category (name, description,image_url,is_active) VALUES ('Misc', 'This is description for Misc category!', 'CAT_8.png', true);
-
 CREATE TABLE user_detail (
 	id IDENTITY,
 	first_name VARCHAR(50),
@@ -27,20 +18,12 @@ CREATE TABLE user_detail (
 	enabled BOOLEAN,
 	password VARCHAR(50),
 	email VARCHAR(100),
+	user_name VARCHAR(100),
+	address VARCHAR(255),
 	contact_number VARCHAR(15),	
 	CONSTRAINT pk_user_id PRIMARY KEY(id),
 );
 
-INSERT INTO user_detail 
-(first_name, last_name, role, enabled, password, email, contact_number) 
-VALUES ('Virat', 'Kohli', 'ADMIN', true, 'admin', 'vk@gmail.com', '8888888888');
-
-INSERT INTO user_detail 
-(first_name, last_name, role, enabled, password, email, contact_number) 
-VALUES ('Ravindra', 'Jadeja', 'SUPPLIER', true, '12345', 'rj@gmail.com', '9999999999');
-INSERT INTO user_detail 
-(first_name, last_name, role, enabled, password, email, contact_number) 
-VALUES ('Ravichandra', 'Ashwin', 'SUPPLIER', true, '12345', 'ra@gmail.com', '7777777777');
 CREATE TABLE product (
 	id IDENTITY,
 	code VARCHAR(20),
@@ -58,6 +41,42 @@ CREATE TABLE product (
  	CONSTRAINT fk_product_category_id FOREIGN KEY (category_id) REFERENCES category (id),
 	CONSTRAINT fk_product_supplier_id FOREIGN KEY (supplier_id) REFERENCES user_detail(id),	
 );	
+
+
+CREATE TABLE cart (
+	id IDENTITY,
+	user_id int,
+	grand_total DECIMAL(10,2),
+	cart_lines int,
+	CONSTRAINT fk_cart_user_id FOREIGN KEY (user_id ) REFERENCES user_detail (id),
+	CONSTRAINT pk_cart_id PRIMARY KEY (id)
+);
+
+
+INSERT INTO category (name, description,image_url,is_active) VALUES ('Grocery', 'This is description for Grocery category!', 'CAT_1.png', true);
+INSERT INTO category (name, description,image_url,is_active) VALUES ('Electronic', 'This is description for Electronic category!', 'CAT_2.png', true);
+INSERT INTO category (name, description,image_url,is_active) VALUES ('Vegetables', 'This is description for Vegetables category!', 'CAT_3.png', true);
+INSERT INTO category (name, description,image_url,is_active) VALUES ('Fruits', 'This is description for Fruits category!', 'CAT_4.png', true);
+INSERT INTO category (name, description,image_url,is_active) VALUES ('Dress', 'This is description for Dress category!', 'CAT_5.png', true);
+INSERT INTO category (name, description,image_url,is_active) VALUES ('Bakery', 'This is description for Bakery category!', 'CAT_6.png', true);
+INSERT INTO category (name, description,image_url,is_active) VALUES ('Liquor', 'This is description for Liquor category!', 'CAT_7.png', true);
+INSERT INTO category (name, description,image_url,is_active) VALUES ('Misc', 'This is description for Misc category!', 'CAT_8.png', true);
+
+
+
+INSERT INTO user_detail 
+(first_name, last_name, role, enabled, password, email, user_name, address, contact_number) 
+VALUES ('Virat', 'Kohli', 'ADMIN', true, 'admin', 'vk@gmail.com', 'viratKohli', 'Address', '8888888888');
+
+INSERT INTO user_detail 
+(first_name, last_name, role, enabled, password, email, user_name, address, contact_number) 
+VALUES ('Ravindra', 'Jadeja', 'SUPPLIER', true, '12345', 'rj@gmail.com', 'RavindraJadeja', 'Address', '9999999999');
+INSERT INTO user_detail 
+(first_name, last_name, role, enabled, password, email, user_name, address, contact_number) 
+VALUES ('Ravichandra', 'Ashwin', 'SUPPLIER', true, '12345',  'ra@gmail.com', 'RavichandraAshwin', 'Address', '7777777777');
+
+
+
 INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
 VALUES ('PRDABC123DEFX', 'Tata-Tea-500g', 'Tata', 'This is one of the best tea available in the market right now!', 100, 50, true, 1, 2 );
 INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)

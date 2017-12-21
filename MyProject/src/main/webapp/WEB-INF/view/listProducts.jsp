@@ -10,12 +10,13 @@
 		</div>
 		
 		
+		
 		<!-- Would be to display the actual products -->
-		<div class="col-md-9">
+		<div class="col-md-6">
 			
 			<!-- Added breadcrumb component -->
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-md-12">
 					<c:if test="${userClickedAllProducts == true}" >
 						<script>
 							window.categoryId = '';
@@ -41,7 +42,7 @@
 			</div>
 		
 			<div class="row>">
-				<div class="col-xs-12">
+				<div class="col-md-12">
 					<table id="productlistTable" class="table table-striped table-borderd">
 						
 						<thead>
@@ -58,6 +59,14 @@
 				</div>
 			</div>
 		</div>
+		
+		<!-- Cart bar -->
+		
+		<div class="col-md-3">
+			<p class="h3" >Cart</p> 
+			<%@include file="cartbar.jsp" %>
+		</div>
+		
 	
 	</div>
 
