@@ -5,14 +5,14 @@
 	
 	
 		<!-- Would be to display the sidebar -->
-		<div class="col-md-3">
+		<div class="col-md-2">
 			<%@include file="./shared/sidebar.jsp" %>
 		</div>
 		
 		
 		
 		<!-- Would be to display the actual products -->
-		<div class="col-md-6">
+		<div class="col-md-7">
 			
 			<!-- Added breadcrumb component -->
 			<div class="row">
@@ -63,7 +63,7 @@
 		<!-- Cart bar -->
 		
 		<div class="col-md-3">
-			<p class="h3" >Cart</p> 
+			<p class="h2" style="color:ForestGreen;" >Cart</p> 
 			<%@include file="cartbar.jsp" %>
 		</div>
 		

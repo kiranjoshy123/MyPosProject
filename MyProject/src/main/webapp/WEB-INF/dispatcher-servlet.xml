@@ -10,7 +10,6 @@
    ">
 
 	<context:component-scan base-package="net.mypos.MyProject"></context:component-scan>
-	<context:component-scan base-package="net.mypos.MyProjectBackend"></context:component-scan>
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

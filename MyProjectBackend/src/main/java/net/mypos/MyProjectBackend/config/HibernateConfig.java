@@ -27,7 +27,7 @@ public class HibernateConfig {
 	
 	
 	// datasource bean will be available.
-	@Bean
+	@Bean("dataSource")
 	public DataSource getDataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName(DATABASE_DRIVER);

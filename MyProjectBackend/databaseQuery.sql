@@ -10,7 +10,7 @@ CREATE TABLE category (
 
 );
 
-CREATE TABLE user_detail (
+CREATE TABLE userinfo (
 	id IDENTITY,
 	first_name VARCHAR(50),
 	last_name VARCHAR(50),
@@ -39,7 +39,7 @@ CREATE TABLE product (
 	views INT DEFAULT 0,
 	CONSTRAINT pk_product_id PRIMARY KEY (id),
  	CONSTRAINT fk_product_category_id FOREIGN KEY (category_id) REFERENCES category (id),
-	CONSTRAINT fk_product_supplier_id FOREIGN KEY (supplier_id) REFERENCES user_detail(id),	
+	CONSTRAINT fk_product_supplier_id FOREIGN KEY (supplier_id) REFERENCES userinfo(id),	
 );	
 
 
@@ -48,7 +48,7 @@ CREATE TABLE cart (
 	user_id int,
 	grand_total DECIMAL(10,2),
 	cart_lines int,
-	CONSTRAINT fk_cart_user_id FOREIGN KEY (user_id ) REFERENCES user_detail (id),
+	CONSTRAINT fk_cart_user_id FOREIGN KEY (user_id ) REFERENCES userinfo (id),
 	CONSTRAINT pk_cart_id PRIMARY KEY (id)
 );
 
@@ -64,14 +64,14 @@ INSERT INTO category (name, description,image_url,is_active) VALUES ('Misc', 'Th
 
 
 
-INSERT INTO user_detail 
+INSERT INTO userinfo 
 (first_name, last_name, role, enabled, password, email, user_name, address, contact_number) 
 VALUES ('Virat', 'Kohli', 'ADMIN', true, 'admin', 'vk@gmail.com', 'viratKohli', 'Address', '8888888888');
 
-INSERT INTO user_detail 
+INSERT INTO userinfo 
 (first_name, last_name, role, enabled, password, email, user_name, address, contact_number) 
 VALUES ('Ravindra', 'Jadeja', 'SUPPLIER', true, '12345', 'rj@gmail.com', 'RavindraJadeja', 'Address', '9999999999');
-INSERT INTO user_detail 
+INSERT INTO userinfo 
 (first_name, last_name, role, enabled, password, email, user_name, address, contact_number) 
 VALUES ('Ravichandra', 'Ashwin', 'SUPPLIER', true, '12345',  'ra@gmail.com', 'RavichandraAshwin', 'Address', '7777777777');
 

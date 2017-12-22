@@ -16,10 +16,8 @@
 						<div class="media">
 							<div class="media-body">
 								<h4 class="media-heading">
-									<a href="#">Product</a>
+									<a href="#">Product1</a>
 								</h4>
-								<h5 class="media-heading">
-									by Brand </h5>
 							</div>
 						</div>
 					</td>
@@ -39,10 +37,8 @@
 						<div class="media">
 							<div class="media-body">
 								<h4 class="media-heading">
-									<a href="#">Product</a>
+									<a class="text-center" href="#">Product2</a>
 								</h4>
-								<h5 class="media-heading">
-									by Brand </h5>
 							</div>
 						</div>
 					</td>
@@ -53,10 +49,11 @@
 					<td class="col-md-1 text-center"><strong>$9.98</strong></td>
 					<td class="col-md-1">
 						<button type="button" class="btn btn-danger">
-							<span class="glyphicon glyphicon-remove"></span> Remove
+							<span class="glyphicon glyphicon-remove" ></span> Remove
 						</button>
 					</td>
 				</tr>
+				
 				<tr>
 					<td> </td>
 					<td> </td>

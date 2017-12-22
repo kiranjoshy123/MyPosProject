@@ -84,7 +84,8 @@
 						<div class="form-group">
 							<label class="control-label col-md-4" for="contactNumber">Contact Number : </label>
 							<div class="col-md-8">
-								<sf:input type="number" path="contactNumber" id="contactNumber" placeholder="Enter a contact number." class="form-control"/>
+								<sf:input type="text" path="contactNumber" id="contactNumber" placeholder="Enter a contact number." class="form-control"/>
+								<sf:errors path="contactNumber" cssClass="help-block" element="em"/>
 							</div>
 						</div>
 						
@@ -94,8 +95,7 @@
 								<input type="submit" name="submit" id="submit" value="Save" class="btn btn-primary"/>
 								
 								<!-- Hidden fields for user -->
-								<sf:hidden path="id"/>
-								<sf:hidden path="enabled"/>
+								<sf:hidden path="role"/>
 							</div>
 						</div>
 						
@@ -124,13 +124,14 @@
 					class="table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th>Id</th>
 							<th>First Name</th>
 							<th>Last Name</th>
 							<th>Address</th>
 							<th>User Name</th>
 							<th>Email</th>
 							<th>Contact Number</th>
+							<th>Enable</th>
+							<th>Edit</th>
 						</tr>
 					</thead>
 				</table>

@@ -20,9 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import net.mypos.MyProjectBackend.dao.CatergoryDAO;
 import net.mypos.MyProjectBackend.dao.ProductDAO;
+import net.mypos.MyProjectBackend.dao.UserinfoDAO;
 import net.mypos.MyProjectBackend.dto.Category;
 import net.mypos.MyProjectBackend.dto.Product;
-import net.mypos.MyProjectBackend.dto.User;
+import net.mypos.MyProjectBackend.dto.Userinfo;
 
 @Controller
 @RequestMapping("/manage")
@@ -33,6 +34,9 @@ public class ManagementController {
 	
 	@Autowired
 	private ProductDAO productDAO;
+	
+	@Autowired
+	private UserinfoDAO userinfoDAO;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ManagementController.class);
 	
@@ -166,7 +170,7 @@ public class ManagementController {
 	
 	@RequestMapping(value="/{id}/categories", method=RequestMethod.GET)
 	public ModelAndView showEditCategory(@PathVariable int id) {	
-		// Create a new Category.
+		// Fetch the existing Category using id.
 		Category newCategory = categoryDAO.get(id);
 		
 		ModelAndView mv = new ModelAndView("page");
@@ -181,15 +185,15 @@ public class ManagementController {
 	
 	//-------------------------- Manage Users -----------------------------------------
 	@RequestMapping(value="/users", method=RequestMethod.GET)
-	public ModelAndView showManageUsers(@RequestParam(name="operation", required=false) String operation) {
+	public ModelAndView showManageUser(@RequestParam(name="operation", required=false) String operation) {
 		// Create a new category.
-		User newUser = new User();
-		//newUser.setEnabled(true);
+		Userinfo newUserinfo = new Userinfo();
+		newUserinfo.setEnabled(true);
 		
 		ModelAndView mv = new ModelAndView("page");
 		mv.addObject("userClickedManageUser",true);
-		mv.addObject("title","Manage Users");
-		mv.addObject("user", newUser);
+		mv.addObject("title","Manage User");
+		mv.addObject("user", newUserinfo);
 		
 		if(operation != null) {
 			if(operation.equals("user")){
@@ -199,4 +203,60 @@ public class ManagementController {
 		
 		return mv;
 	}
+	
+	@RequestMapping(value="/users", method=RequestMethod.POST)
+	public String handleUserSubmission(@Valid @ModelAttribute("user") Userinfo modifiedUserinfo, BindingResult results, Model model) {
+		
+		logger.info("handleUserSubmission");
+		logger.info(modifiedUserinfo.toString());
+		
+		// Check for errors.
+		if(results.hasErrors()) {
+			model.addAttribute("userClickedManageUser",true);
+			model.addAttribute("title","Manage User");
+			model.addAttribute("message","Validation failed for User Submited!!");
+			return "page";
+		}
+		
+		// id = 0 means, product doesn't exists. Hence add a new one,else update the existing one
+		if(modifiedUserinfo.getId() == 0) {
+			userinfoDAO.add(modifiedUserinfo);
+		}
+		else {
+			userinfoDAO.update(modifiedUserinfo);
+		}
+		
+		return "redirect:/manage/users?operation=user";
+	}
+	
+	@RequestMapping(value="/user/{id}/activation", method=RequestMethod.POST)
+	@ResponseBody
+	public String handleUserActivation(@PathVariable int id) {
+		
+		Userinfo extUser = userinfoDAO.get(id);
+		boolean isAlredyEnabled = extUser.getEnabled();
+		extUser.setEnabled(!isAlredyEnabled);
+		userinfoDAO.update(extUser);
+		
+		return isAlredyEnabled ? "You have succesfully Disabled the user with id " + id : "You have succesfully Enabled the user with id " + id; 
+	}
+	
+	@RequestMapping(value="/{id}/users", method=RequestMethod.GET)
+	public ModelAndView showEditUser(@PathVariable int id) {	
+
+		logger.info("showEditUser");
+		
+		// Get existing user
+		Userinfo existingUserinfo = userinfoDAO.get(id);
+		
+		logger.info(existingUserinfo.toString());
+		
+		
+		ModelAndView mv = new ModelAndView("page");
+		mv.addObject("userClickedManageUser",true);
+		mv.addObject("title","Manage User");
+		
+		mv.addObject("user", existingUserinfo);
+		return mv;
+	} 
 }

@@ -17,6 +17,16 @@ $(function() {
 			break;
 	}*/
 	
+	// Adding the csrf token
+	var token = $('meta[name="_csrf"]').attr('content');
+	var header = $('meta[name="_csrf_header"]').attr('content');
+	if(token.length > 0 && header.length >0 ){
+		// Set the token header for ajax request.
+		$(document).ajaxSend(function(e,xhr,options){
+			xhr.setRequestHeader(header,token);
+		});
+	}
+	
 	// Code for jquery dataTable
 	
 	var $table = $('#productlistTable');
@@ -196,7 +206,7 @@ $(function() {
 				api.$('.switch input[type="checkbox"]').on( 'change', function(){
 					var checkbox = $(this);
 					var checked = checkbox.prop('checked');
-					var msg = (checked) ? 'You want to active the product ?' : 'You want to deactivate the product ?'
+					var msg = (checked) ? 'You want to activate the product ?' : 'You want to deactivate the product ?'
 					var value = checkbox.prop('value');
 					
 					bootbox.confirm({
@@ -270,7 +280,142 @@ $(function() {
 		});
 	}
 	
-	//------------------------------Data table for Category - Admin -------------------------
+	//------------------------------Data table for User - Admin -------------------------
+	var $table = $('#adminUserTable');
+	// Execute only when categories are to be displayed.
+	if($table.length){
+		console.log("Inside the table!");
+		
+		var jsonURL = window.contextRoot + '/json/data/admin/all/users';
+		console.log(jsonURL);
+		
+		$table.DataTable({
+			lengthMenu : [[5,10,30,-1],['5','10','30','All']],
+			pageLength : 10,
+			ajax :{
+				url : jsonURL,
+				dataSrc : ''
+			},
+			columns : [
+				{
+					data : 'firstName',
+				},
+				{
+					data : 'lastName',
+				},
+				{
+					data : 'address',
+				},
+				{
+					data : 'userName',
+				},
+				{
+					data : 'email',
+				},
+				{
+					data : 'contactNumber',
+				},
+				{
+					data : 'enabled',
+					bSortable : false,
+					mRender : function(data,type,row){
+						var str = '';
+						str += '<label class="switch">';
+						
+						if(data){
+							str += '<input type="checkbox" checked="checked" value="' + row.id + '"/>';
+						}
+						else{
+							str += '<input type="checkbox" value="' + row.id + '"/>';
+						}
+						
+						str += '<div class="slider"></div></label>';
+						return str;
+					}
+					
+				},
+				{
+					data : 'id',
+					bSortable : false,
+					mRender : function(data, type, row){
+						var str = '';
+						str += '<a href="'+ window.contextRoot +'/manage/' + data + '/users" class="btn btn-warning" >';
+						str += '<span class="glyphicon glyphicon-pencil" ></span></a>';
+						return str;
+					
+					}
+				}
+				
+			],
+			
+			initComplete : function(){
+				var api = this.api();
+				api.$('.switch input[type="checkbox"]').on( 'change', function(){
+					var checkbox = $(this);
+					var checked = checkbox.prop('checked');
+					var msg = (checked) ? 'You want to enable the user ?' : 'You want to disable the user ?'
+					var value = checkbox.prop('value');
+					
+					bootbox.confirm({
+						size:'medium',
+						title:'User enabling & disabling',
+						message : msg,
+						callback : function(confirmed)
+						{
+							if(confirmed){
+								
+								var actURL = window.contextRoot + '/manage/user/' + value + '/activation';
+								$.post(actURL, function( data ){
+									console.log("post returned" + data);
+									/*bootbox.confirm({
+										size:'medium',
+										title:'Information',
+										message : data
+									});*/
+								});
+							}
+							else{
+								checkbox.prop('checked', !checked);
+							}
+						}
+					});
+				});
+			}
+			
+		});
+	}
 	
+	
+	//------------------------------Login form validation----------------------------
+	var $loginForm = $('#loginForm');
+	if($loginForm.length){
+		$loginForm.validate({
+			rules : {
+				username : {
+					required: true,
+					//email: true
+				},
+				password:{
+					required: true
+				}
+			},
+			
+			message : {
+				username : {
+					required: "Please enter the User ID."
+				},
+				password:{
+					required: "Please enter the Password."
+				}
+			},
+			
+			errorElement : 'em',
+			errorPlacement : function(error, element){
+				error.addClass('help-block');
+				error.insertAfter(element);
+			}
+			
+		});
+	}
 	
 });
