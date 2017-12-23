@@ -33,6 +33,22 @@ public class UserinfoDAOImpl implements UserinfoDAO {
 			return null;
 		}
 	}
+	
+	@Override
+	public Userinfo getbyEmail(String email) {
+		try {
+			String selQuery = "FROM Userinfo WHERE email = :email";
+			return sessFactory.
+						getCurrentSession().
+							createQuery(selQuery, Userinfo.class).
+								setParameter("email", email).
+									getSingleResult();
+								
+		}catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
 
 	@Override
 	public boolean add(Userinfo user) {
@@ -63,5 +79,7 @@ public class UserinfoDAOImpl implements UserinfoDAO {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	
 
 }

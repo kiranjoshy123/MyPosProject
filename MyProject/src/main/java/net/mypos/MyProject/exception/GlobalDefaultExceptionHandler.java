@@ -37,12 +37,12 @@ public class GlobalDefaultExceptionHandler {
 		mv.addObject("errorTitle", "Contact your Administrator!");
 		
 		/* Only for debugging your application */
-		/*StringWriter sw = new StringWriter();
+		StringWriter sw = new StringWriter();
 		PrintWriter pw = new PrintWriter(sw);
 		ex.printStackTrace(pw);
-		mv.addObject("errorDescription", sw.toString());*/
+		mv.addObject("errorDescription", sw.toString());
 		
-		mv.addObject("errorDescription", ex.toString());
+		//mv.addObject("errorDescription", ex.toString());
 		mv.addObject("title", "Error");
 		
 		return mv;

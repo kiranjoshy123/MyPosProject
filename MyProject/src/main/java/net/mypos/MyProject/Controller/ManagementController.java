@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,6 +38,9 @@ public class ManagementController {
 	
 	@Autowired
 	private UserinfoDAO userinfoDAO;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ManagementController.class);
 	
@@ -217,6 +221,9 @@ public class ManagementController {
 			model.addAttribute("message","Validation failed for User Submited!!");
 			return "page";
 		}
+		
+		// Handle password encryption.
+		modifiedUserinfo.setPassword(passwordEncoder.encode(modifiedUserinfo.getPassword()));
 		
 		// id = 0 means, product doesn't exists. Hence add a new one,else update the existing one
 		if(modifiedUserinfo.getId() == 0) {

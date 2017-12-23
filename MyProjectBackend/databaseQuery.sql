@@ -16,7 +16,7 @@ CREATE TABLE userinfo (
 	last_name VARCHAR(50),
 	role VARCHAR(50),
 	enabled BOOLEAN,
-	password VARCHAR(50),
+	password VARCHAR(60),
 	email VARCHAR(100),
 	user_name VARCHAR(100),
 	address VARCHAR(255),
@@ -66,14 +66,14 @@ INSERT INTO category (name, description,image_url,is_active) VALUES ('Misc', 'Th
 
 INSERT INTO userinfo 
 (first_name, last_name, role, enabled, password, email, user_name, address, contact_number) 
-VALUES ('Virat', 'Kohli', 'ADMIN', true, 'admin', 'vk@gmail.com', 'viratKohli', 'Address', '8888888888');
+VALUES ('Virat', 'Kohli', 'ADMIN', true, '$2a$10$yvjrz1qy66/TQ8sigm4.b.knJRqnfc9cvqo2n5TAMR6JWLRnxm/GO', 'vk@gmail.com', 'viratKohli', 'Address', '9752435255');
 
 INSERT INTO userinfo 
 (first_name, last_name, role, enabled, password, email, user_name, address, contact_number) 
-VALUES ('Ravindra', 'Jadeja', 'SUPPLIER', true, '12345', 'rj@gmail.com', 'RavindraJadeja', 'Address', '9999999999');
+VALUES ('Ravindra', 'Jadeja', 'SUPPLIER', true, '$2a$10$Gb3J2Go.s5ZKHK4hSobRyuCZZC6w/wMdNetqzNtw.JR9oj4oo1EB.', 'rj@gmail.com', 'RavindraJadeja', 'Address', '9876363544');
 INSERT INTO userinfo 
 (first_name, last_name, role, enabled, password, email, user_name, address, contact_number) 
-VALUES ('Ravichandra', 'Ashwin', 'SUPPLIER', true, '12345',  'ra@gmail.com', 'RavichandraAshwin', 'Address', '7777777777');
+VALUES ('Ravichandra', 'Ashwin', 'SUPPLIER', true, '$2a$10$75SvWVBBP35esShVRoUsKOVhae.uxopQoFYt.wK0/oh0vJqrNIz3G',  'ra@gmail.com', 'RavichandraAshwin', 'Address', '9765243566');
 
 
 
