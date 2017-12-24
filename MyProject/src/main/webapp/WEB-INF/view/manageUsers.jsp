@@ -118,23 +118,25 @@
 		</div>
 		
 		<div class="col-xs-12" >
-			<div style="overflow:auto">
+			<div class="container-fluid">
+				<div class="table-responsive">
 				
-				<table id="adminUserTable"
-					class="table table-striped table-bordered">
-					<thead>
-						<tr>
-							<th>First Name</th>
-							<th>Last Name</th>
-							<th>Address</th>
-							<th>User Name</th>
-							<th>Email</th>
-							<th>Contact Number</th>
-							<th>Enable</th>
-							<th>Edit</th>
-						</tr>
-					</thead>
-				</table>
+					<table id="adminUserTable"
+						class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Address</th>
+								<th>User Name</th>
+								<th>Email</th>
+								<th>Contact Number</th>
+								<th>Enable</th>
+								<th>Edit</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
 			</div>
 		</div>
 		

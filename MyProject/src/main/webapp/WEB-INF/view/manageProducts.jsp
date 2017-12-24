@@ -118,22 +118,25 @@
 		
 		
 		<div class="col-xs-12" >
-			<div style="overflow:auto">
+			<div class="container-fluid">
+				<div class="table-responsive">
 				
-				<table id="adminProductTable"
-					class="table table-striped table-bordered">
-					<thead>
-						<tr>
-							<th>Category</th>
-							<th>Name</th>
-							<th>Brand</th>
-							<th>Quantity</th>
-							<th>Unit Price</th>
-							<th>Active</th>
-							<th>Edit</th>
-						</tr>
-					</thead>
-				</table>
+					<table id="adminProductTable"
+						class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Category</th>
+								<th>Name</th>
+								<th>Brand</th>
+								<th>Quantity</th>
+								<th>Unit Price</th>
+								<th>Active</th>
+								<th>Edit</th>
+							</tr>
+						</thead>
+					</table>
+					
+				</div>
 			</div>
 		</div>
 	

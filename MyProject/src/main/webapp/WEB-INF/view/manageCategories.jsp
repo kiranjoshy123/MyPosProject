@@ -80,18 +80,20 @@
 		
 		
 		<div class="col-md-offset-2 col-xs-8" >
-			<div style="overflow:auto">
+			<div class="container-fluid">
+				<div class="table-responsive">
 				
-				<table id="adminCategoryTable"
-					class="table table-striped table-bordered">
-					<thead>
-						<tr>
-							<th>Id</th>
-							<th>Name</th>
-							<th>Edit</th>
-						</tr>
-					</thead>
-				</table>
+					<table id="adminCategoryTable"
+						class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Name</th>
+								<th>Edit</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
 			</div>
 		</div>
 	

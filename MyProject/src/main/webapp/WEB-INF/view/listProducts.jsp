@@ -43,29 +43,34 @@
 		
 			<div class="row>">
 				<div class="col-md-12">
-					<table id="productlistTable" class="table table-striped table-borderd">
-						
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Brand</th>
-								<th>Price</th>
-								<th>Qnty.Available</th>
-								<th></th>
-							</tr>
-						</thead>
-						
-					</table>
+					
+					<div class="contaier-fluid">
+						<div class="table-responsive">
+							<table id="productlistTable"
+								class="table table-striped table-borderd">
+
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Brand</th>
+										<th>Price</th>
+										<th>Qnty.Available</th>
+										<th></th>
+									</tr>
+								</thead>
+
+							</table>
+						</div>
+
+					</div>
+
 				</div>
 			</div>
 		</div>
 		
 		<!-- Cart bar -->
 		
-		<div class="col-md-3">
-			<p class="h2" style="color:ForestGreen;" >Cart</p> 
-			<%@include file="cartbar.jsp" %>
-		</div>
+		
 		
 	
 	</div>
