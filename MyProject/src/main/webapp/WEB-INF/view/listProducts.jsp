@@ -54,7 +54,7 @@
 										<th>Name</th>
 										<th>Brand</th>
 										<th>Price</th>
-										<th>Qnty.Available</th>
+										<th>Qnty</th>
 										<th></th>
 									</tr>
 								</thead>

@@ -27,6 +27,8 @@
 	window.contextRoot = '${contextRoot}';
 </script>
 
+<!-- All the CSS goes here -->
+
 <!-- Bootstrap core CSS -->
 <link href="${css}/bootstrap.min.css" rel="stylesheet">
 
@@ -50,7 +52,8 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 			<div class="container">
 				<div class="navbar-header">
-					<a class="navbar-brand" style="color: white"> <span style="font-weight: bold">ePOS</span>
+					<a class="navbar-brand" style="color: white"> <span
+						style="font-weight: bold">ePOS</span>
 					</a>
 				</div>
 			</div>
@@ -59,42 +62,59 @@
 		<!-- Page Content -->
 		<div class="content">
 			<div class="container">
-				
+
 				<!-- Will be displayed if credentials are wrong -->
 				<c:if test="${not empty message}">
 					<div class="row">
 						<div class="col-md-offset-3 col-md-6">
-						
-						<div class="alert alert-danger"> ${message} </div>
+
+							<div class="alert alert-danger alert-dismissible">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+							${message}
+							</div>
 						</div>
 					</div>
 				</c:if>
-				
+
 				<!-- Will be displayed if user has logged out -->
 				<c:if test="${not empty logout}">
 					<div class="row">
 						<div class="col-md-offset-3 col-md-6">
-						
-						<div class="alert alert-success"> ${logout} </div>
+
+							<div class="alert alert-success alert-dismissible">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+							
+								${logout}
+							</div>
 						</div>
 					</div>
 				</c:if>
-				
-				
-				<div class="row">
-					<div class="col-md-offset-3 col-md-6">
-						<div class="panel panel-primary">
 
-							<div class="panel-heading">
-								<h4>Login</h4>
+
+				<div class="row">
+					<div class="panel panel-primary">
+
+						<div class="panel-heading">
+							<h4 class="text-center">Login</h4>
+						</div>
+
+						<div class="panel-body">
+
+							<div class="col-md-8">
+									<c:forEach items="${users}" var="user">
+										<button class="btn btn-success btn-lg" id="button">${user.firstName}</button>
+									</c:forEach>
+								
 							</div>
 
-							<div class="panel-body">
 
+							<div class="col-md-1 vertical-line"></div>
+							<div class="col-md-3">
 
 								<!-- Form Elements -->
 
 								<form class="form-horizontal" action="${contextRoot}/login" method="POST" id="loginForm">
+									
 									<div class="form-group">
 										<label class="control-label col-md-4" for="username">User Id:</label>
 										<div class="col-md-8">
@@ -103,7 +123,7 @@
 									</div>
 
 									<div class="form-group">
-										<label class="control-label col-md-4" for="password">Password :</label>
+										<label class="control-label col-md-4" for="password">Password:</label>
 										<div class="col-md-8">
 											<input type="text" name="password" id="password" class="form-control" />
 										</div>
@@ -112,21 +132,18 @@
 									<div class="form-group">
 										<div class="col-md-offset-4 col-md-8">
 											<input type="submit" value="Login" class="btn btn-primary" />
-											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 										</div>
 									</div>
 
 								</form>
 
-							</div>
 
+							</div>
 
 						</div>
 
-
 					</div>
-
-
 				</div>
 
 
@@ -139,10 +156,10 @@
 
 		<!-- jQuery -->
 		<script src="${js}/jquery.js"></script>
-		
+
 		<!-- DataTable plugin -->
 		<script src="${js}/jquery.dataTables.js"></script>
-		
+
 
 		<!-- Bootstrap core JavaScript -->
 		<script src="${js}/bootstrap.min.js"></script>

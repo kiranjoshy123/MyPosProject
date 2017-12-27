@@ -152,3 +152,8 @@ text-decoration:none;
 .bigGreenButton a:hover {
  background-color:#cccccc;
 }
+
+.vertical-line{
+	border-left: 3px solid green;
+    height: 600px;
+}

@@ -19,6 +19,7 @@ import net.mypos.MyProject.Service.CartService;
 import net.mypos.MyProject.exception.ProductNotFoundException;
 import net.mypos.MyProjectBackend.dao.CatergoryDAO;
 import net.mypos.MyProjectBackend.dao.ProductDAO;
+import net.mypos.MyProjectBackend.dao.UserinfoDAO;
 import net.mypos.MyProjectBackend.dto.Category;
 import net.mypos.MyProjectBackend.dto.Product;
 
@@ -37,6 +38,9 @@ public class PageController {
 	
 	@Autowired
 	private CartService cartService;
+	
+	@Autowired
+	private UserinfoDAO userinfoDAO;
 	
 	@RequestMapping(value = { "/", "/home", "/index" })
 	public ModelAndView index() {
@@ -95,6 +99,7 @@ public class PageController {
 		mv.addObject("title", category.getName());
 		mv.addObject("category", category);
 		mv.addObject("categories", categoryDAO.list());
+		mv.addObject("cartLines", cartService.getCartLines());
 		
 		mv.addObject("userClickedCategoryProducts", true);
 		return mv;
@@ -124,6 +129,7 @@ public class PageController {
 	 @RequestMapping(value= {"/login"})
 	 public ModelAndView showLogin(@RequestParam(name ="error", required=false)String error,
 			 @RequestParam(name ="logout", required=false)String logout) {
+		 
 		 ModelAndView mv = new ModelAndView("login");
 		 if(error != null) {
 			 mv.addObject("message","Invalid user name or password");
@@ -133,8 +139,9 @@ public class PageController {
 			 mv.addObject("logout","User has successfully logout!");
 		 }
 		 
-		 
+		 ;
 		 mv.addObject("title", "Login");
+		 mv.addObject("users", userinfoDAO.list());
 		 return mv;
 	 }
 	 

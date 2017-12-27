@@ -20,9 +20,7 @@
 							<td class="col-md-1">
 								<div class="media">
 									<div class="media-body">
-										<h4 class="media-heading">
-											<a href="#">${cartLine.product.name}</a>
-										</h4>
+										<h5 class="media-heading"> ${cartLine.product.name} </h5>
 									</div>
 								</div>
 							</td>
