@@ -120,7 +120,7 @@
 										<div class="col-md-8">
 											<input type="text" name="username" id="username" class="form-control" />
 										</div>
-									</div>
+									</div>  
 
 									<div class="form-group">
 										<label class="control-label col-md-4" for="password">Password:</label>
