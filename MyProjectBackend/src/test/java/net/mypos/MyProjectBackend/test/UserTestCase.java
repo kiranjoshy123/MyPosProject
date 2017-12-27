@@ -7,13 +7,16 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import net.mypos.MyProjectBackend.dao.UserinfoDAO;
+import net.mypos.MyProjectBackend.dto.Cart;
 import net.mypos.MyProjectBackend.dto.Userinfo;
 
 public class UserTestCase {
 
 	private static AnnotationConfigApplicationContext context;
 	private static UserinfoDAO userinfoDAO;
+	
 	private Userinfo userinfo;
+	private Cart cart;
 	
 	@BeforeClass
 	public static void init() {
@@ -25,21 +28,22 @@ public class UserTestCase {
 		userinfoDAO = (UserinfoDAO)context.getBean("userinfoDAO");
 	}
 	
-	/*@Test
+	@Test
 	public void testAddUser() {
 		userinfo = new Userinfo();
-		userinfo.setFirstname("Sachin");
-		userinfo.setLastname("Tendulkar");
-		userinfo.setRole("ADMIN");
+		userinfo.setFirstName("Sachin");
+		userinfo.setLastName("Tendulkar");
+		userinfo.setRole("USER");
 		userinfo.setPassword("admin");
 		userinfo.setEnabled(true);
 		userinfo.setEmail("st@gmail.com");
-		userinfo.setUsername("SachinTendulkar");
+		userinfo.setUserName("SachinTendulkar");
 		userinfo.setAddress("This is Address");
-		userinfo.setContactnumber("9753453422");
+		userinfo.setContactNumber("9753453422");
 		
-		assertEquals("Failed to add a new user!", true, userinfoDAO.add(userinfo));
-	}*/
+		cart = new Cart();
+		assertEquals("Failed to add a new user!", true, userinfoDAO.add(userinfo, cart));
+	}
 	
 	/*@Test 
 	public void testGetUser(){

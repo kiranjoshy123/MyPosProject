@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import net.mypos.MyProject.Service.CartService;
 import net.mypos.MyProject.exception.ProductNotFoundException;
 import net.mypos.MyProjectBackend.dao.CatergoryDAO;
 import net.mypos.MyProjectBackend.dao.ProductDAO;
 import net.mypos.MyProjectBackend.dto.Category;
 import net.mypos.MyProjectBackend.dto.Product;
 
-@Controller
+@Controller		
 public class PageController {
 
 	private static final Logger logger = LoggerFactory.getLogger(PageController.class);
@@ -33,6 +34,9 @@ public class PageController {
 	
 	@Autowired
 	private ProductDAO productDAO;
+	
+	@Autowired
+	private CartService cartService;
 	
 	@RequestMapping(value = { "/", "/home", "/index" })
 	public ModelAndView index() {
@@ -72,6 +76,7 @@ public class PageController {
 		mv.addObject("title", "All Products");
 		mv.addObject("userClickedAllProducts", true);
 		mv.addObject("categories", categoryDAO.list());
+		mv.addObject("cartLines", cartService.getCartLines());
 		
 		return mv;
 	}

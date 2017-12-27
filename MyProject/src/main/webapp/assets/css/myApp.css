@@ -131,3 +131,24 @@ input:checked + .slider:before{
 .table-responsive{
 	overflow-x : inherit;
 }
+
+
+.bigGreenButton{
+width:100px;
+height:50px;
+background-color:#4582ec;
+padding: 10px;
+text-align:center;
+}
+
+.bigGreenButton a{
+font-size:18px;
+color:white;
+text-transform:uppercase;
+text-decoration:none;
+
+}
+
+.bigGreenButton a:hover {
+ background-color:#cccccc;
+}

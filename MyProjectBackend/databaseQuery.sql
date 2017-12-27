@@ -52,6 +52,18 @@ CREATE TABLE cart (
 	CONSTRAINT pk_cart_id PRIMARY KEY (id)
 );
 
+CREATE TABLE cart_line(
+	id IDENTITY,
+	cart_id int,
+	total DECIMAL(10,2),
+	product_id int,
+	product_count int,
+	buying_price DECIMAL(10,2),
+	is_available boolean,
+    CONSTRAINT fk_cartline_cart_id FOREIGN KEY( cart_id ) REFERENCES cart(id),
+	CONSTRAINT fk_cartline_product_id FOREIGN KEY( product_id ) REFERENCES product(id),
+	CONSTRAINT pk_cartline_id PRIMARY KEY(id)
+);
 
 INSERT INTO category (name, description,image_url,is_active) VALUES ('Grocery', 'This is description for Grocery category!', 'CAT_1.png', true);
 INSERT INTO category (name, description,image_url,is_active) VALUES ('Electronic', 'This is description for Electronic category!', 'CAT_2.png', true);
@@ -75,6 +87,19 @@ INSERT INTO userinfo
 (first_name, last_name, role, enabled, password, email, user_name, address, contact_number) 
 VALUES ('Ravichandra', 'Ashwin', 'SUPPLIER', true, '$2a$10$75SvWVBBP35esShVRoUsKOVhae.uxopQoFYt.wK0/oh0vJqrNIz3G',  'ra@gmail.com', 'RavichandraAshwin', 'Address', '9765243566');
 
+
+
+INSERT INTO cart
+(user_id, grand_total, cart_lines)
+VALUES(1,0,0);
+
+INSERT INTO cart 
+(user_id, grand_total, cart_lines)
+VALUES(2,0,0);
+
+INSERT INTO cart 
+(user_id, grand_total, cart_lines)
+VALUES(3,0,0);
 
 
 INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)

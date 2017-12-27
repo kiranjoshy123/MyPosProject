@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import net.mypos.MyProjectBackend.dao.CatergoryDAO;
 import net.mypos.MyProjectBackend.dao.ProductDAO;
 import net.mypos.MyProjectBackend.dao.UserinfoDAO;
+import net.mypos.MyProjectBackend.dto.Cart;
 import net.mypos.MyProjectBackend.dto.Category;
 import net.mypos.MyProjectBackend.dto.Product;
 import net.mypos.MyProjectBackend.dto.Userinfo;
@@ -227,7 +228,8 @@ public class ManagementController {
 		
 		// id = 0 means, product doesn't exists. Hence add a new one,else update the existing one
 		if(modifiedUserinfo.getId() == 0) {
-			userinfoDAO.add(modifiedUserinfo);
+			Cart cart = new Cart();
+			userinfoDAO.add(modifiedUserinfo,cart);
 		}
 		else {
 			userinfoDAO.update(modifiedUserinfo);

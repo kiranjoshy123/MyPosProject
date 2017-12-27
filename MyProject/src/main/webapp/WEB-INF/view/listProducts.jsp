@@ -69,7 +69,10 @@
 		</div>
 		
 		<!-- Cart bar -->
-		
+		<div class="col-md-3">
+-			<p class="h2" style="color:ForestGreen;" >Cart</p> 
+-			<%@include file="cartbar.jsp" %>
+-		</div>
 		
 		
 	

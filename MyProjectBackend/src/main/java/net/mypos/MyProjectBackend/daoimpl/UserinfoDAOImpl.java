@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.mypos.MyProjectBackend.dao.UserinfoDAO;
+import net.mypos.MyProjectBackend.dto.Cart;
 import net.mypos.MyProjectBackend.dto.Userinfo;
 
 @Repository("userinfoDAO")
@@ -51,10 +52,13 @@ public class UserinfoDAOImpl implements UserinfoDAO {
 	}
 
 	@Override
-	public boolean add(Userinfo user) {
+	public boolean add(Userinfo user, Cart cart) {
 		try {
-			// add category to the database table.
+			// Map the cart and user.
+			cart.setUser(user);
+			// add user to the userinfo table.
 			sessFactory.getCurrentSession().persist(user);
+			sessFactory.getCurrentSession().persist(cart);
 			return true;
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -80,6 +84,20 @@ public class UserinfoDAOImpl implements UserinfoDAO {
 		return false;
 	}
 
-	
-
+	// Method to get the respective cart for a user.
+	@Override
+	public Cart getCart(int userID) {
+		try {
+			String selQuery = "FROM Cart WHERE user.id = :userID";
+			return sessFactory.
+						getCurrentSession().
+							createQuery(selQuery, Cart.class).
+								setParameter("userID", userID).
+									getSingleResult();
+								
+		}catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
 }
