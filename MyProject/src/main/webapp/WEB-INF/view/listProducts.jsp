@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
 	
 	
@@ -10,9 +10,8 @@
 		</div>
 		
 		
-		
 		<!-- Would be to display the actual products -->
-		<div class="col-md-7">
+		<div class="col-md-6">
 			
 			<!-- Added breadcrumb component -->
 			<div class="row">
@@ -69,7 +68,7 @@
 		</div>
 		
 		<!-- Cart bar -->
-		<div class="col-md-3">
+		<div class="col-md-4">
 -			<p class="h2" style="color:ForestGreen;" >Cart</p> 
 -			<%@include file="cartbar.jsp" %>
 -		</div>
