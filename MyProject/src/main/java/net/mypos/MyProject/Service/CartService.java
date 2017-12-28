@@ -56,4 +56,18 @@ public class CartService {
 			cartLineDAO.updateCart(cart);
 		}
 	}
+
+	public void deleteCartLine(int cartLineId) {
+		CartLine cartline = cartLineDAO.get(cartLineId);
+		if(cartline != null) {
+			// Update the Cart first.
+			Cart cart = this.getCart();
+			cart.setGrandTotal(cart.getGrandTotal() - cartline.getTotal());
+			cart.setCartLines(cart.getCartLines() - 1);
+			cartLineDAO.updateCart(cart);
+			
+			cartLineDAO.delete(cartline);
+		}
+		
+	}
 }

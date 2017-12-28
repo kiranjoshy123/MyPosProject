@@ -24,46 +24,30 @@
 									</div>
 								</div>
 							</td>
-							<td class="col-md-1" style="text-align: center"><input
-								type="number" min="1" class="form-control" id="exampleInputEmail1"
-								value="${cartLine.productCount}"></td>
+							<td class="col-md-2" style="text-align: center">
+								<!-- <button type="button" class="glyphicon glyphicon glyphicon-plus" ></button> -->
+								<!-- <input type="number" min="1" class="form-control" id="exampleInputEmail1" value="${cartLine.productCount}"> -->
+								<label>${cartLine.productCount}</label>
+								<!-- <button type="button" class="glyphicon glyphicon glyphicon-minus" ></button> -->
+							</td>
 							<td class="col-md-1 text-center"><strong>${cartLine.byingPrice}</strong></td>
 							<td class="col-md-1 text-center"><strong>${cartLine.total}</strong></td>
 							<td class="col-md-1">
-								<button type="button" class="btn btn-danger">
+								<a href="${contextRoot}/cart/${cartLine.id}/delete" type="button" class="btn btn-danger">
 									<span class="glyphicon glyphicon-remove"></span> Remove
-								</button>
+								</a>
 							</td>
 						</tr>
 
 					</c:forEach>
 
-
-					<tr>
-						<td> </td>
-						<td> </td>
-						<td> </td>
-						<td><h5>Subtotal</h5></td>
-						<td class="text-right"><h5>
-								<strong>${userModel.cart.grandTotal}</strong>
-							</h5></td>
-					</tr>
-					<tr>
-						<td> </td>
-						<td> </td>
-						<td> </td>
-						<td><h5>Estimated shipping</h5></td>
-						<td class="text-right">
-							<h5><strong>$6.94</strong></h5>
-						</td>
-					</tr>
 					<tr>
 						<td> </td>
 						<td> </td>
 						<td> </td>
 						<td><h3>Total</h3></td>
 						<td class="text-right">
-							<h3><strong>$31.53</strong></h3>
+							<h3><strong>${userModel.cart.grandTotal}</strong></h3>
 						</td>
 					</tr>
 					<tr>

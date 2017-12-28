@@ -20,8 +20,13 @@ public class CartController {
 	
 	@RequestMapping(value="/add/{productId}/product")
 	public String addToCart(@PathVariable int productId) {
-		logger.info("Inside addToCart");
 		cartservice.addCartLine(productId);
+		return "redirect:/show/all/products";
+	}
+	
+	@RequestMapping(value="/{cartLineId}/delete")
+	public String deleteFromCart(@PathVariable int cartLineId) {
+		cartservice.deleteCartLine(cartLineId);
 		return "redirect:/show/all/products";
 	}
 }

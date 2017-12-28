@@ -69,9 +69,10 @@
 		
 		<!-- Cart bar -->
 		<div class="col-md-4">
--			<p class="h2" style="color:ForestGreen;" >Cart</p> 
--			<%@include file="cartbar.jsp" %>
--		</div>
+			<p class="h2" style="color:ForestGreen;" >Cart</p>
+ 			<!-- <img style='display:block; width:100px;height:100px;' class="img-responsive" src="Cart.png" />  -->
+			 <%@include file="cartbar.jsp" %>
+		</div>
 		
 		
 	

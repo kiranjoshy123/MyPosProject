@@ -54,6 +54,11 @@ $(function() {
 			columns : [
 				{
 					data : 'name',
+					mRender : function(data,type,row){
+						var str = '';
+						str += '<a href ="' + window.contextRoot + '/show/' + row.id + '/product" >' + data + '</a>';
+						return str;
+					}
 				},
 				{
 					data : 'brand',
@@ -80,14 +85,12 @@ $(function() {
 					bSortable : false,
 					mRender : function(data,type,row){
 						var str = '';
-						str += '<a href ="' + window.contextRoot + '/show/' + data + '/product" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a>';
 						if(row.quantity < 1){
 							str += '<a href ="javascript:void(0) class="btn btn-success disabled""><span class="glyphicon glyphicon-shopping-cart"></a>';
 						}
 						else{
 							str += '<a href ="' + window.contextRoot + '/cart/add/' + data + '/product" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></a>';
 						}
-						console.log(str);
 						return str;
 					}
 				}
@@ -420,5 +423,11 @@ $(function() {
 	}
 	
 
+	 $('.num').click(function () {
+	        var num = $(this);
+	        var text = $.trim(num.find('.txt').clone().children().remove().end().text());
+	        var telNumber = $('#telNumber');
+	        $(telNumber).val(telNumber.val() + text);
+	    });
 	
 });

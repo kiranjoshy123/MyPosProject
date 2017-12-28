@@ -38,6 +38,8 @@
 <!-- Data table Bootstrap CSS -->
 <link href="${css}/dataTables.bootstrap.css" rel="stylesheet">
 
+<!-- Numpad CSS -->
+<link href="${css}/numpad.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="${css}/myApp.css" rel="stylesheet">
@@ -101,10 +103,9 @@
 						<div class="panel-body">
 
 							<div class="col-md-8">
-									<c:forEach items="${users}" var="user">
-										<button class="btn btn-success btn-lg" id="button">${user.firstName}</button>
-									</c:forEach>
-								
+								<c:forEach items="${users}" var="user">
+									<button class="btn btn-success btn-lg" id="button">${user.firstName}</button>
+								</c:forEach>
 							</div>
 
 
@@ -112,22 +113,27 @@
 							<div class="col-md-3">
 
 								<!-- Form Elements -->
-
 								<form class="form-horizontal" action="${contextRoot}/login" method="POST" id="loginForm">
 									
 									<div class="form-group">
-										<label class="control-label col-md-4" for="username">User Id:</label>
+										<label class="control-label col-md-4" for="username">Login in as :</label>
 										<div class="col-md-8">
 											<input type="text" name="username" id="username" class="form-control" />
 										</div>
 									</div>  
-
+									
+									
 									<div class="form-group">
 										<label class="control-label col-md-4" for="password">Password:</label>
 										<div class="col-md-8">
 											<input type="text" name="password" id="password" class="form-control" />
 										</div>
 									</div>
+									
+									<!-- Num pad comes here. -->
+									<%@include file="numpad.jsp"%>
+									
+									
 
 									<div class="form-group">
 										<div class="col-md-offset-4 col-md-8">
@@ -156,10 +162,6 @@
 
 		<!-- jQuery -->
 		<script src="${js}/jquery.js"></script>
-
-		<!-- DataTable plugin -->
-		<script src="${js}/jquery.dataTables.js"></script>
-
 
 		<!-- Bootstrap core JavaScript -->
 		<script src="${js}/bootstrap.min.js"></script>

@@ -59,7 +59,13 @@ public class CartLineDAOImpl implements CartLineDAO {
 
 	@Override
 	public boolean delete(CartLine cartline) {
-		return false;
+		try {
+			sessFactory.getCurrentSession().delete(cartline);
+			return true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
