@@ -33,8 +33,8 @@
 							<td class="col-md-1 text-center"><strong>${cartLine.byingPrice}</strong></td>
 							<td class="col-md-1 text-center"><strong>${cartLine.total}</strong></td>
 							<td class="col-md-1">
-								<a href="${contextRoot}/cart/${cartLine.id}/delete" type="button" class="btn btn-danger">
-									<span class="glyphicon glyphicon-remove"></span> Remove
+								<a href="${contextRoot}/cart/${cartLine.id}/delete" type="button" class="btn icon-btn btn-warning">
+									<span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-warning"></span> Remove
 								</a>
 							</td>
 						</tr>

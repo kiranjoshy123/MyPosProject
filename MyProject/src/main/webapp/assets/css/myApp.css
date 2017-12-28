@@ -157,3 +157,16 @@ text-decoration:none;
 	border-left: 3px solid green;
     height: 600px;
 }
+
+/*
+Round button with text
+*/
+.btn-glyphicon {
+    padding:8px;
+    background:#ffffff;
+    margin-right:4px;
+}
+.icon-btn {
+    padding: 1px 15px 3px 2px;
+    border-radius:50px;
+}
