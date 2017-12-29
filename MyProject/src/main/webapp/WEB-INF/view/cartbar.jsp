@@ -50,19 +50,26 @@
 							<h3><strong>${userModel.cart.grandTotal}</strong></h3>
 						</td>
 					</tr>
-					<tr>
-						<td> </td>
-						<td> </td>
-						<td> </td>
-						<td></td>
-						<td>
-							<button type="button" class="btn btn-success">
-								Checkout <span class="glyphicon glyphicon-play"></span>
-							</button>
-						</td>
-					</tr>
 				</tbody>
 			</table>
+			
+			<!-- Cart pay/hold/delete -->
+			<div class="cartFooter">
+				<div class="row" >
+					<a href="#" style="margin-left:10px;" class="col-md-3 btn btn-danger">
+						<span class="glyphicon glyphicon-trash" ></span>
+      					<span style="padding-left:10px;" >Clear</span>
+					</a>
+					<a href="#" style="margin-left:10px;" class="col-md-3 btn btn-info">
+						<span class="glyphicon glyphicon-pause" ></span>
+      					<span style="padding-left:10px;" >Hold</span>
+					</a>
+					<a href="#" style="margin-left:10px;" class="col-md-5 btn btn-success">
+						<span style="vertical-align: middle;" class="glyphicon glyphicon-credit-card" ></span>
+      					<span style="vertical-align: middle;padding-left:10px;" >Pay</span>
+					</a>
+				</div>
+			</div>			
 		</c:when>
 		<c:otherwise>
 			<div class="jumbotron">
