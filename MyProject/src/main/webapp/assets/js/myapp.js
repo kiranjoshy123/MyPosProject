@@ -1,21 +1,24 @@
 $(function() {
 	
-	/*switch(menu){
-		
-		case 'About Us':
-			$('#about').addClass('active');
-			break;
-		case 'Contact Us' :
-			$('#contact').addClass('active');
-			break;
+	switch(menu){
 		case 'All Products' :
 			$('#listProducts').addClass('active');
+			break;	
+		case 'Manage Products':
+			$('#manageProducts').addClass('active');
+			break;
+		case 'Manage Category' :
+			$('#manageCategory').addClass('active');
+			break;
+		case 'Manage User' :
+			$('#manageUsers').addClass('active');
 			break;
 		default:
 			$('#listProducts').addClass('active');
 			$('#a_'+menu).addClass('active');
+			console.log(menu);
 			break;
-	}*/
+	}
 	
 	// Adding the csrf token
 	var token = $('meta[name="_csrf"]').attr('content');

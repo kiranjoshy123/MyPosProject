@@ -10,7 +10,6 @@ html {
 body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     height: 100%;
-    font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .slide-image {
@@ -160,7 +159,7 @@ text-decoration:none;
 }
 
 /*
-Round button with text
+Oval shape button with text
 */
 .btn-glyphicon {
     padding:8px;
@@ -170,6 +169,18 @@ Round button with text
 .icon-btn {
     padding: 1px 15px 3px 2px;
     border-radius:50px;
+}
+
+/*
+Round button.
+*/
+.btn-circle {
+  width: 45px;
+  height: 45px;
+  padding: 10px 12px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
 }
 
 
@@ -183,8 +194,6 @@ Cart total bar
   left: 0;
   padding: 1rem;
 }
-
-
 
 
 

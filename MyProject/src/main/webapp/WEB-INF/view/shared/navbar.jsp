@@ -4,6 +4,7 @@
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="#">Settings</a>
+  <a href="#">Reports</a>
   <a href="#">History</a>
   <a href="#">Calc</a>
   <a href="${contextRoot}/contact">Contact</a>
@@ -63,7 +64,6 @@
 					<li class="dropdown">
 						<a  href="javascript:void(0)"
 							class="btn btn-default dropdown-toggle"
-							id="dropdownMenu1"
 							data-toggle="dropdown">
 								${userModel.fullName}
 							<span class="caret"></span>

@@ -26,7 +26,7 @@
 <title>POS Home</title>
 
 <script>
-   	window.menu = '$(title)';
+   	window.menu = '${title}';
    	window.contextRoot = '${contextRoot}';
 </script>
 

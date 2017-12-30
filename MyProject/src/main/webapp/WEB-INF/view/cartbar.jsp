@@ -7,7 +7,7 @@
 				<thead>
 					<tr>
 						<th>Product</th>
-						<th>Quantity</th>
+						<th style="text-align:center">Quantity</th>
 						<th class="text-center">Price</th>
 						<th class="text-center">Total</th>
 						<th> </th>
@@ -16,7 +16,7 @@
 				<tbody>
 
 					<c:forEach items="${cartLines}" var="cartLine">
-						<tr>
+						<tr height="80">
 							<td class="col-md-1">
 								<div class="media">
 									<div class="media-body">
@@ -24,17 +24,21 @@
 									</div>
 								</div>
 							</td>
-							<td class="col-md-2" style="text-align: center">
-								<!-- <button type="button" class="glyphicon glyphicon glyphicon-plus" ></button> -->
+							<td class="col-md-4" style="text-align:center">
+								<a type="button"class="btn btn-info btn-circle" >
+									<span class="glyphicon glyphicon-minus"></span>
+								</a>
 								<!-- <input type="number" min="1" class="form-control" id="exampleInputEmail1" value="${cartLine.productCount}"> -->
-								<label>${cartLine.productCount}</label>
-								<!-- <button type="button" class="glyphicon glyphicon glyphicon-minus" ></button> -->
+								<label>&nbsp;${cartLine.productCount}&nbsp;</label>
+								<a type="button"class="btn btn-info btn-circle" >
+									<span class="glyphicon glyphicon-plus"></span>
+								</a>
 							</td>
 							<td class="col-md-1 text-center"><strong>${cartLine.byingPrice}</strong></td>
 							<td class="col-md-1 text-center"><strong>${cartLine.total}</strong></td>
 							<td class="col-md-1">
-								<a href="${contextRoot}/cart/${cartLine.id}/delete" type="button" class="btn icon-btn btn-warning">
-									<span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-warning"></span> Remove
+								<a href="${contextRoot}/cart/${cartLine.id}/delete" type="button" class="btn icon-btn btn-danger">
+									<span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span> Remove
 								</a>
 							</td>
 						</tr>
@@ -72,6 +76,7 @@
 			</div>			
 		</c:when>
 		<c:otherwise>
+			<br></br>
 			<div class="jumbotron">
 				<h2>Add items to the Cart!!</h2>
 			</div>
