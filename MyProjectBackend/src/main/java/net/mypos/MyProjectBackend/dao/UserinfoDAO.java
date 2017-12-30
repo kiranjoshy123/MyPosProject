@@ -8,6 +8,7 @@ import net.mypos.MyProjectBackend.dto.Userinfo;
 public interface UserinfoDAO {
 	
 	List<Userinfo> list();
+	List<Userinfo> getActiveUserslist();
 	
 	Userinfo get(int userID);
 	Userinfo getbyEmail(String email);

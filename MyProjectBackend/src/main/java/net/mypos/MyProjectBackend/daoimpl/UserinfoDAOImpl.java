@@ -24,6 +24,13 @@ public class UserinfoDAOImpl implements UserinfoDAO {
 				.createQuery("FROM Userinfo", Userinfo.class)
 					.getResultList();
 	}
+	
+	@Override
+	public List<Userinfo> getActiveUserslist(){
+		return sessFactory.getCurrentSession()
+				.createQuery("FROM Userinfo WHERE ENABLED = TRUE", Userinfo.class)
+					.getResultList();
+	}
 
 	@Override
 	public Userinfo get(int userID) {

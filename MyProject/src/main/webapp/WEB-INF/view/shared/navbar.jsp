@@ -6,8 +6,8 @@
   <a href="#">Settings</a>
   <a href="#">History</a>
   <a href="#">Calc</a>
-  <a href="${contextRoot}/about">About</a>
   <a href="${contextRoot}/contact">Contact</a>
+  <a href="${contextRoot}/about">About</a>
 </div>
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">

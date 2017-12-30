@@ -141,7 +141,7 @@ public class PageController {
 		 
 		 ;
 		 mv.addObject("title", "Login");
-		 mv.addObject("users", userinfoDAO.list());
+		 mv.addObject("users", userinfoDAO.getActiveUserslist());
 		 return mv;
 	 }
 	 
