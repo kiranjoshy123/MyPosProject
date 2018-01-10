@@ -15,7 +15,6 @@ $(function() {
 			break;
 		default:
 			$('#listProducts').addClass('active');
-			$('#a_'+menu).addClass('active');
 			console.log(menu);
 			break;
 	}
@@ -424,6 +423,28 @@ $(function() {
 			
 		});
 	}
+	
+	// Key-down function - Waiting for scanner input. 
+	var barcode="";
+    $(document).keydown(function(e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if(code==13)// Enter key hit
+        {
+            alert(barcode);
+            var $table = $('#productlistTable').DataTable();
+            $table.search( 'Mac' ).draw();
+            barcode = "";
+        }
+        else if(code==9)// Tab key hit
+        {
+            alert(barcode);
+        }
+        else
+        {
+            barcode = barcode + String.fromCharCode(code);
+        }
+    });
+
 	
 
 	 $('.num').click(function () {

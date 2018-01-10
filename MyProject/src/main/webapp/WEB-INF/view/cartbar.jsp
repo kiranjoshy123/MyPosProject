@@ -16,7 +16,7 @@
 				<tbody>
 
 					<c:forEach items="${cartLines}" var="cartLine">
-						<tr height="80">
+						<tr height="80" >
 							<td class="col-md-1">
 								<div class="media">
 									<div class="media-body">

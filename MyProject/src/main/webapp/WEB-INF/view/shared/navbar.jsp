@@ -5,7 +5,7 @@
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="#">Settings</a>
   <a href="#">Reports</a>
-  <a href="#">History</a>
+  <a href="${contextRoot}/history">History</a>
   <a href="#">Calc</a>
   <a href="${contextRoot}/contact">Contact</a>
   <a href="${contextRoot}/about">About</a>
