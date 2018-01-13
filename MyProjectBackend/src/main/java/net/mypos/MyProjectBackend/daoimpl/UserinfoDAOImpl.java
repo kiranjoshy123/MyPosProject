@@ -8,7 +8,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.mypos.MyProjectBackend.dao.UserinfoDAO;
+import net.mypos.MyProjectBackend.dto.Admin;
 import net.mypos.MyProjectBackend.dto.Cart;
+import net.mypos.MyProjectBackend.dto.Customer;
+import net.mypos.MyProjectBackend.dto.Staff;
+import net.mypos.MyProjectBackend.dto.Supplier;
 import net.mypos.MyProjectBackend.dto.Userinfo;
 
 @Repository("userinfoDAO")
@@ -59,14 +63,69 @@ public class UserinfoDAOImpl implements UserinfoDAO {
 	}
 
 	@Override
-	public boolean add(Userinfo user, Cart cart) {
+	public boolean add(Userinfo user, String role1) {
 		try {
-			// Map the cart and user.
-			cart.setUser(user);
-			// add user to the userinfo table.
-			sessFactory.getCurrentSession().persist(user);
-			sessFactory.getCurrentSession().persist(cart);
-			return true;
+			
+			String role = user.getRole();
+			if(role.equals("STAFF"))
+			{
+				Staff staff = new Staff();
+				staff.setEnabled(user.getEnabled());
+				staff.setEmail(user.getEmail());
+				staff.setAddress(user.getAddress());
+				staff.setContactNumber(user.getContactNumber());
+				staff.setUserinfo(user);
+				
+				// add user to the userinfo table.
+				sessFactory.getCurrentSession().persist(user);
+				sessFactory.getCurrentSession().persist(staff);
+				return true;
+			}
+			else if(role.equals("ADMIN"))
+			{
+				Admin admin = new Admin();
+				admin.setEnabled(user.getEnabled());
+				admin.setEmail(user.getEmail());
+				admin.setAddress(user.getAddress());
+				admin.setContactNumber(user.getContactNumber());
+				admin.setUserinfo(user);
+				
+				// add user to the userinfo table.
+				sessFactory.getCurrentSession().persist(user);
+				sessFactory.getCurrentSession().persist(admin);
+				return true;
+			}
+			else if(role.equals("CUSTOMER"))
+			{
+				Customer customer = new Customer();
+				customer.setEnabled(user.getEnabled());
+				customer.setEmail(user.getEmail());
+				customer.setAddress(user.getAddress());
+				customer.setContactNumber(user.getContactNumber());
+				customer.setUserinfo(user);
+				
+				// add user to the userinfo table.
+				sessFactory.getCurrentSession().persist(user);
+				sessFactory.getCurrentSession().persist(customer);
+				return true;
+			}
+			else if(role.equals("SUPPLIER"))
+			{
+				Supplier supplier = new Supplier();
+				supplier.setEnabled(user.getEnabled());
+				supplier.setEmail(user.getEmail());
+				supplier.setAddress(user.getAddress());
+				supplier.setContactNumber(user.getContactNumber());
+				supplier.setUserinfo(user);
+				
+				// add user to the userinfo table.
+				sessFactory.getCurrentSession().persist(user);
+				sessFactory.getCurrentSession().persist(supplier);
+				return true;
+			}
+			
+			return false;
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return false;

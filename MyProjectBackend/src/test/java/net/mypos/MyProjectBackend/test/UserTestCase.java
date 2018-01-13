@@ -31,9 +31,9 @@ public class UserTestCase {
 	@Test
 	public void testAddUser() {
 		userinfo = new Userinfo();
-		userinfo.setFirstName("Sachin");
+		userinfo.setFirstName("SachinSTAFF2");
 		userinfo.setLastName("Tendulkar");
-		userinfo.setRole("USER");
+		userinfo.setRole("ADMIN");
 		userinfo.setPassword("admin");
 		userinfo.setEnabled(true);
 		userinfo.setEmail("st@gmail.com");
@@ -41,8 +41,7 @@ public class UserTestCase {
 		userinfo.setAddress("This is Address");
 		userinfo.setContactNumber("9753453422");
 		
-		cart = new Cart();
-		assertEquals("Failed to add a new user!", true, userinfoDAO.add(userinfo, cart));
+		assertEquals("Failed to add a new user!", true, userinfoDAO.add(userinfo, userinfo.getRole()));
 	}
 	
 	/*@Test 

@@ -425,7 +425,7 @@ $(function() {
 	}
 	
 	// Key-down function - Waiting for scanner input. 
-	var barcode="";
+	/*var barcode="";
     $(document).keydown(function(e) {
         var code = (e.keyCode ? e.keyCode : e.which);
         if(code==13)// Enter key hit
@@ -452,6 +452,6 @@ $(function() {
 	        var text = $.trim(num.find('.txt').clone().children().remove().end().text());
 	        var telNumber = $('#telNumber');
 	        $(telNumber).val(telNumber.val() + text);
-	    });
+	    });*/
 	
 });

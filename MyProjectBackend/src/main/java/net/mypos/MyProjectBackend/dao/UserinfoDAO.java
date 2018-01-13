@@ -13,7 +13,7 @@ public interface UserinfoDAO {
 	Userinfo get(int userID);
 	Userinfo getbyEmail(String email);
 	
-	boolean add(Userinfo user,Cart cart);
+	boolean add(Userinfo user, String role);
 	boolean update(Userinfo user);
 	boolean delete(Userinfo user);
 	

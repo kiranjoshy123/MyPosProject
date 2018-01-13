@@ -1,7 +1,6 @@
 package net.mypos.MyProject.Controller;
 
 import java.util.List;
-
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -194,7 +193,7 @@ public class ManagementController {
 		// Create a new category.
 		Userinfo newUserinfo = new Userinfo();
 		newUserinfo.setEnabled(true);
-		
+        
 		ModelAndView mv = new ModelAndView("page");
 		mv.addObject("userClickedManageUser",true);
 		mv.addObject("title","Manage User");
@@ -228,8 +227,7 @@ public class ManagementController {
 		
 		// id = 0 means, product doesn't exists. Hence add a new one,else update the existing one
 		if(modifiedUserinfo.getId() == 0) {
-			Cart cart = new Cart();
-			userinfoDAO.add(modifiedUserinfo,cart);
+			userinfoDAO.add(modifiedUserinfo, modifiedUserinfo.getRole());
 		}
 		else {
 			userinfoDAO.update(modifiedUserinfo);

@@ -89,13 +89,25 @@
 							</div>
 						</div>
 						
+						<div class="form-group">
+							<label class="control-label col-md-4" for="role">Role : </label>
+							<div class="col-md-8">
+								
+								<sf:select class="form-control" path="role">
+					                <sf:option value="ADMIN">ADMIN</sf:option>
+					                <sf:option value="STAFF">STAFF</sf:option>
+					                <sf:option value="CUSTOMER">CUSTOMER</sf:option>
+					                <sf:option value="SUPPLIER">SUPPLIER</sf:option>
+					            </sf:select >
+							</div>
+						</div>
+						
 						
 						<div class="form-group">
 							<div class="col-md-offset-5 col-md-7">
 								<input type="submit" name="submit" id="submit" value="Save" class="btn btn-primary"/>
 								
-								<!-- Hidden fields for user -->
-								<sf:hidden path="role"/>
+								
 							</div>
 						</div>
 						
@@ -111,7 +123,7 @@
 	</div>
 
 
-	<!-- List of all Products -->
+	<!-- List of all users -->
 	<div class="row">
 		<div class="col-xs-12">
 			<h3>Available Users</h3>

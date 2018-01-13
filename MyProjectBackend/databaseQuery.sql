@@ -24,6 +24,50 @@ CREATE TABLE userinfo (
 	CONSTRAINT pk_user_id PRIMARY KEY(id),
 );
 
+CREATE TABLE customer (
+	id IDENTITY,
+	enabled BOOLEAN,
+	email VARCHAR(100),
+	address VARCHAR(255),
+	contact_number VARCHAR(15),	
+	person_id INT,
+	CONSTRAINT pk_customer_id PRIMARY KEY(id),
+	CONSTRAINT fk_customer_person_id FOREIGN KEY (person_id) REFERENCES userinfo (id)
+);
+
+CREATE TABLE Admin (
+	id IDENTITY,
+	enabled BOOLEAN,
+	email VARCHAR(100),
+	address VARCHAR(255),
+	contact_number VARCHAR(15),	
+	person_id INT,
+	CONSTRAINT pk_admin_id PRIMARY KEY(id),
+	CONSTRAINT fk_admin_person_id FOREIGN KEY (person_id) REFERENCES userinfo (id)
+);
+
+CREATE TABLE Supplier (
+	id IDENTITY,
+	enabled BOOLEAN,
+	email VARCHAR(100),
+	address VARCHAR(255),
+	contact_number VARCHAR(15),	
+	person_id INT,
+	CONSTRAINT pk_supplier_id PRIMARY KEY(id),
+	CONSTRAINT fk_supplier_person_id FOREIGN KEY (person_id) REFERENCES userinfo (id)
+);
+
+CREATE TABLE Staff (
+	id IDENTITY,
+	enabled BOOLEAN,
+	email VARCHAR(100),
+	address VARCHAR(255),
+	contact_number VARCHAR(15),	
+	person_id INT,
+	CONSTRAINT pk_staff_id PRIMARY KEY(id),
+	CONSTRAINT fk_staff_person_id FOREIGN KEY (person_id) REFERENCES userinfo (id)
+);
+
 CREATE TABLE product (
 	id IDENTITY,
 	code VARCHAR(20),
@@ -79,15 +123,23 @@ INSERT INTO category (name, description,image_url,is_active) VALUES ('Misc', 'Th
 INSERT INTO userinfo 
 (first_name, last_name, role, enabled, password, email, user_name, address, contact_number) 
 VALUES ('Virat', 'Kohli', 'ADMIN', true, '$2a$10$yvjrz1qy66/TQ8sigm4.b.knJRqnfc9cvqo2n5TAMR6JWLRnxm/GO', 'vk@gmail.com', 'viratKohli', 'Address', '9752435255');
+INSERT INTO admin 
+(enabled, email, address, contact_number, person_id) 
+VALUES (true, 'vk@gmail.com', 'Address', '9752435255', 1);
 
 INSERT INTO userinfo 
 (first_name, last_name, role, enabled, password, email, user_name, address, contact_number) 
-VALUES ('Ravindra', 'Jadeja', 'SUPPLIER', true, '$2a$10$Gb3J2Go.s5ZKHK4hSobRyuCZZC6w/wMdNetqzNtw.JR9oj4oo1EB.', 'rj@gmail.com', 'RavindraJadeja', 'Address', '9876363544');
+VALUES ('Ravindra', 'Jadeja', 'STAFF', true, '$2a$10$Gb3J2Go.s5ZKHK4hSobRyuCZZC6w/wMdNetqzNtw.JR9oj4oo1EB.', 'rj@gmail.com', 'RavindraJadeja', 'Address', '9876363544');
+INSERT INTO staff 
+(enabled, email, address, contact_number, person_id) 
+VALUES (true, 'rj@gmail.com', 'Address', '9876363544', 2);
+
 INSERT INTO userinfo 
 (first_name, last_name, role, enabled, password, email, user_name, address, contact_number) 
-VALUES ('Ravichandra', 'Ashwin', 'SUPPLIER', true, '$2a$10$75SvWVBBP35esShVRoUsKOVhae.uxopQoFYt.wK0/oh0vJqrNIz3G',  'ra@gmail.com', 'RavichandraAshwin', 'Address', '9765243566');
-
-
+VALUES ('Ravichandra', 'Ashwin', 'CUSTOMER', true, '$2a$10$75SvWVBBP35esShVRoUsKOVhae.uxopQoFYt.wK0/oh0vJqrNIz3G',  'ra@gmail.com', 'RavichandraAshwin', 'Address', '9765243566');
+INSERT INTO customer 
+(enabled, email, address, contact_number, person_id) 
+VALUES (true, 'ra@gmail.com', 'Address', '9765243566', 3);
 
 INSERT INTO cart
 (user_id, grand_total, cart_lines)
