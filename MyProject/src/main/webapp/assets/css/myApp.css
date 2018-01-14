@@ -195,8 +195,27 @@ Cart total bar
   padding: 1rem;
 }
 
+/*
+User button in login page
+*/
 
+.btn-user{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
 
+.btn-user:active{
+	background-color:: none;
+ 	background:#ffffff;
+  	color: black;
+  	outline:0;
+}
+.btn-user:focus {
+	background-color:: none;
+ 	background:#ffffff;
+  	color: black;
+  	outline:0;
+}
 
 /*
 Custom Side-nav bar.

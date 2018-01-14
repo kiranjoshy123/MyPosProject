@@ -29,8 +29,8 @@ $(function() {
 		});
 	}
 	
-	// Code for jquery dataTable
 	
+	// Code for jquery dataTable
 	var $table = $('#productlistTable');
 	// Execute only when products are to be displayed.
 	if($table.length){
@@ -100,6 +100,9 @@ $(function() {
 			]
 		});
 	}
+	
+	
+	
 	
 	
 	//Timer implementation for dismissing the alert
@@ -443,15 +446,10 @@ $(function() {
         {
             barcode = barcode + String.fromCharCode(code);
         }
-    });
+    });*/
 
 	
 
-	 $('.num').click(function () {
-	        var num = $(this);
-	        var text = $.trim(num.find('.txt').clone().children().remove().end().text());
-	        var telNumber = $('#telNumber');
-	        $(telNumber).val(telNumber.val() + text);
-	    });*/
+	 
 	
 });

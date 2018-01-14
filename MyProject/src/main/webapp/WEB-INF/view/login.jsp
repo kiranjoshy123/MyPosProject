@@ -104,7 +104,7 @@
 
 							<div class="col-md-8">
 								<c:forEach items="${users}" var="user">
-									<button class="btn btn-success btn-lg" id="button">${user.firstName}</button>
+									<button class="btn btn-primary btn-lg btn-user" id="buttonUser" value="${user.email}">${user.firstName}</button>
 								</c:forEach>
 							</div>
 
@@ -115,18 +115,20 @@
 								<!-- Form Elements -->
 								<form class="form-horizontal" action="${contextRoot}/login" method="POST" id="loginForm">
 									
+									<!-- Hidden fields - User name -->
 									<div class="form-group">
-										<label class="control-label col-md-4" for="username">Login in as :</label>
+										<label class="control-label col-md-4" for="username" style="display: none">Login in as :</label>
 										<div class="col-md-8">
-											<input type="text" name="username" id="username" class="form-control" />
+											<input type="text" name="username" id="username" class="form-control" style="display: none"/>
 										</div>
 									</div>  
 									
+									<label class="control-label col-md-10" for="password" ><h4>Enter your passcode</h4></label>
+									<br></br>
 									
 									<div class="form-group">
-										<label class="control-label col-md-4" for="password">Password:</label>
-										<div class="col-md-8">
-											<input type="text" name="password" id="password" class="form-control" />
+										<div class="col-md-10 col-md-offset-1">
+											<input type="password" name="password" id="password" class="form-control" style="text-align:center"/>
 										</div>
 									</div>
 									
@@ -171,6 +173,23 @@
 
 		<!-- Self coded javascript -->
 		<script src="${js}/myapp.js"></script>
+		
+		<script>
+			$('.num').click(function () {
+		        var num = $(this);
+		        var text = $.trim(num.find('.txt').clone().children().remove().end().text());
+		        var telNumber = $('#password');
+		        $(telNumber).val(telNumber.val() + text);
+		    });
+			
+		
+			$(document).on('click','#buttonUser',function(){
+				var user = $(this);
+				$('#username').val($(user).attr("value"));
+			});
+			
+			
+		</script>
 	</div>
 
 </body>
