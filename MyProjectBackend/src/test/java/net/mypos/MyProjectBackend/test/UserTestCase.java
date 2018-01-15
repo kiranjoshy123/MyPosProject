@@ -31,9 +31,9 @@ public class UserTestCase {
 	@Test
 	public void testAddUser() {
 		userinfo = new Userinfo();
-		userinfo.setFirstName("SachinSTAFF2");
+		userinfo.setFirstName("SachinStaff");
 		userinfo.setLastName("Tendulkar");
-		userinfo.setRole("ADMIN");
+		userinfo.setRole("STAFF");
 		userinfo.setPassword("admin");
 		userinfo.setEnabled(true);
 		userinfo.setEmail("st@gmail.com");

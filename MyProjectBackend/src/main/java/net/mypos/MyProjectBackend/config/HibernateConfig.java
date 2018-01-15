@@ -19,11 +19,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class HibernateConfig {
 	
 	// Hibernate config - change it based on the database.
-	private final static String DATABASE_URL = "jdbc:h2:tcp://localhost/~/MyProjetcPos";
-	private final static String DATABASE_DRIVER = "org.h2.Driver";
-	private final static String DATABASE_DIALECT = "org.hibernate.dialect.H2Dialect";
-	private final static String DATABASE_USERNAME = "sa";
-	private final static String DATABASE_PASSWORD = "";
+	private final static String DATABASE_URL = "jdbc:mysql://localhost:3306/eposdatabase";
+	private final static String DATABASE_DRIVER = "com.mysql.jdbc.Driver";
+	private final static String DATABASE_DIALECT = "org.hibernate.dialect.MySQLDialect";
+	private final static String DATABASE_USERNAME = "root";
+	private final static String DATABASE_PASSWORD = "password";
 	
 	
 	// datasource bean will be available.
@@ -63,6 +63,8 @@ public class HibernateConfig {
 		prop.put("hibernate.show_sql", "true");
 		prop.put("hibernate.format_sql", "true");
 		prop.put("hibernate.hbm2ddl.auto", "update");
+		
+		
 		return prop;
 	}
 }
