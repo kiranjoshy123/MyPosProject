@@ -3,20 +3,13 @@
 <div class="container-fluid">
 	<div class="row">
 	
-	
-		<!-- Would be to display the sidebar -->
-		<div class="col-md-2">
-			<%@include file="./shared/sidebar.jsp" %>
-		</div>
-		
-		
 		<!-- Would be to display the actual products -->
-		<div class="col-md-6">
+		<div class="col-md-8">
 			
 			<!-- Added breadcrumb component -->
 			<div class="row">
 				<div class="col-md-12">
-					<c:if test="${userClickedAllProducts == true}" >
+					<c:if test="${userClickedAllProducts == true or userClickedHome == true}" >
 						<script>
 							window.categoryId = '';
 						</script>
@@ -32,7 +25,6 @@
 						</script>
 						<ol class="breadcrumb">
 							<li><a href="${contextRoot}/home">Home</a></li>
-							<li class="active">Category</li>
 							<li class="active">${category.name}</li>
 						</ol>
 					</c:if>
@@ -40,44 +32,20 @@
 			
 			</div>
 		
+			<!-- Categories and product list page -->
 			<div class="row>">
 				<div class="col-md-12">
-					
-					<div class="contaier-fluid">
-						<div class="table-responsive">
-							<table id="productlistTable"
-								class="table table-striped table-borderd">
-
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Brand</th>
-										<th>Price</th>
-										<th>Qnty</th>
-										<th></th>
-									</tr>
-								</thead>
-
-							</table>
-						</div>
-
-					</div>
-
+					<%@include file="categoriesList.jsp" %>
 				</div>
 			</div>
 		</div>
 		
 		<!-- Cart bar -->
-		<div  class="col-md-4">
-			<p class="h2" style="color:ForestGreen;" >Cart</p>
- 			<!-- <img style='display:block; width:100px;height:100px;' class="img-responsive" src="Cart.png" />  -->
+		<div class="col-md-4">
+			
 			<%@include file="cartbar.jsp" %>
 		</div>
 		
-		
-	
 	</div>
-
-
-
+	
 </div>

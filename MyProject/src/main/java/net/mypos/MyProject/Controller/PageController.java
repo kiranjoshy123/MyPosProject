@@ -98,7 +98,7 @@ public class PageController {
 		
 		mv.addObject("title", category.getName());
 		mv.addObject("category", category);
-		mv.addObject("categories", categoryDAO.list());
+		mv.addObject("productList", productDAO.listActiveProductsByCategory(id));
 		mv.addObject("cartLines", cartService.getCartLines());
 		
 		mv.addObject("userClickedCategoryProducts", true);

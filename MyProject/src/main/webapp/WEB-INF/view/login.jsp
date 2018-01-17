@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
@@ -102,7 +101,11 @@
 
 						<div class="panel-body">
 
-							<div class="col-md-8">
+							
+							<div class="col-md-8 text-center">
+								<label class="control-label" for="password" ><h4>Select a user</h4></label>
+								<br/>
+							
 								<c:forEach items="${users}" var="user">
 									<button class="btn btn-primary btn-lg btn-user" id="buttonUser" value="${user.email}">${user.firstName}</button>
 								</c:forEach>
@@ -124,7 +127,7 @@
 									</div>  
 									
 									<label class="control-label col-md-10" for="password" ><h4>Enter your passcode</h4></label>
-									<br></br>
+									<br/>
 									
 									<div class="form-group">
 										<div class="col-md-10 col-md-offset-1">
@@ -135,8 +138,6 @@
 									<!-- Num pad comes here. -->
 									<%@include file="numpad.jsp"%>
 									
-									
-
 									<div class="form-group">
 										<div class="col-md-offset-4 col-md-8">
 											<input type="submit" value="Login" class="btn btn-primary" />

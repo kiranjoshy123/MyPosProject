@@ -59,7 +59,7 @@
 		
 			<!-- Loading the Home contents -->
 			<c:if test="${userClickedHome == true }">
-				<%@include file="home.jsp"%>
+				<%@include file="listProducts.jsp"%>
 			</c:if>
 
 			<!-- About handling -->

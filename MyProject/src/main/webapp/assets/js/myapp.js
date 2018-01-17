@@ -14,8 +14,6 @@ $(function() {
 			$('#manageUsers').addClass('active');
 			break;
 		default:
-			$('#listProducts').addClass('active');
-			console.log(menu);
 			break;
 	}
 	
@@ -28,81 +26,6 @@ $(function() {
 			xhr.setRequestHeader(header,token);
 		});
 	}
-	
-	
-	// Code for jquery dataTable
-	var $table = $('#productlistTable');
-	// Execute only when products are to be displayed.
-	if($table.length){
-		console.log("Inside the table!");
-		
-		
-		var jsonURL = '';
-		if(window.categoryId == ''){
-			jsonURL = window.contextRoot + '/json/data/all/products';
-		}
-		else{
-			jsonURL = window.contextRoot + '/json/data/category/' + window.categoryId + '/products';
-		}
-		
-		
-		$table.DataTable({
-			lengthMenu : [[3,5,10,-1],['3','5','10','All']],
-			pageLength : 10,
-			ajax :{
-				url : jsonURL,
-				dataSrc : ''
-			},
-			columns : [
-				{
-					data : 'name',
-					mRender : function(data,type,row){
-						var str = '';
-						str += '<a href ="' + window.contextRoot + '/show/' + row.id + '/product" >' + data + '</a>';
-						return str;
-					}
-				},
-				{
-					data : 'brand',
-				},
-				{
-					data : 'unit_price',
-					/*mRender : function(data,type,row){
-						return '&#8377;' + data
-					}*/
-				},
-				{
-					data : 'quantity',
-					mRender : function(data,type,row){
-						if(data < 1)
-						{
-							return '<span style="color:red">Out of Stock!</span>';
-						}
-						
-						return data;
-					}
-				},
-				{
-					data : 'id',
-					bSortable : false,
-					mRender : function(data,type,row){
-						var str = '';
-						if(row.quantity < 1){
-							str += '<a href ="javascript:void(0) class="btn btn-success disabled""><span class="glyphicon glyphicon-shopping-cart"></a>';
-						}
-						else{
-							str += '<a href ="' + window.contextRoot + '/cart/add/' + data + '/product" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></a>';
-						}
-						return str;
-					}
-				}
-				
-			]
-		});
-	}
-	
-	
-	
 	
 	
 	//Timer implementation for dismissing the alert
@@ -247,8 +170,6 @@ $(function() {
 			
 		});
 	}
-	
-	//------------------------------Data table for Product - Admin -------------------------
 	
 	
 	//------------------------------Data table for Category - Admin -------------------------
@@ -448,6 +369,62 @@ $(function() {
         }
     });*/
 
+	$(document).on('click','#buttonProduct',function(){
+		var tableCart = document.getElementById("cartTable");
+		var user = $(this);
+		if(tableCart !=null && user != null)
+		{
+	        var tdProduct = document.createElement("td");
+	        tdProduct.className = "col-md-1";
+	        tdProduct.innerHTML = '<div class="media">' + 
+				'<div class="media-body">' + 
+				'<h5 class="media-heading">' + $(user).text() + '</h5>' + 
+	        	'</div>	</div>';
+	        
+	        var tdQuantity = document.createElement("td");
+	        tdQuantity.className = "col-md-4";
+	        tdQuantity.innerHTML = '<a type="button"class="btn btn-info btn-circle" >' +
+				'<span class="glyphicon glyphicon-minus"></span>' +
+				'</a>' +
+				'<label>&nbsp;1&nbsp;</label>' +
+				'<a type="button"class="btn btn-info btn-circle" >' +
+					'<span class="glyphicon glyphicon-plus"></span>' +
+				'</a>';
+	        
+	        var tdPrice = document.createElement("td");
+	        tdPrice.className = "col-md-1 text-center";
+	        tdPrice.innerHTML = "<strong>" + $(user).attr("value") + "</strong>";
+	        
+	        var tdTotal = document.createElement("td");
+	        tdTotal.className = "col-md-1 text-center";
+	        tdTotal.innerHTML = "<strong>" + $(user).attr("value") + "</strong>";
+	        
+	        var tdRemove = document.createElement("td");
+	        tdRemove.className = "col-md-1";
+	        tdRemove.innerHTML = '<a  type="button" class="btn icon-btn btn-danger" id="removeCartItemBtn">' + 
+								'<span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span></a>';
+	        
+	        var newRow = document.createElement("tr");
+	        newRow.setAttribute("height", 80);
+	        newRow.appendChild(tdProduct);
+	        newRow.appendChild(tdQuantity);
+	        newRow.appendChild(tdPrice);
+	        newRow.appendChild(tdTotal);
+	        newRow.appendChild(tdRemove);
+	        
+	        tableCart.appendChild(newRow);
+		}
+		else
+		{
+			
+		}
+	});
+	
+	$(document).on('click','#removeCartItemBtn',function(){
+		// Remove the selected row.
+		$(this).closest ('tr').remove();
+	});
+	
 	
 
 	 

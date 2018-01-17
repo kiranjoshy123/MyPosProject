@@ -1,9 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="row">
+	<h4 style="color:ForestGreen;" >Orders</h4>
 	<c:choose>
 		<c:when test="${not empty cartLines}">
-			<table class="table table-hover">
+			<table class="table table-hover" id="cartTable">
 				<thead>
 					<tr>
 						<th>Product</th>
@@ -14,36 +15,6 @@
 					</tr>
 				</thead>
 				<tbody>
-
-					<c:forEach items="${cartLines}" var="cartLine">
-						<tr height="80" >
-							<td class="col-md-1">
-								<div class="media">
-									<div class="media-body">
-										<h5 class="media-heading"> ${cartLine.product.name} </h5>
-									</div>
-								</div>
-							</td>
-							<td class="col-md-4" style="text-align:center">
-								<a type="button"class="btn btn-info btn-circle" >
-									<span class="glyphicon glyphicon-minus"></span>
-								</a>
-								<!-- <input type="number" min="1" class="form-control" id="exampleInputEmail1" value="${cartLine.productCount}"> -->
-								<label>&nbsp;${cartLine.productCount}&nbsp;</label>
-								<a type="button"class="btn btn-info btn-circle" >
-									<span class="glyphicon glyphicon-plus"></span>
-								</a>
-							</td>
-							<td class="col-md-1 text-center"><strong>${cartLine.byingPrice}</strong></td>
-							<td class="col-md-1 text-center"><strong>${cartLine.total}</strong></td>
-							<td class="col-md-1">
-								<a href="${contextRoot}/cart/${cartLine.id}/delete" type="button" class="btn icon-btn btn-danger">
-									<span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span> Remove
-								</a>
-							</td>
-						</tr>
-
-					</c:forEach>
 
 					<tr>
 						<td> </td>
@@ -58,8 +29,8 @@
 			</table>
 			
 			<!-- Cart pay/hold/delete -->
-			<div class="cartFooter">
-				<div class="row" >
+			<div class="row">
+				<div class="cartFooter" >
 					<a href="#" style="margin-left:10px;" class="col-md-3 btn btn-danger">
 						<span class="glyphicon glyphicon-trash" ></span>
       					<span style="padding-left:10px;" >Clear</span>
