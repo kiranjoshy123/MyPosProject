@@ -1,7 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="row">
-	<h4 style="color:ForestGreen;" >Orders</h4>
+	<div class="CartBarHeading">
+	    <h4 style="color:white;" >Orders</h4>
+	</div>
+	
 	<c:choose>
 		<c:when test="${not empty cartLines}">
 			<table class="table table-hover" id="cartTable">
@@ -31,7 +34,7 @@
 			<!-- Cart pay/hold/delete -->
 			<div class="row">
 				<div class="cartFooter" >
-					<a href="#" style="margin-left:10px;" class="col-md-3 btn btn-danger">
+					<a href="#" style="margin-left:15px;" class="col-md-3 btn btn-danger" id="clearCartBtn">
 						<span class="glyphicon glyphicon-trash" ></span>
       					<span style="padding-left:10px;" >Clear</span>
 					</a>

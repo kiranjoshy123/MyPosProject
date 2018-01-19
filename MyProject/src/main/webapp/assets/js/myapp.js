@@ -374,8 +374,9 @@ $(function() {
 		var user = $(this);
 		if(tableCart !=null && user != null)
 		{
+			console.log(tableCart);
 	        var tdProduct = document.createElement("td");
-	        tdProduct.className = "col-md-1";
+	        tdProduct.className = "col-md-4";
 	        tdProduct.innerHTML = '<div class="media">' + 
 				'<div class="media-body">' + 
 				'<h5 class="media-heading">' + $(user).text() + '</h5>' + 
@@ -425,6 +426,22 @@ $(function() {
 		$(this).closest ('tr').remove();
 	});
 	
+	$(document).on('click','#clearCartBtn',function(){
+		// Remove all the rows in cart.
+		var tableCart = document.getElementById("cartTable");
+		if(tableCart !=null )
+		{
+			tableCart.innerHTML = '<thead>' + 
+					'<tr>' + 
+						'<th>Product</th>' + 
+						'<th style="text-align:center">Quantity</th>' + 
+						'<th class="text-center">Price</th>' + 
+						'<th class="text-center">Total</th>' + 
+						'<th></th>' + 
+					'</tr>' + 
+				'</thead>';
+		}
+	});
 	
 
 	 

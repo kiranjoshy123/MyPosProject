@@ -12,7 +12,7 @@
 
 	<c:if test="${userClickedCategoryProducts == true}">
 		<c:forEach items="${productList}" var="product">
-			<button class="btn btn-primary btn-item" id="buttonProduct" value="${product.unit_price}">${product.name}</button>
+			<button type="button" class="btn btn-primary btn-item" id="buttonProduct" value="${product.unit_price}">${product.name}</button>
 		</c:forEach>
 	</c:if>
 

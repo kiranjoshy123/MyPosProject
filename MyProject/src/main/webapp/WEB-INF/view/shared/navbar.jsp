@@ -35,13 +35,7 @@
 				</li>
 			</ul>
 			
-			<ul class="nav navbar-nav navbar-right">
-				<security:authorize access="isAuthenticated()">
-					<li id="listProducts">
-						<a href="${contextRoot}/show/all/products">All Products</a>
-					</li>
-				</security:authorize>
-				
+			<ul class="nav navbar-nav navbar-right">				
 				<!-- Show 'Manage Products', 'Manage Category' and 'Manage Users' only for AMIN -->
 				<security:authorize access="hasAuthority('ADMIN')">
 					<li id="manageProducts">

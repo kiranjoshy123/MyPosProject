@@ -69,9 +69,6 @@
 
 		</div>
 
-		<!-- Footer -->
-		<%@include file="./shared/footer.jsp"%>
-
 		<!-- jQuery -->
 		<script src="${js}/jquery.js"></script>
 		

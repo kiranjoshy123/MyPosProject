@@ -66,9 +66,6 @@ footer {
 	position: relative;
 }
 
-.content{
-	padding-bottom: 60px; /*height of the footer*/
-}
 
 .footer{
 	position: absolute;
@@ -200,6 +197,8 @@ User button in login page
 	margin-bottom: 5px;
 	text-align: center;
 	vertical-align: middle;
+	white-space: normal !important;
+    word-wrap: break-word;
 }
 
 .btn-user:active{
@@ -225,9 +224,10 @@ Category/Product button
 	margin-right: 3px;
 	height: 70px;
 	width: 130px;
-	line-height:50px;
 	text-align: center;
 	vertical-align: middle;
+	white-space: normal !important;
+    word-wrap: break-word;
 }
 
 .btn-item:active{
@@ -252,7 +252,7 @@ Custom Side-nav bar.
     position: fixed;
     z-index: 1;
     left: 0;
-    background-color: #2196f3;
+    background-color: #4881ea;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 13px;
@@ -288,4 +288,14 @@ Custom Side-nav bar.
 
 .breadcrumb >.active {
    color: #c7c7c7;
+}
+
+div.CartBarHeading{
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #4881ea;
+    color: #8AF;
+    padding: 0px 20px;
+    height: 37px;
+    vertical-align: middle;
 }

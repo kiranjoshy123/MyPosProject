@@ -50,6 +50,7 @@ public class PageController {
 		mv.addObject("title", "Home");
 		mv.addObject("userClickedHome", true);
 		mv.addObject("categories", categoryDAO.list());
+		mv.addObject("cartLines", cartService.getCartLines());
 		
 		return mv;
 	}
@@ -73,7 +74,7 @@ public class PageController {
 	
 	/*
 	 * Methods to load all the products based on category
-	 * */
+	 * 
 	@RequestMapping(value = { "/show/all/products" })
 	public ModelAndView showAllProducts() {
 		ModelAndView mv = new ModelAndView("page");
@@ -83,7 +84,7 @@ public class PageController {
 		mv.addObject("cartLines", cartService.getCartLines());
 		
 		return mv;
-	}
+	}*/
 	
 	/*
 	 * Methods to load all the products based on category

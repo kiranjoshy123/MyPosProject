@@ -61,7 +61,7 @@
 		</nav>
 
 		<!-- Page Content -->
-		<div class="content" style="margin:10px;" >
+		<div style="margin:10px;" >
 			<div class="container-fluid">
 
 				<!-- Will be displayed if credentials are wrong -->
@@ -100,8 +100,6 @@
 						</div>
 
 						<div class="panel-body">
-
-							
 							<div class="col-md-8 text-center">
 								<label class="control-label" for="password" ><h4>Select a user</h4></label>
 								<br/>
@@ -110,7 +108,6 @@
 									<button class="btn btn-primary btn-lg btn-user" id="buttonUser" value="${user.email}">${user.firstName}</button>
 								</c:forEach>
 							</div>
-
 
 							<div class="col-md-1 vertical-line"></div>
 							<div class="col-md-3">
@@ -159,9 +156,6 @@
 			</div>
 
 		</div>
-
-		<!-- Footer -->
-		<%@include file="./shared/footer.jsp"%>
 
 		<!-- jQuery -->
 		<script src="${js}/jquery.js"></script>

@@ -2,14 +2,15 @@ body
 {
     margin: 0;
     padding: 0;
-  
 }
+
 p
 {
     margin: 0;
     padding: 0 0 10px 0;
     line-height: 20px;
 }
+
 .span4
 {
     width: 80px;
@@ -42,7 +43,7 @@ p
     border-radius: 999px;
     -moz-border-radius: 999px;
     height: 80px;
-    background-color: #fff;
+    background-color: #2196f3;
     color: #333;
     cursor: pointer;
 }
@@ -59,10 +60,10 @@ p
 {
     font-size: 30px;
     text-align: center;
-    margin-top: 15px;
+    margin-top: 24px;
     font-family: 'Lato' , sans-serif;
     line-height: 30px;
-    color: #333;
+    color: #ffffff;
 }
 .small
 {

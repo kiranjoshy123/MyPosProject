@@ -1,13 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="container-fluid">
-	<div class="row">
+<div class="container-fluid" >
+	<div class="row" >
 	
 		<!-- Would be to display the actual products -->
+		
 		<div class="col-md-8">
-			
 			<!-- Added breadcrumb component -->
-			<div class="row">
+			<div class="row" >
 				<div class="col-md-12">
 					<c:if test="${userClickedAllProducts == true or userClickedHome == true}" >
 						<script>
@@ -33,8 +33,8 @@
 			</div>
 		
 			<!-- Categories and product list page -->
-			<div class="row>">
-				<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-12" >
 					<%@include file="categoriesList.jsp" %>
 				</div>
 			</div>
@@ -42,7 +42,6 @@
 		
 		<!-- Cart bar -->
 		<div class="col-md-4">
-			
 			<%@include file="cartbar.jsp" %>
 		</div>
 		
