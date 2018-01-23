@@ -14,8 +14,7 @@
 							window.categoryId = '';
 						</script>
 						<ol class="breadcrumb">
-							<li><a href="${contextRoot}/home">Home</a></li>
-							<li class="active">All Products</li>
+							<li class="active">Home</li>
 						</ol>
 					</c:if>
 					

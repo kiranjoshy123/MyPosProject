@@ -51,8 +51,6 @@
 	
 		<!-- Navigation -->
 		<%@include file="./shared/navbar.jsp"%>
-		
-		
 
 		<!-- Page Content -->
 		<div class="content">
@@ -96,6 +94,8 @@
 			<c:if test="${userClickedManageUser == true }">
 				<%@include file="manageUsers.jsp"%>
 			</c:if>
+			
+			<%@include file="payment.jsp"%>
 
 		</div>
 

@@ -172,12 +172,15 @@ Oval shape button with text
 Round button.
 */
 .btn-circle {
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   padding: 10px 12px;
-  font-size: 18px;
+  font-size: 15px;
   line-height: 1.33;
   border-radius: 25px;
+  background-color:transparent; !important;
+  color: #4881ea;
+  line-color: #4881ea;
 }
 
 
@@ -185,7 +188,7 @@ Round button.
 Cart total bar
 */
 .cartFooter {
- 	
+	
 }
 
 /*
@@ -298,4 +301,17 @@ div.CartBarHeading{
     padding: 0px 20px;
     height: 37px;
     vertical-align: middle;
+}
+
+.table-bordered > tbody > tr > td,
+.table-bordered > thead > tr > td,
+.table-bordered {
+    border-right:0;
+    border-left: 0;
+    vertical-align: middle;
+}
+
+
+.glyphicon.btn-danger {
+    font-size: 75px;
 }
