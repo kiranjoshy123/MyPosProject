@@ -108,6 +108,24 @@ CREATE TABLE cart_line(
 	CONSTRAINT pk_cartline_id PRIMARY KEY(id)
 );
 
+CREATE TABLE sales(
+	id INT AUTO_INCREMENT,
+	product_count int,
+	total DECIMAL(10,2),
+	buying_price DECIMAL(10,2),
+	discount DECIMAL(10,2),
+	payment_method int,
+	tax_paid DECIMAL(10,2),
+	date_time DATETIME,
+	product_id int,
+	customer_id int,
+	staff_id int,
+	CONSTRAINT fk_sales_product_id FOREIGN KEY( product_id ) REFERENCES product(id),
+	CONSTRAINT fk_sales_customer_id FOREIGN KEY( customer_id ) REFERENCES customer(id),
+	CONSTRAINT fk_sales_staff_id FOREIGN KEY( staff_id ) REFERENCES Staff(id),
+	CONSTRAINT pk_sales_id PRIMARY KEY(id)
+)
+
 INSERT INTO category (name, description,image_url,is_active) VALUES ('Grocery', 'This is description for Grocery category!', 'CAT_1.png', true);
 INSERT INTO category (name, description,image_url,is_active) VALUES ('Electronic', 'This is description for Electronic category!', 'CAT_2.png', true);
 INSERT INTO category (name, description,image_url,is_active) VALUES ('Vegetables', 'This is description for Vegetables category!', 'CAT_3.png', true);
