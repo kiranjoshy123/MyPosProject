@@ -1,5 +1,6 @@
 <div class="row1">
 	<div class="col-md-12">
+		<!-- <input type="tel" name="name" id="telNumber" class="form-control tel" value="" />  -->
 		<div class="num-pad">
 			<div class="span4">
 				<div class="num">
@@ -58,14 +59,12 @@
 			</div>
 			<div class="span4">
 				<div class="num">
-					<div class="txt"><</div>
+					<div class="txt">#</div>
 				</div>
 			</div>
 		</div>
 		<div class="clearfix"></div>
 	</div>
-	
-	
 	
 </div>
 <div class="clearfix"></div>

@@ -43,10 +43,10 @@
 				</div>
 				
 				<div class="col-md-6">
-					<button id="myBtn" class="btn btn-success btn-block">
+					<a href="${contextRoot}/order/pay" class="btn btn-success btn-block">
 						<span style="vertical-align: middle;" class="glyphicon glyphicon-credit-card" ></span>
 	     				<span style="vertical-align: middle" >Pay</span>
-					</button>
+					</a>
 				</div>
 			</div>
 					

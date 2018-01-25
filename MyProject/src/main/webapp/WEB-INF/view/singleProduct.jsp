@@ -44,22 +44,7 @@
 				</c:otherwise>
 			</c:choose>
 			
-			<!-- Disabling/Enabing the add to cart -->
-			<c:choose>
-				<c:when test="${product.quantity < 1}">
-					<a href="javascript:void(0)" class="btn btn-success disabled">
-					<span class="glyphicon glyphicon-shopping-cart" ></span>Add to Cart</a>
-				</c:when>
-			
-				<c:otherwise>
-					<a href="${contextRoot}/cart/add/${product.id}/product" class="btn btn-success">
-					<span class="glyphicon glyphicon-shopping-cart" ></span>Add to Cart</a>
-				</c:otherwise>
-			</c:choose>
-			
-			
-			
-			<a href="${contextRoot}/show/all/products" class="btn btn-primary">Back</a>
+			<a href="${contextRoot}/home" class="btn btn-primary">Back</a>
 			
 		</div>
 	

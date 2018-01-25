@@ -43,6 +43,9 @@
 <!-- Custom styles for this template -->
 <link href="${css}/myApp.css" rel="stylesheet">
 
+<!-- Numpad CSS -->
+<link href="${css}/numpad.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -95,7 +98,10 @@
 				<%@include file="manageUsers.jsp"%>
 			</c:if>
 			
-			<%@include file="payment.jsp"%>
+			<!-- Show only when payment page is requested from orders -->
+			<c:if test="${userClickedOrderPayment == true }">
+				<%@include file="payment.jsp"%>
+			</c:if>
 
 		</div>
 
