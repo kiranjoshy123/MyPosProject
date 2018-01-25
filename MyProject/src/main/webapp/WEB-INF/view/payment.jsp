@@ -47,13 +47,13 @@
 		        
 		        <li class="switch">.</li>
 		        <li class="letter">0</li>  
-		        <li class="delete lastitem"><</li> 
+		        <li class="delete lastitem"></li> 
 		        <li class="letter smallBtn">$55</li>
 		    </ul> 
 			
-			<button type="button" class="btn btn-primary btn-item" value="" >Cash</button>
-			<button type="button" class="btn btn-primary btn-item" value="" >Credit/Debit Card</button>
-			<button type="button" class="btn btn-primary btn-item" value="" >Gift Card</button>
+			<a href="${contextRoot}/order/payment/cash" type="button" class="btn btn-primary btn-item">Cash</a>
+			<a href="${contextRoot}/order/payment/card" type="button" class="btn btn-primary btn-item">Credit/Debit Card</a>
+			<a href="#" type="button" class="btn btn-primary btn-item">Gift Card</a>
 		</div>
 		<div class="col-md-3"></div>
 		<div class="col-md-2"></div>
