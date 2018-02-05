@@ -47,48 +47,105 @@
 
 <body>
 
-	<div class="wrapper">
-	
-		<!-- Navigation -->
-		<%@include file="./shared/navbar.jsp"%>
-		
-		
+<div class="wrapper">
 
-		<!-- Page Content -->
-		<div class="content">
-		
-			<div class="container">
-				<div class="row">
-					<h1>History</h1>
-			
-					<hr />
-					<p>This is the History page!!</p>
+	<!-- Navigation -->
+	<%@include file="./shared/navbar.jsp"%>
+
+	<!-- Page Content -->
+	<div class="content">
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col-xs-12">
+					<h3>Your Sales</h3>
 				</div>
-			
+
+				<div class="col-xs-12">
+					<div class="tab" role="tabpanel">
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a href="#Section1"
+								aria-controls="home" role="tab" data-toggle="tab">Today</a></li>
+							<li role="presentation"><a href="#Section2"
+								aria-controls="profile" role="tab" data-toggle="tab">All</a></li>
+						</ul>
+						<!-- Tab panes -->
+						<div class="tab-content tabs">
+							<div role="tabpanel" class="tab-pane fade in active" id="Section1">
+								<div class="table-responsive">
+									<table id="todaysHistoryTable"
+										class="table table-striped table-bordered">
+										<thead>
+											<tr>
+												<th>Order ID</th>
+												<th>Date Time</th>
+												<th>Product ID</th>
+												<th>Price</th>
+												<th>Item Count</th>
+												<th>Discount</th>
+												<th>Tax Paid</th>
+												<th>Total</th>
+												<th>Payment Method</th>
+												<th>Customer ID</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="Section2">
+								<div class="table-responsive">
+									<table id="allHistoryTable"
+										class="table table-striped table-bordered">
+										<thead>
+											<tr>
+												<th>Order ID</th>
+												<th>Date Time</th>
+												<th>Product ID</th>
+												<th>Price</th>
+												<th>Item Count</th>
+												<th>Discount</th>
+												<th>Tax Paid</th>
+												<th>Total</th>
+												<th>Payment Method</th>
+												<th>Customer ID</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
 			</div>
 
 		</div>
 
-		<!-- jQuery -->
-		<script src="${js}/jquery.js"></script>
-		
-		<!-- Bootstrap core JavaScript -->
-		<script src="${js}/bootstrap.min.js"></script>
-		
-		<!-- DataTable plugin -->
-		<script src="${js}/jquery.dataTables.js"></script>
-
-		<!-- DataTable Bootstrap script-->
-		<script src="${js}/dataTables.bootstrap.js"></script>
-
-		<!-- Bootbox script-->
-		<script src="${js}/bootbox.min.js"></script>
-		
-		
-		<!-- Self coded javascript -->
-		<script src="${js}/myapp.js"></script>
 	</div>
-	
+
+	<!-- jQuery -->
+	<script src="${js}/jquery.js"></script>
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="${js}/bootstrap.min.js"></script>
+
+	<!-- DataTable plugin -->
+	<script src="${js}/jquery.dataTables.js"></script>
+
+	<!-- DataTable Bootstrap script-->
+	<script src="${js}/dataTables.bootstrap.js"></script>
+
+	<!-- Bootbox script-->
+	<script src="${js}/bootbox.min.js"></script>
+
+
+	<!-- Self coded javascript -->
+	<script src="${js}/myapp.js"></script>
+</div>
+
 </body>
 
 </html>

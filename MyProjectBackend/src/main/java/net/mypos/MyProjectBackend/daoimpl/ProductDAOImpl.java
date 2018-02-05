@@ -83,13 +83,13 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List<Product> listActiveProductsByCategory(int categoryID) {
-		String selectActiveProductsByCategory = "FROM Product WHERE is_active = :active AND category_id = :categoryID";
+	public List<Product> listActiveProductsByCategory(int subcategoryID) {
+		String selectActiveProductsBysubcategory = "FROM Product WHERE is_active = :active AND subcategory_id = :subcategoryID";
 		return sessFactory
 				.getCurrentSession()
-					.createQuery(selectActiveProductsByCategory,Product.class)
+					.createQuery(selectActiveProductsBysubcategory,Product.class)
 						.setParameter("active", true)
-							.setParameter("categoryID", categoryID)
+							.setParameter("subcategoryID", subcategoryID)
 								.getResultList();
 	}
 

@@ -25,6 +25,17 @@
 						<ol class="breadcrumb">
 							<li><a href="${contextRoot}/home">Home</a></li>
 							<li class="active">${category.name}</li>
+							<li class="active">${subcategory.name}</li>
+						</ol>
+					</c:if>
+					
+					<c:if test="${userClickedSubCategory == true}" >
+						<script>
+							window.categoryId = '${category.id}';
+						</script>
+						<ol class="breadcrumb">
+							<li><a href="${contextRoot}/home">Home</a></li>
+							<li class="active">${category.name}</li>
 						</ol>
 					</c:if>
 				</div>

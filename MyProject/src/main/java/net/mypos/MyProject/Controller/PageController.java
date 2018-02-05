@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import net.mypos.MyProject.Service.CartService;
 import net.mypos.MyProject.exception.ProductNotFoundException;
 import net.mypos.MyProjectBackend.dao.CatergoryDAO;
 import net.mypos.MyProjectBackend.dao.ProductDAO;
+import net.mypos.MyProjectBackend.dao.SubcategoryDAO;
 import net.mypos.MyProjectBackend.dao.UserinfoDAO;
 import net.mypos.MyProjectBackend.dto.Category;
 import net.mypos.MyProjectBackend.dto.Product;
+import net.mypos.MyProjectBackend.dto.Subcategory;
 
 @Controller		
 public class PageController {
@@ -34,23 +35,21 @@ public class PageController {
 	private CatergoryDAO categoryDAO;
 	
 	@Autowired
-	private ProductDAO productDAO;
+	private SubcategoryDAO subcategoryDAO;
 	
 	@Autowired
-	private CartService cartService;
+	private ProductDAO productDAO;
 	
 	@Autowired
 	private UserinfoDAO userinfoDAO;
 	
 	@RequestMapping(value = { "/", "/home", "/index" })
 	public ModelAndView index() {
-		logger.info("Inside PageController index method - INFO");
-		
 		ModelAndView mv = new ModelAndView("page");
 		mv.addObject("title", "Home");
 		mv.addObject("userClickedHome", true);
 		mv.addObject("categories", categoryDAO.list());
-		mv.addObject("cartLines", cartService.getCartLines());
+		mv.addObject("bOrderItems", true);
 		
 		return mv;
 	}
@@ -71,40 +70,55 @@ public class PageController {
 		return mv;
 	}
 	
-	
-	/*
-	 * Methods to load all the products based on category
-	 * 
-	@RequestMapping(value = { "/show/all/products" })
-	public ModelAndView showAllProducts() {
-		ModelAndView mv = new ModelAndView("page");
-		mv.addObject("title", "All Products");
-		mv.addObject("userClickedAllProducts", true);
-		mv.addObject("categories", categoryDAO.list());
-		mv.addObject("cartLines", cartService.getCartLines());
-		
+	@RequestMapping(value = { "/history" })
+	public ModelAndView history() {
+		ModelAndView mv = new ModelAndView("history");
+		mv.addObject("title", "History");
 		return mv;
-	}*/
+	}
+	
 	
 	/*
 	 * Methods to load all the products based on category
 	 * */
-	@RequestMapping(value = { "/show/category/{id}/products" })
+	@RequestMapping(value = { "/show/subcategory/{id}/products" })
 	public ModelAndView showCategoryProducts(@PathVariable("id") int id) {
 		ModelAndView mv = new ModelAndView("page");
 		
 		// categorydao to fetch a single category
+		Subcategory subcategory = null;
+		subcategory = subcategoryDAO.get(id);
+		
+		mv.addObject("title", subcategory.getName());
+		mv.addObject("subcategory", subcategory);
+		mv.addObject("productList", productDAO.listActiveProductsByCategory(id));
+		
+		mv.addObject("userClickedCategoryProducts", true);
+		return mv;
+	}
+	
+	/*
+	 * Methods to load all the sub categories from category
+	 * */
+	@RequestMapping(value = { "/show/category/{id}/subcategory" })
+	public ModelAndView showSubCategories(@PathVariable("id") int id) {
+		logger.info("showSubCategories is " + id);
+		ModelAndView mv = new ModelAndView("page");
+		
+		// subcategorydao to fetch a single category
 		Category category = null;
 		category = categoryDAO.get(id);
 		
 		mv.addObject("title", category.getName());
 		mv.addObject("category", category);
-		mv.addObject("productList", productDAO.listActiveProductsByCategory(id));
-		mv.addObject("cartLines", cartService.getCartLines());
+		mv.addObject("subcategoryList", subcategoryDAO.listActiveSubcategoriesByCategory(id));
+		logger.info( "subcategoryDAO.listActiveSubcategoriesByCategory() Size" + subcategoryDAO.listActiveSubcategoriesByCategory(id).size());
 		
-		mv.addObject("userClickedCategoryProducts", true);
+		mv.addObject("userClickedSubCategory", true);
 		return mv;
 	}
+	
+	
 	
 	/*
 	 * Viewing a single product
@@ -140,7 +154,6 @@ public class PageController {
 			 mv.addObject("logout","User has successfully logout!");
 		 }
 		 
-		 ;
 		 mv.addObject("title", "Login");
 		 mv.addObject("users", userinfoDAO.getActiveUserslist());
 		 return mv;

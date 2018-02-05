@@ -29,7 +29,9 @@ public class OrderController {
 	
 	@RequestMapping(value="payment/cash")
 	public String processCashPayment() {
-		saleService.addSales(1);
+		logger.info("OrderController::processCashPayment()");
+		
+		saleService.addSales();
 		return "redirect:/home";
 	}
 	

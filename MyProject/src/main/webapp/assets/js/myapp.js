@@ -75,7 +75,7 @@ $(function() {
 			},
 			columns : [
 				{
-					data : 'category_id',
+					data : 'subcategory_id',
 				},
 				{
 					data : 'name',
@@ -210,6 +210,64 @@ $(function() {
 		});
 	}
 	
+//------------------------------Data table for SubCategory - Admin -------------------------
+	
+	var $table = $('#adminSubCategoryTable');
+	// Execute only when Sub-categories are to be displayed.
+	if($table.length){
+		var jsonURL = window.contextRoot + '/json/data/admin/all/subcategories';
+		
+		$table.DataTable({
+			lengthMenu : [[10,30,50,-1],['10','30','50','All']],
+			pageLength : 30,
+			ajax :{
+				url : jsonURL,
+				dataSrc : ''
+			},
+			drawCallback: function ( settings ) {
+				var api = this.api();
+	            var rows = api.rows( {page:'current'} ).nodes();
+	            var last=null;
+	 
+	            api.column(0, {page:'current'} ).data().each( function ( group, i ) {
+	                if ( last !== group ) {
+	                    $(rows).eq( i ).before(
+	                        '<tr class="group" style="background-color:black;"><td colspan="5">'+group+'</td></tr>'
+	                    );
+	 
+	                    last = group;
+	                }
+	            } );
+	    },
+			columns : [
+				{
+					data : 'categoryId',
+					visible : false,
+				},
+				{
+					data : 'name',
+				},
+				{
+					data : 'description',
+				}
+				,
+				{
+					data : 'id',
+					bSortable : false,
+					mRender : function(data, type, row){
+						var str = '';
+						str += '<a href="'+ window.contextRoot +'/manage/' + data + '/subcategories" class="btn btn-warning" >';
+						str += '<span class="glyphicon glyphicon-pencil" ></span></a>';
+						return str;
+					
+					}
+				}
+				
+			]
+		});
+	}
+	
+	
 	//------------------------------Data table for User - Admin -------------------------
 	var $table = $('#adminUserTable');
 	// Execute only when categories are to be displayed.
@@ -312,6 +370,144 @@ $(function() {
 				});
 			}
 			
+		});
+	}
+	
+	var $table = $('#todaysHistoryTable');
+	if($table.length){
+		var jsonURL = window.contextRoot + '/json/data/sales/today';
+		
+		$table.DataTable({
+			lengthMenu : [[10,30,50,-1],['10','30','50','All']],
+			pageLength : 30,
+			ajax :{
+				url : jsonURL,
+				dataSrc : ''
+			},
+			columns : [
+				{
+					data : 'id',
+				},
+				{
+					data : 'dateTime',
+				}
+				,
+				{
+					data : 'productId',
+				}
+				,
+				{
+					data : 'byingPrice',
+				}
+				,
+				{
+					data : 'productCount',
+				}
+				,
+				{
+					data : 'discount',
+				}
+				,
+				{
+					data : 'taxPaid',
+				}
+				,
+				{
+					data : 'total',
+				}
+				,
+				{
+					data : 'paymentMethod',
+					mRender : function(data, type, row){
+						console.log('INput data customer ID - ' + data);
+						var str = '';
+						if(data == 1){
+							str = 'Cash';
+						}else if(data == 2){
+							str = 'Credit\Debit Card';
+						}else if(data == 3){
+							str = 'Gift Card';
+						}
+						
+						console.log('Output str - ' + str);
+						return str;
+					}
+				}
+				,
+				{
+					data : 'customerId',
+				}
+				
+			]
+		});
+	}
+	
+	var $table = $('#allHistoryTable');
+	if($table.length){
+		var jsonURL = window.contextRoot + '/json/data/sales/complete';
+		
+		$table.DataTable({
+			lengthMenu : [[10,30,50,-1],['10','30','50','All']],
+			pageLength : 30,
+			ajax :{
+				url : jsonURL,
+				dataSrc : ''
+			},
+			columns : [
+				{
+					data : 'id',
+				},
+				{
+					data : 'dateTime',
+				}
+				,
+				{
+					data : 'productId',
+				}
+				,
+				{
+					data : 'byingPrice',
+				}
+				,
+				{
+					data : 'productCount',
+				}
+				,
+				{
+					data : 'discount',
+				}
+				,
+				{
+					data : 'taxPaid',
+				}
+				,
+				{
+					data : 'total',
+				}
+				,
+				{
+					data : 'paymentMethod',
+					mRender : function(data, type, row){
+						console.log('INput data customer ID - ' + data);
+						var str = '';
+						if(data == 1){
+							str = 'Cash';
+						}else if(data == 2){
+							str = 'Credit\Debit Card';
+						}else if(data == 3){
+							str = 'Gift Card';
+						}
+						
+						console.log('Output str - ' + str);
+						return str;
+					}
+				}
+				,
+				{
+					data : 'customerId',
+				}
+				
+			]
 		});
 	}
 	
@@ -502,7 +698,5 @@ $(function() {
 			$('#cartTotal').text("0.0");
 		}
 	});
-	
-	 
 	
 });

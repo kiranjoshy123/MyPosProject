@@ -2,7 +2,10 @@ package net.mypos.MyProject.Model;
 
 import java.io.Serializable;
 
+import net.mypos.MyProjectBackend.dto.Admin;
 import net.mypos.MyProjectBackend.dto.Cart;
+import net.mypos.MyProjectBackend.dto.Staff;
+import net.mypos.MyProjectBackend.dto.Supplier;
 
 public class UserModel implements Serializable{
 
@@ -16,6 +19,10 @@ public class UserModel implements Serializable{
 	private String email;
 	private String role;
 	private Cart cart;
+	//private Admin admin;
+	//private Staff staff;
+	//private Supplier supplier;
+	
 	public int getId() {
 		return id;
 	}
@@ -48,11 +55,31 @@ public class UserModel implements Serializable{
 	}
 	
 	
+	
+	/*public Admin getAdmin() {
+		return admin;
+	}
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
+	}
+	public Staff getStaff() {
+		return staff;
+	}
+	public void setStaff(Staff staff) {
+		this.staff = staff;
+	}
+	public Supplier getSupplier() {
+		return supplier;
+	}
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}*/
+	
 	@Override
 	public String toString() {
 		return "UserModel [id=" + id + ", fullName=" + fullName + ", email=" + email + ", role=" + role + ", cart="
 				+ cart + "]";
 	}
-
+	
 	
 }

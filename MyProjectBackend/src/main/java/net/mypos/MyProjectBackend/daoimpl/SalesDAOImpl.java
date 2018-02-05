@@ -1,5 +1,9 @@
 package net.mypos.MyProjectBackend.daoimpl;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -49,5 +53,34 @@ public class SalesDAOImpl implements SalesDAO{
 			ex.printStackTrace();
 			return false;
 		}
+	}
+
+	@Override
+	public List<Sales> getTodaysSales(int staffId) {
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		Date curDate = cal.getTime();
+		
+		
+		String selectTodaysSalesForAStaff = "FROM Sales WHERE staff_id = :staffId AND DATE(date_time) =:curDate";
+		return sessFactory
+				.getCurrentSession()
+					.createQuery(selectTodaysSalesForAStaff,Sales.class)
+							.setParameter("staffId", staffId)
+								.setParameter("curDate", curDate)
+									.getResultList();
+	}
+
+	@Override
+	public List<Sales> getCompleteSales(int staffId) {
+		String selectTodaysSalesForAStaff = "FROM Sales WHERE staff_id = :staffId";
+		return sessFactory
+				.getCurrentSession()
+					.createQuery(selectTodaysSalesForAStaff,Sales.class)
+							.setParameter("staffId", staffId)
+									.getResultList();
 	}
 }

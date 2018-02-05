@@ -166,4 +166,48 @@ public class UserinfoDAOImpl implements UserinfoDAO {
 			return null;
 		}
 	}
+
+	@Override
+	public Admin getAdminByPersonId(int personId) {
+		try {
+			String selQuery = "FROM Admin WHERE person_id = :personId";
+			return sessFactory.
+						getCurrentSession().
+							createQuery(selQuery, Admin.class).
+								setParameter("personId", personId).
+									getSingleResult();
+								
+		}catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public Staff getStaffByPersonId(int personId) {
+		try {
+			String selQuery = "FROM Staff WHERE person_id = :personId";
+			return sessFactory.
+						getCurrentSession().
+							createQuery(selQuery, Staff.class).
+								setParameter("personId", personId).
+									getSingleResult();
+								
+		}catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public Supplier getSupplierByPersonId(int userID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Customer getCustomerByPersonId(int userID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

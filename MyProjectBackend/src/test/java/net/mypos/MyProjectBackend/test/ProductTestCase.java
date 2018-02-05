@@ -25,14 +25,14 @@ public class ProductTestCase {
 		productDAO = (ProductDAO)context.getBean("productDAO");
 	}
 	
-	private void testAddProduct(String name, String brand, String description, double unitPrice, int category_id, int supplier_id) {
+	private void testAddProduct(String name, String brand, String description, double unitPrice, int subcategory_id, int supplier_id) {
 		product = new Product();
 		product.setName(name);
 		product.setBrand(brand);
 		product.setDescription(description);
 		product.setUnit_price(unitPrice);
 		product.setIs_active(true);
-		product.setCategory_id(category_id);
+		product.setSubcategory_id(subcategory_id);
 		product.setSupplier_id(supplier_id);
 		
 		assertEquals("Something went wrong while inserting a new product!", true, productDAO.add(product));

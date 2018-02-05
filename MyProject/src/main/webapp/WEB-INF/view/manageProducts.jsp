@@ -73,10 +73,10 @@
 						</div>
 						
 						<div class="form-group">
-							<label class="control-label col-md-4" for="categoryId">Select Category : </label>
+							<label class="control-label col-md-4" for="subcategoryId">Select Category : </label>
 							<div class="col-md-8">
-								<sf:select class="form-control" id="categoryId" path="category_id" 
-									items="${categories}" 
+								<sf:select class="form-control" id="subcategoryId" path="subcategory_id" 
+									items="${subcategories}" 
 									itemLabel="name" 
 									itemValue="id"								
 								/>
@@ -125,7 +125,7 @@
 						class="table table-striped table-bordered">
 						<thead>
 							<tr>
-								<th>Category</th>
+								<th>Sub-Category</th>
 								<th>Name</th>
 								<th>Brand</th>
 								<th>Quantity</th>

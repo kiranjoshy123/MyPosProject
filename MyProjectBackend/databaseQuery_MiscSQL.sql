@@ -1,0 +1,13 @@
+SET FOREIGN_KEY_CHECKS = 0;
+drop table if exists category;
+drop table if exists subcategory;
+drop table if exists userinfo;
+drop table if exists customer;
+drop table if exists Admin;
+drop table if exists Supplier;
+drop table if exists Staff;
+drop table if exists product;
+drop table if exists cart;
+drop table if exists cart_line;
+drop table if exists sales;
+SET FOREIGN_KEY_CHECKS = 1;

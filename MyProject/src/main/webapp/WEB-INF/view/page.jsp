@@ -74,7 +74,7 @@
 			</c:if>
 			
 			<!-- All products/list products handling -->
-			<c:if test="${userClickedAllProducts == true or userClickedCategoryProducts == true }">
+			<c:if test="${userClickedAllProducts == true or userClickedCategoryProducts == true or userClickedSubCategory == true}">
 				<%@include file="listProducts.jsp"%>
 			</c:if>
 			
@@ -90,7 +90,7 @@
 			
 			<!-- Show only when user clicks a manage categories -->
 			<c:if test="${userClickedManageCategory == true }">
-				<%@include file="manageCategories.jsp"%>
+				<%@include file="manageCategoriesAndSubCategories.jsp"%>
 			</c:if>
 			
 			<!-- Show only when user clicks a manage categories -->

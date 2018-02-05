@@ -1,6 +1,7 @@
 package net.mypos.MyProject.Controller;
 
 import java.util.List;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -20,10 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import net.mypos.MyProjectBackend.dao.CatergoryDAO;
 import net.mypos.MyProjectBackend.dao.ProductDAO;
+import net.mypos.MyProjectBackend.dao.SubcategoryDAO;
 import net.mypos.MyProjectBackend.dao.UserinfoDAO;
-import net.mypos.MyProjectBackend.dto.Cart;
 import net.mypos.MyProjectBackend.dto.Category;
 import net.mypos.MyProjectBackend.dto.Product;
+import net.mypos.MyProjectBackend.dto.Subcategory;
 import net.mypos.MyProjectBackend.dto.Userinfo;
 
 @Controller
@@ -32,6 +34,9 @@ public class ManagementController {
 
 	@Autowired
 	private CatergoryDAO categoryDAO;
+	
+	@Autowired
+	private SubcategoryDAO subcategoryDAO;
 	
 	@Autowired
 	private ProductDAO productDAO;
@@ -124,6 +129,11 @@ public class ManagementController {
 	public List<Category> getCategories(){
 		return categoryDAO.list();
 	}
+	
+	@ModelAttribute("subcategories")
+	public List<Subcategory> getSubcategories(){
+		return subcategoryDAO.listActiveSubcategories();
+	}
 
 	
 	//-------------------------- Manage Categories -----------------------------------------
@@ -183,6 +193,66 @@ public class ManagementController {
 		
 		// set the product fetch from database
 		mv.addObject("category", newCategory);
+		return mv;
+	} 
+	
+	
+	//-------------------------- Manage SubCategories -----------------------------------------
+	@RequestMapping(value="/subcategories", method=RequestMethod.GET)
+	public ModelAndView showManageSubCategory(@RequestParam(name="operation", required=false) String operation) {
+		// Create a new sub-category.
+		Subcategory newSubCategory = new Subcategory();
+		newSubCategory.setActive(true);
+		
+		ModelAndView mv = new ModelAndView("page");
+		mv.addObject("userClickedManageSubCategory",true);
+		mv.addObject("title","Manage SubCategory");
+		mv.addObject("subcategory", newSubCategory);
+		
+		if(operation != null) {
+			if(operation.equals("subcategory")){
+				mv.addObject("message", "SubCategory saved successfully..");
+			}
+		}
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/subcategories", method=RequestMethod.POST)
+	public String handleSubCategorySubmission(@Valid @ModelAttribute("subcategory") Subcategory modifiedSubCategory, BindingResult results, Model model) {
+		
+		logger.info(modifiedSubCategory.toString());
+		
+		// Check for errors.
+		if(results.hasErrors()) {
+			model.addAttribute("userClickedManageSubCategory",true);
+			model.addAttribute("title","Manage SubCategory");
+			model.addAttribute("message","Validation failed for SubCategory Submited!!");
+			return "page";
+		}
+		
+		if(modifiedSubCategory.getId() == 0) {
+			// id = 0 means, sub-category doesn't exists. Hence add a new one. 
+			subcategoryDAO.add(modifiedSubCategory);
+		}
+		else {
+			subcategoryDAO.udpate(modifiedSubCategory);
+		}
+		
+		return "redirect:/manage/subcategories?operation=subcategory";
+	}
+	
+	@RequestMapping(value="/{id}/subcategories", method=RequestMethod.GET)
+	public ModelAndView showEditSubCategory(@PathVariable int id) {	
+		// Fetch the existing Sub-Category using id.
+		Subcategory newSubCategory = subcategoryDAO.get(id);
+		
+		ModelAndView mv = new ModelAndView("page");
+		mv.addObject("userClickedManageSubCategory",true);
+		mv.addObject("title","Manage SubCategory");
+		
+		// set the product fetch from database
+		mv.addObject("subcategory", newSubCategory);
 		return mv;
 	} 
 	

@@ -36,7 +36,7 @@ public class Product {
 	private int quantity;
 	private boolean is_active;
 	
-	private int category_id;
+	private int subcategory_id;
 	@JsonIgnore
 	private int supplier_id;
 	private int purchases;
@@ -95,12 +95,15 @@ public class Product {
 	public void setIs_active(boolean is_active) {
 		this.is_active = is_active;
 	}
-	public int getCategory_id() {
-		return category_id;
+	
+	public int getSubcategory_id() {
+		return subcategory_id;
 	}
-	public void setCategory_id(int category_id) {
-		this.category_id = category_id;
+
+	public void setSubcategory_id(int subcategory_id) {
+		this.subcategory_id = subcategory_id;
 	}
+
 	public int getSupplier_id() {
 		return supplier_id;
 	}
@@ -120,12 +123,13 @@ public class Product {
 	public void setViews(int views) {
 		this.views = views;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", code=" + code + ", name=" + name + ", brand=" + brand + ", description="
 				+ description + ", unit_price=" + unit_price + ", quantity=" + quantity + ", is_active=" + is_active
-				+ ", category_id=" + category_id + ", supplier_id=" + supplier_id + ", purchases=" + purchases
+				+ ", subcategory_id=" + subcategory_id + ", supplier_id=" + supplier_id + ", purchases=" + purchases
 				+ ", views=" + views + "]";
 	}
+	
 }
