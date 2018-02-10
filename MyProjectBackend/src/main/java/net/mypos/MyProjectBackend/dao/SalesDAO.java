@@ -9,6 +9,11 @@ public interface SalesDAO {
 	boolean udpate(Sales sales);
 	boolean delete(Sales sales);
 	
-	public List<Sales> getTodaysSales(int staffId);
-	public List<Sales> getCompleteSales(int staffId);
+	// Get the sales for each staff.
+	public List<Sales> getTodaysSalesById(int staffId);
+	public List<Sales> getCompleteSalesById(int staffId);
+	
+	// Get the entire sales for Admin.
+	public List<Sales> getTodaysSales();
+	public List<Sales> getCompleteSales();
 }

@@ -373,6 +373,7 @@ $(function() {
 		});
 	}
 	
+	//------------------------------ Todays/All days history----------------------------
 	var $table = $('#todaysHistoryTable');
 	if($table.length){
 		var jsonURL = window.contextRoot + '/json/data/sales/today';
@@ -384,7 +385,32 @@ $(function() {
 				url : jsonURL,
 				dataSrc : ''
 			},
+			drawCallback: function ( settings ) {
+				var api = this.api();
+	            var rows = api.rows( {page:'current'} ).nodes();
+	            var last=null;
+	 
+	            api.column(0, {page:'current'} ).data().each( function ( group, i ) {
+	                if ( last !== group ) {
+	                    $(rows).eq( i ).before(
+	                        '<tr class="group" style="background-color:black;"><td colspan="10">'+group+'</td></tr>'
+	                    );
+	 
+	                    last = group;
+	                }
+	            } );
+			},
+			columnDefs : [
+		    	{
+		    		"targets": "_all",
+		    	    "className": "text-center",
+		    	},
+		    ],
 			columns : [
+				{
+					data : 'staffId',
+					visible : false,
+				},
 				{
 					data : 'id',
 				},
@@ -437,7 +463,7 @@ $(function() {
 				{
 					data : 'customerId',
 				}
-				
+
 			]
 		});
 	}
@@ -453,7 +479,32 @@ $(function() {
 				url : jsonURL,
 				dataSrc : ''
 			},
+			drawCallback: function ( settings ) {
+				var api = this.api();
+	            var rows = api.rows( {page:'current'} ).nodes();
+	            var last=null;
+	 
+	            api.column(0, {page:'current'} ).data().each( function ( group, i ) {
+	                if ( last !== group ) {
+	                    $(rows).eq( i ).before(
+	                        '<tr class="group" style="background-color:black;"><td colspan="10">'+group+'</td></tr>'
+	                    );
+	 
+	                    last = group;
+	                }
+	            } );
+		    },
+		    columnDefs : [
+		    	{
+		    		"targets": "_all",
+		    	    "className": "text-center",
+		    	},
+		    ],
 			columns : [
+				{
+					data : 'staffId',
+					visible : false,
+				},
 				{
 					data : 'id',
 				},
@@ -488,7 +539,6 @@ $(function() {
 				{
 					data : 'paymentMethod',
 					mRender : function(data, type, row){
-						console.log('INput data customer ID - ' + data);
 						var str = '';
 						if(data == 1){
 							str = 'Cash';
@@ -506,12 +556,11 @@ $(function() {
 				{
 					data : 'customerId',
 				}
-				
 			]
 		});
 	}
 	
-	
+
 	//------------------------------Login form validation----------------------------
 	var $loginForm = $('#loginForm');
 	if($loginForm.length){

@@ -56,14 +56,13 @@ public class SalesDAOImpl implements SalesDAO{
 	}
 
 	@Override
-	public List<Sales> getTodaysSales(int staffId) {
+	public List<Sales> getTodaysSalesById(int staffId) {
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.HOUR_OF_DAY, 0);
 		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.MILLISECOND, 0);
 		Date curDate = cal.getTime();
-		
 		
 		String selectTodaysSalesForAStaff = "FROM Sales WHERE staff_id = :staffId AND DATE(date_time) =:curDate";
 		return sessFactory
@@ -75,12 +74,38 @@ public class SalesDAOImpl implements SalesDAO{
 	}
 
 	@Override
-	public List<Sales> getCompleteSales(int staffId) {
+	public List<Sales> getCompleteSalesById(int staffId) {
 		String selectTodaysSalesForAStaff = "FROM Sales WHERE staff_id = :staffId";
 		return sessFactory
 				.getCurrentSession()
 					.createQuery(selectTodaysSalesForAStaff,Sales.class)
 							.setParameter("staffId", staffId)
+									.getResultList();
+	}
+
+	@Override
+	public List<Sales> getTodaysSales() {
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		Date curDate = cal.getTime();
+		
+		String selectTodaysSalesForAStaff = "FROM Sales WHERE DATE(date_time) =:curDate";
+		return sessFactory
+				.getCurrentSession()
+					.createQuery(selectTodaysSalesForAStaff,Sales.class)
+								.setParameter("curDate", curDate)
+									.getResultList();
+	}
+
+	@Override
+	public List<Sales> getCompleteSales() {
+		String selectTodaysSalesForAStaff = "FROM Sales";
+		return sessFactory
+				.getCurrentSession()
+					.createQuery(selectTodaysSalesForAStaff,Sales.class)
 									.getResultList();
 	}
 }

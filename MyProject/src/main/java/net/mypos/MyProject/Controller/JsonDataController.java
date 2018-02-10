@@ -90,25 +90,43 @@ public class JsonDataController {
 	@RequestMapping("/sales/today")
 	@ResponseBody
 	public List<Sales> getTodaysSalesHistory(){
-		int userID = ((UserModel)session.getAttribute("userModel")).getId();
-		Staff staff = userinfoDAO.getStaffByPersonId(userID);
-		if(staff == null) {
+		UserModel usermodel = ((UserModel)session.getAttribute("userModel"));
+		if(usermodel.getRole().equals("STAFF")) {
+			int userID = usermodel.getId();
+			Staff staff = userinfoDAO.getStaffByPersonId(userID);
+			if(staff == null) {
+				return Collections.emptyList();
+			}
+			
+			return salesDAO.getTodaysSalesById(staff.getId());
+		}
+		else if(usermodel.getRole().equals("ADMIN")) {
+			return salesDAO.getTodaysSales();
+		}
+		else {
 			return Collections.emptyList();
 		}
-		
-		return salesDAO.getTodaysSales(staff.getId());
 	}
 	
 	@RequestMapping("/sales/complete")
 	@ResponseBody
 	public List<Sales> getCompleteSalesHistory(){
-		int userID = ((UserModel)session.getAttribute("userModel")).getId();
-		Staff staff = userinfoDAO.getStaffByPersonId(userID);
-		if(staff == null) {
+		UserModel usermodel = ((UserModel)session.getAttribute("userModel"));
+		if(usermodel.getRole().equals( "STAFF")) {
+			int userID = usermodel.getId();
+			Staff staff = userinfoDAO.getStaffByPersonId(userID);
+			if(staff == null) {
+				return Collections.emptyList();
+			}
+			
+			return salesDAO.getCompleteSalesById(staff.getId());
+		}
+		else if(usermodel.getRole().equals( "ADMIN")) {
+			return salesDAO.getCompleteSales();
+		}
+		else {
 			return Collections.emptyList();
 		}
-		
-		return salesDAO.getCompleteSales(staff.getId());
 	}
 	
 	

@@ -30,7 +30,7 @@ public class UserTestCase {
 	
 	@Test
 	public void testAddUser() {
-		userinfo = new Userinfo();
+		/*userinfo = new Userinfo();
 		userinfo.setFirstName("SachinStaff");
 		userinfo.setLastName("Tendulkar");
 		userinfo.setRole("STAFF");
@@ -42,6 +42,7 @@ public class UserTestCase {
 		userinfo.setContactNumber("9753453422");
 		
 		assertEquals("Failed to add a new user!", true, userinfoDAO.add(userinfo, userinfo.getRole()));
+		*/
 	}
 	
 	/*@Test 

@@ -52,14 +52,18 @@
 	<!-- Navigation -->
 	<%@include file="./shared/navbar.jsp"%>
 
-	<!-- Page Content -->
+
+	<!-- User Page Content -->
 	<div class="content">
-
 		<div class="container">
-
 			<div class="row">
 				<div class="col-xs-12">
-					<h3>Your Sales</h3>
+					<c:if test="${userModel.role == 'STAFF'}">
+						<h3>Your Sales</h3>
+					</c:if>
+					<c:if test="${userModel.role == 'ADMIN'}">
+						<h3>Total Sales</h3>
+					</c:if>
 				</div>
 
 				<div class="col-xs-12">
@@ -73,12 +77,14 @@
 						</ul>
 						<!-- Tab panes -->
 						<div class="tab-content tabs">
-							<div role="tabpanel" class="tab-pane fade in active" id="Section1">
+							<div role="tabpanel" class="tab-pane fade in active"
+								id="Section1">
 								<div class="table-responsive">
 									<table id="todaysHistoryTable"
 										class="table table-striped table-bordered">
 										<thead>
 											<tr>
+												<th>Staff ID</th>
 												<th>Order ID</th>
 												<th>Date Time</th>
 												<th>Product ID</th>
@@ -100,6 +106,7 @@
 										class="table table-striped table-bordered">
 										<thead>
 											<tr>
+												<th>Staff ID</th>
 												<th>Order ID</th>
 												<th>Date Time</th>
 												<th>Product ID</th>
@@ -118,13 +125,11 @@
 						</div>
 					</div>
 				</div>
-
-
 			</div>
-
 		</div>
-
 	</div>
+
+
 
 	<!-- jQuery -->
 	<script src="${js}/jquery.js"></script>
