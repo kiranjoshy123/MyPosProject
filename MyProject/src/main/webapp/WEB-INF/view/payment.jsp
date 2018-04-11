@@ -12,7 +12,7 @@
 				<div id="whiteSquareBox" class="panel panel-default">
 				    <div class="panel-body">
 						<h4 style="color:black">Amount Due</h4>
-						<h6 style="color:black"><strong>$ 219.99</strong></h6>
+						<h6 style="color:black"><strong>${total}</strong></h6>
 						<br/>
 						
 						<h4 style="color:black">Total Discount</h4>
@@ -29,7 +29,7 @@
 			<h3>Amount to be paid</h3>
 	
 			<!-- Num pad comes here. -->
-			<input type="number" name="name" id="numpadInput" class="form-control" value="220" />
+			<input type="number" name="name" id="numpadInput" class="form-control" value="${total}" />
 			<ul id="keyboard">  
 		        <li class="letter">1</li>
 		        <li class="letter">2</li>

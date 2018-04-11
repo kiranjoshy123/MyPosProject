@@ -1,10 +1,13 @@
 package net.mypos.MyProject.Controller;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.mypos.MyProject.Service.SalesService;
@@ -12,27 +15,26 @@ import net.mypos.MyProject.Service.SalesService;
 @Controller
 @RequestMapping("/order")
 public class OrderController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(PageController.class);
-	
+
 	@Autowired
 	SalesService saleService;
-	
-	@RequestMapping(value="/pay")
-	public ModelAndView processOrder() {
+
+	@RequestMapping(value = "/pay")
+	public ModelAndView processOrder(@RequestParam("name") String name) {
 		ModelAndView mv = new ModelAndView("page");
-		//mv.addObject("title", product.getName()); 
-		//mv.addObject("product", product);
+		mv.addObject("total", name);
 		mv.addObject("userClickedOrderPayment", true);
 		return mv;
 	}
-	
-	@RequestMapping(value="payment/cash")
+
+	@RequestMapping(value = "payment/cash")
 	public String processCashPayment() {
 		logger.info("OrderController::processCashPayment()");
-		
+
 		saleService.addSales();
 		return "redirect:/home";
 	}
-	
+
 }
