@@ -21,6 +21,10 @@
 			<button type="button" class="btn btn-primary btn-item" id="buttonProduct" value="${product.unit_price}" productId="${product.id}">${product.name}</button>
 		</c:forEach>
 	</c:if>
-
 	
+	<!-- Show only when payment page is requested from orders -->
+	<c:if test="${userClickedOrderPayment == true}">
+		<%@include file="payment.jsp"%>
+	</c:if>
+
 </div>

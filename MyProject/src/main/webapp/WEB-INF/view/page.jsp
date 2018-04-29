@@ -73,8 +73,8 @@
 				<%@include file="contact.jsp"%>
 			</c:if>
 			
-			<!-- All products/list products handling -->
-			<c:if test="${userClickedAllProducts == true or userClickedCategoryProducts == true or userClickedSubCategory == true}">
+			<!-- All products/list products handling. Cart bar will be shown till payment page. -->
+			<c:if test="${userClickedAllProducts == true or userClickedCategoryProducts == true or userClickedSubCategory == true or userClickedOrderPayment == true}">
 				<%@include file="listProducts.jsp"%>
 			</c:if>
 			
@@ -98,11 +98,6 @@
 				<%@include file="manageUsers.jsp"%>
 			</c:if>
 			
-			<!-- Show only when payment page is requested from orders -->
-			<c:if test="${userClickedOrderPayment == true }">
-				<%@include file="payment.jsp"%>
-			</c:if>
-
 		</div>
 
 		<!-- jQuery -->

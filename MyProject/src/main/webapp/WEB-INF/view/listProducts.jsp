@@ -2,9 +2,6 @@
 
 <div class="container-fluid" >
 	<div class="row" >
-	
-		<!-- Would be to display the actual products -->
-		
 		<div class="col-md-8">
 			<!-- Added breadcrumb component -->
 			<div class="row" >
@@ -48,6 +45,7 @@
 					<%@include file="categoriesList.jsp" %>
 				</div>
 			</div>
+			
 		</div>
 		
 		<!-- Cart bar -->

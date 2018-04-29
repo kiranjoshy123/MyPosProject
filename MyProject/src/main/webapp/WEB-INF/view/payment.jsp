@@ -7,7 +7,8 @@
 			</ol>
 		</div>
 				
-		<div class="col-md-3">
+		<div class="col-md-2"></div>
+		<div class="col-md-4">
 			<div class="form-group">
 				<div id="whiteSquareBox" class="panel panel-default">
 				    <div class="panel-body">
@@ -15,17 +16,22 @@
 						<h6 style="color:black"><strong>${total}</strong></h6>
 						<br/>
 						
+						<h4 style="color:black">Total Tax</h4>
+						<h6 style="color:black"><strong>$ 0.0</strong></h6>
+						
 						<h4 style="color:black">Total Discount</h4>
 						<h6 style="color:black"><strong>$ 0.0</strong></h6>
 						<br/>
 						
 						<h4 style="color:black">Points earned</h4>
 						<h6 style="color:black"><strong>$ 0.0</strong></h6>
+						
+						
 					</div>
 				 </div>
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-6">
 			<h3>Amount to be paid</h3>
 	
 			<!-- Num pad comes here. -->
@@ -55,8 +61,6 @@
 			<a href="${contextRoot}/order/payment/card" type="button" class="btn btn-primary btn-item">Credit/Debit Card</a>
 			<a href="#" type="button" class="btn btn-primary btn-item">Gift Card</a>
 		</div>
-		<div class="col-md-3"></div>
-		<div class="col-md-2"></div>
 	</div>
 
 </div>
