@@ -594,91 +594,108 @@ $(function() {
 	}
 	
 	// Key-down function - Waiting for scanner input. 
-	/*var barcode="";
-    $(document).keydown(function(e) {
+	var barcode='';
+    $(document).keypress(function(e) {
         var code = (e.keyCode ? e.keyCode : e.which);
         if(code==13)// Enter key hit
         {
-            alert(barcode);
-            var $table = $('#productlistTable').DataTable();
-            $table.search( 'Mac' ).draw();
-            barcode = "";
+        	var request = $.ajax({
+        		url: '/search/products',
+        		type: "POST",
+        		data: { code: barcode },
+        		success: function(product)
+        		{
+        			console.log("Mapping Successful" + product.id);
+        			addProduct(product.id,product.unit_price,product.name);
+        		},
+        		
+        		error: function (error) {
+        			console.log("Error : " + error);
+        		}
+        	});
+        	
+            barcode = '';
         }
         else if(code==9)// Tab key hit
         {
-            alert(barcode);
+            barcode='';
         }
         else
         {
             barcode = barcode + String.fromCharCode(code);
         }
-    });*/
+    });
 
 	$(document).on('click','#buttonProduct',function(){
-		var tableCart = document.getElementById("cartTable").getElementsByTagName('tbody')[0];
 		var user = $(this);
-		
-		if(tableCart !=null && user != null)
+		if(user != null)
 		{
-			// Check whether the product already exists using the productId.
-			var row = $('tr[productId="' + $(user).attr("productId") + '"]');
-			if(row.index() == -1)
-			{
-		        var tdProduct = document.createElement("td");
-		        tdProduct.className = "col-md-4 Product";
-		        //
-		        tdProduct.innerHTML = '<div >' + 
-					'<div >' + 
-					'<h5 style="font-size: 15px;" >' + $(user).text() + '</h5>' + 
-		        	'</div>	</div>';
-		        
-		        var tdQuantity = document.createElement("td");
-		        tdQuantity.className = "col-md-5 text-center quantity";
-		        tdQuantity.innerHTML = '<a type="button" class="btn btn-info btn-circle" id="itemCountMinus" disabled="disabled">' +
-					'<span class="glyphicon glyphicon-minus"></span>' +
-					'</a>' +
-					'<label class="labelQuantity">&nbsp;&nbsp;1&nbsp;&nbsp;</label>' +
-					'<a type="button" class="btn btn-info btn-circle" id="itemCountPlus" >' +
-						'<span class="glyphicon glyphicon-plus"></span>' +
-					'</a>';
-		        
-		        var tdPrice = document.createElement("td");
-		        tdPrice.className = "col-md-1 text-center itemPrice";
-		        tdPrice.innerHTML = $(user).attr("value");
-		        
-		        var tdTotal = document.createElement("td");
-		        tdTotal.className = "col-md-1 text-center totalItemPrice";
-		        tdTotal.innerHTML = $(user).attr("value");
-		        
-		        var tdRemove = document.createElement("td");
-		        tdRemove.className = "col-md-1 removeItem";
-		        tdRemove.innerHTML = '<a  type="button" class="btn icon-btn btn-danger" id="removeCartItemBtn">' + 
-									'<span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span></a>';
-		        
-		        var newRow = document.createElement("tr");
-		        newRow.setAttribute("height", 80);
-		        newRow.setAttribute('productId', $(user).attr("productId"));
-		        newRow.appendChild(tdProduct);
-		        newRow.appendChild(tdQuantity);
-		        newRow.appendChild(tdPrice);
-		        newRow.appendChild(tdTotal);
-		        newRow.appendChild(tdRemove);
-		        
-		        tableCart.appendChild(newRow);
-		        
-		        // Update the cart total.
-		        var currentCartVal = parseInt($('#cartTotal').text(), 10);
-		        var newItemPrice = parseInt($(user).attr("value"), 10);
-		        $('#cartTotal').text(currentCartVal+newItemPrice);
-			}else{
-				// Product exists. Increase the count of existing product.
-				incrementProductCount(row);
-			}
-		}else
-		{
-			
+			addProduct($(user).attr("productId"),$(user).attr("value"),$(user).text());
 		}
 	});
+	
+	function addProduct(productId, productValue, productName){
+		
+		var tableCart = document.getElementById("cartTable").getElementsByTagName('tbody')[0];
+		if((tableCart == null) || (productId == null) || (productValue == null) ||(productName == null)){
+			return;
+		}
+		
+		// Check whether the product already exists using the productId.
+		var row = $('tr[productId="' + productId + '"]');
+		if(row.index() == -1)
+		{
+	        var tdProduct = document.createElement("td");
+	        tdProduct.className = "col-md-4 Product";
+	        tdProduct.innerHTML = '<div >' + 
+				'<div >' + 
+				'<h5 style="font-size: 15px;" >' + productName + '</h5>' + 
+	        	'</div>	</div>';
+	        
+	        var tdQuantity = document.createElement("td");
+	        tdQuantity.className = "col-md-5 text-center quantity";
+	        tdQuantity.innerHTML = '<a type="button" class="btn btn-info btn-circle" id="itemCountMinus" disabled="disabled">' +
+				'<span class="glyphicon glyphicon-minus"></span>' +
+				'</a>' +
+				'<label class="labelQuantity">&nbsp;&nbsp;1&nbsp;&nbsp;</label>' +
+				'<a type="button" class="btn btn-info btn-circle" id="itemCountPlus" >' +
+					'<span class="glyphicon glyphicon-plus"></span>' +
+				'</a>';
+	        
+	        var tdPrice = document.createElement("td");
+	        tdPrice.className = "col-md-1 text-center itemPrice";
+	        tdPrice.innerHTML = productValue;
+	        
+	        var tdTotal = document.createElement("td");
+	        tdTotal.className = "col-md-1 text-center totalItemPrice";
+	        tdTotal.innerHTML = productValue;
+	        
+	        var tdRemove = document.createElement("td");
+	        tdRemove.className = "col-md-1 removeItem";
+	        tdRemove.innerHTML = '<a  type="button" class="btn icon-btn btn-danger" id="removeCartItemBtn">' + 
+								'<span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span></a>';
+	        
+	        var newRow = document.createElement("tr");
+	        newRow.setAttribute("height", 80);
+	        newRow.setAttribute('productId', productId);
+	        newRow.appendChild(tdProduct);
+	        newRow.appendChild(tdQuantity);
+	        newRow.appendChild(tdPrice);
+	        newRow.appendChild(tdTotal);
+	        newRow.appendChild(tdRemove);
+	        
+	        tableCart.appendChild(newRow);
+	        
+	        // Update the cart total.
+	        var currentCartVal = parseInt($('#cartTotal').text(), 10);
+	        var newItemPrice = parseInt(productValue, 10);
+	        $('#cartTotal').text(currentCartVal+newItemPrice);
+		}else{
+			// Product exists. Increase the count of existing product.
+			incrementProductCount(row);
+		}
+	}
+	
 	
 	$(document).on('click','#removeCartItemBtn',function(){
 		// Reduce the price of item removed.
@@ -694,6 +711,7 @@ $(function() {
 		
 		incrementProductCount($(this));
 	});
+	
 	
 	function incrementProductCount(row){
 		if(row === undefined)

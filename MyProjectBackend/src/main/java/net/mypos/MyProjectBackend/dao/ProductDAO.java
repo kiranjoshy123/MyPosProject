@@ -9,6 +9,7 @@ public interface ProductDAO {
 	List<Product> list();
 	
 	Product get(int productID);
+	Product get(String code);
 	boolean add(Product product);
 	boolean update(Product product);
 	boolean delete(Product product);

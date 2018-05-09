@@ -34,6 +34,21 @@ public class ProductDAOImpl implements ProductDAO {
 			return null;
 		}
 	}
+	
+	@Override
+	public Product get(String code) {
+		try {
+			String selectActiveProducts = "FROM Product WHERE code = :code";
+			return sessFactory
+					.getCurrentSession()
+						.createQuery(selectActiveProducts,Product.class)
+							.setParameter("code", code)
+								.getSingleResult();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
 
 	@Override
 	public boolean add(Product product) {

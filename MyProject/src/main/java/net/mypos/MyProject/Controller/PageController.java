@@ -10,9 +10,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.mypos.MyProject.exception.ProductNotFoundException;
@@ -119,10 +122,20 @@ public class PageController {
 	}
 	
 	
-	
 	/*
 	 * Viewing a single product
 	 **/
+	 @RequestMapping(value= "/search/products", method=RequestMethod.POST)
+	 @ResponseBody
+	 public Product searchProduct(@ModelAttribute("code") String code) throws ProductNotFoundException {
+		 logger.info("retieveProduct " + code);
+		 Product product = productDAO.get(code);
+		 if(product == null) {
+			 throw new ProductNotFoundException();
+		 }
+		 return product;
+	 }
+	 
 	 @RequestMapping(value= {"/show/{id}/product"})
 	 public ModelAndView showSingleProduct(@PathVariable("id") int id) throws ProductNotFoundException {
 		 
