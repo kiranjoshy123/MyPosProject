@@ -55,13 +55,15 @@ public class CartService {
 			cart.setGrandTotal(cart.getGrandTotal()+cartline.getTotal());
 			cartLineDAO.updateCart(cart);
 		}
+		else if(cartline.getProductCount()>=1){
+			updateCartLine(cartline.getCartId(), productId);
+		}
 	}
 
-	public void deleteCartLine(int cartLineId) {
-		CartLine cartline = cartLineDAO.get(cartLineId);
-		if(cartline != null) {
-			// Update the Cart first.
-			Cart cart = this.getCart();
+	public void deleteCartLine(int productId) {
+		Cart cart = getCart();
+		CartLine cartline = cartLineDAO.getByCartAndProduct(cart.getId(), productId);
+		if(cartline != null) {	
 			cart.setGrandTotal(cart.getGrandTotal() - cartline.getTotal());
 			cart.setCartLines(cart.getCartLines() - 1);
 			cartLineDAO.updateCart(cart);
@@ -70,4 +72,65 @@ public class CartService {
 		}
 		
 	}
+	
+	public void reduceProductCount(int productId) {
+		Cart cart = getCart();
+		CartLine cartline = cartLineDAO.getByCartAndProduct(cart.getId(), productId);
+		if(cartline != null) {	
+			cartline.getProductCount();
+			if(cartline.getProductCount()>1){
+				cartline.setProductCount(cartline.getProductCount()-1);
+				cartLineDAO.update(cartline);
+			}
+			else{
+				deleteCartLine(productId);
+			}
+			
+		}
+		
+	}
+	
+	public void updateCartLine(int cartLineId, int productId) {
+		Cart cart = getCart();
+		CartLine cartline = cartLineDAO.getByCartAndProduct(cart.getId(), productId);
+
+		cartline.setProductCount(cartline.getProductCount()+1);
+		
+		/*cartLine.setTotal(cartLine.getProductPrice() * quantity);
+		cartLineDAO.update(cartLine);
+		
+		cart.setTotal(this.countTotal());*/
+		
+		cartLineDAO.update(cartline);
+
+	}
+
+/*	public boolean checkProductInCartLine(Product product) {
+
+		Cart userCart = this.getCart();
+		try {
+			if (cartLineDAO.get(userCart.getId(), product) != null) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+
+	public Double countTotal() {
+
+		List<CartLine> cartlines = this.getCartLines();
+		double total = 0;
+		for (CartLine line : cartlines) {
+			double lineTotal = line.getProductCount() * line.getProductPrice();
+			total += lineTotal;
+		}
+		return total;
+	}*/
+
+	
 }
