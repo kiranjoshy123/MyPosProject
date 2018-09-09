@@ -17,6 +17,7 @@ public interface ProductDAO {
 	// Business methods.
 	List<Product> listActiveProducts();
 	List<Product> listActiveProductsByCategory(int categoryID);
+	List<Product> listActiveProductsByCode(String code);
 	List<Product> getLatestActiveProducts(int count);
 
 }

@@ -17,10 +17,10 @@ public class Subcategory {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@NotBlank(message = "Please enter the Category Name!")
+	@NotBlank(message = "Please enter the Sub-Category Name!")
 	private String name;
 	
-	@NotBlank(message = "Please enter the Category description!")
+	@NotBlank(message = "Please enter the Sub-Category description!")
 	private String description;
 	
 	@Column(name = "image_url")

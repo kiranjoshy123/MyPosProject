@@ -74,7 +74,7 @@
 			</c:if>
 			
 			<!-- All products/list products handling. Cart bar will be shown till payment page. -->
-			<c:if test="${userClickedAllProducts == true or userClickedCategoryProducts == true or userClickedSubCategory == true or userClickedOrderPayment == true}">
+			<c:if test="${showAllCategories == true or showAllProducts == true or showAllSubCategories == true or userClickedOrderPayment == true}">
 				<%@include file="listProducts.jsp"%>
 			</c:if>
 			
@@ -98,7 +98,8 @@
 				<%@include file="manageUsers.jsp"%>
 			</c:if>
 			
-		</div>
+			<!-- Modal dialog for product search -->
+			<%@include file="productSearch.jsp"%>
 
 		<!-- jQuery -->
 		<script src="${js}/jquery.js"></script>

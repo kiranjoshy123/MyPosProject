@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,8 @@ import net.mypos.MyProjectBackend.dto.Sales;
 public class SalesDAOImpl implements SalesDAO{
 	@Autowired
 	private SessionFactory sessFactory;
+	
+	private static final Logger logger = LoggerFactory.getLogger(SalesDAOImpl.class);
 	
 	@Override
 	public boolean add(Sales sales) {
@@ -65,6 +69,7 @@ public class SalesDAOImpl implements SalesDAO{
 		Date curDate = cal.getTime();
 		
 		String selectTodaysSalesForAStaff = "FROM Sales WHERE staff_id = :staffId AND DATE(date_time) =:curDate";
+		logger.info("selectTodaysSalesForAStaff", selectTodaysSalesForAStaff);
 		return sessFactory
 				.getCurrentSession()
 					.createQuery(selectTodaysSalesForAStaff,Sales.class)

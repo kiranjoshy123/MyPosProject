@@ -60,7 +60,6 @@ footer {
 /*
 	custom styling
 */
-
 .wrapper{
 	min-height: 100%;
 	position: relative;
@@ -81,7 +80,6 @@ footer {
 /*
 Toogle switch
 */
-
 .switch{
 	width:50px;
 	height: 30px;
@@ -220,18 +218,15 @@ User button in login page
 /*
 Category/Product button
 */
-
 .btn-item{
-	margin-top: 3px;
-	margin-bottom: 3px;
-	margin-right: 3px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-right: 5px;
 	height: 70px;
-	width: 130px;
-	text-align: center;
-	vertical-align: middle;
+	width: 120px;
 	white-space: normal !important;
     word-wrap: break-word;
-
+    text-align: center;
 }
 
 .btn-item:active{
@@ -246,6 +241,26 @@ Category/Product button
   	color: black;
   	outline:0;
 }
+
+.btn-item-product{
+	text-align: left;
+	display: inline-flex;
+	position: relative;
+}
+
+.button-left-top{
+	position: absolute;
+	display: block;
+	top:5px; 
+	left:5px
+}
+
+.button-left-bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
 
 /*
 Custom Side-nav bar.
@@ -440,6 +455,9 @@ Custom Tab with line.
     margin-top: 0;
 }
 
+.modal-dialog {
+  padding-top: 15%;
+}
 
 /*
 Color of Data tables.

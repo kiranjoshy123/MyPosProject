@@ -1,6 +1,8 @@
 package net.mypos.MyProject.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -30,9 +32,11 @@ public class SalesService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PageController.class);
 	
-	public void addSales() {
+	// TODO : Not exactly correct implemention. Update accordingly
+	public List<Sales> addSales() {
 		logger.info("Adding new sale item");
 		
+		List <Sales> allItems = new ArrayList<Sales>();;
 		int userID = ((UserModel)session.getAttribute("userModel")).getId();
 		Staff staff = userinfoDAO.getStaffByPersonId(userID);
 		if(staff != null) {
@@ -51,6 +55,9 @@ public class SalesService {
 			order.setDateTime(currDateTime);
 			
 			salesDAO.add(order);
+			allItems.add(order);
 		}
+		
+		return allItems;
 	}
 }

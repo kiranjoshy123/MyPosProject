@@ -9,7 +9,6 @@
 		<c:if test="${not empty message}" >
 			<div class="col-xs-12">
 				<div class="alert alert-success alert-dismissible">
-				
 					<button type="button" class="close" data-dismiss="alert">&times;</button>
 					${message}
 				
@@ -37,7 +36,6 @@
 					<div role="tabpanel" class="tab-pane fade in active" id="Section2">
 						<%@include file="ManageSubCategory.jsp"%>
 					</div>
-				
 				
 				</div>
 			</div>

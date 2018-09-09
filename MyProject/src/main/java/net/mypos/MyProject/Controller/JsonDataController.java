@@ -5,10 +5,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.mypos.MyProject.Model.UserModel;
@@ -46,6 +49,7 @@ public class JsonDataController {
 	@Autowired
 	private HttpSession session;
 	
+	private static final Logger logger = LoggerFactory.getLogger(PageController.class);	
 	
 	// Returning only the active products - For user.
 	@RequestMapping("/all/products")
@@ -85,6 +89,13 @@ public class JsonDataController {
 	@ResponseBody
 	public List<Userinfo> getAllListForAdmin(){
 		return userinfoDAO.list();
+	}
+	
+	@RequestMapping("/search/products")
+	@ResponseBody
+	public List<Product> getAllProductsByCode(@RequestParam(name="item=", required=true) String code){
+		logger.info("Code : ", code);
+		return productDAO.listActiveProductsByCode(code);
 	}
 	
 	@RequestMapping("/sales/today")

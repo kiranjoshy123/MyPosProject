@@ -6,37 +6,35 @@
 			<!-- Added breadcrumb component -->
 			<div class="row" >
 				<div class="col-md-12">
-					<c:if test="${userClickedAllProducts == true or userClickedHome == true}" >
+					<c:if test="${showAllCategories == true or userClickedHome == true}" >
 						<script>
-							window.categoryId = '';
+							window.categoryName = '';
 						</script>
-						<ol class="breadcrumb">
+						<ol class="breadcrumb clearfix">
 							<li class="active">Home</li>
 						</ol>
+						
 					</c:if>
 					
-					<c:if test="${userClickedCategoryProducts == true}" >
+					<c:if test="${showAllSubCategories == true}" >
 						<script>
-							window.categoryId = '${category.id}';
+							window.categoryName = '${category.name}';
 						</script>
 						<ol class="breadcrumb">
 							<li><a href="${contextRoot}/home">Home</a></li>
 							<li class="active">${category.name}</li>
+						</ol>
+					</c:if>
+					
+					<c:if test="${showAllProducts == true}" >
+						<ol class="breadcrumb">
+							<li><a href="${contextRoot}/home">Home</a></li>
+							<li><a href="${contextRoot}/show/category/${category.id}/subcategory">${category.name}</a></li>							
 							<li class="active">${subcategory.name}</li>
 						</ol>
 					</c:if>
 					
-					<c:if test="${userClickedSubCategory == true}" >
-						<script>
-							window.categoryId = '${category.id}';
-						</script>
-						<ol class="breadcrumb">
-							<li><a href="${contextRoot}/home">Home</a></li>
-							<li class="active">${category.name}</li>
-						</ol>
-					</c:if>
 				</div>
-			
 			</div>
 		
 			<!-- Categories and product list page -->

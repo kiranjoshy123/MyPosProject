@@ -10,7 +10,7 @@
 	<div class="panel-body">
 
 		<!-- Form Elements -->
-		<sf:form class="form-horizontal" modelAttribute="category" action="${contextRoot}/manage/categories" method="POST">
+		<sf:form autocomplete="off" class="form-horizontal" modelAttribute="category" action="${contextRoot}/manage/categories" method="POST">
 			<div class="form-group">
 				<label class="control-label col-md-4" for="name">Category Name :</label>
 				<div class="col-md-8">

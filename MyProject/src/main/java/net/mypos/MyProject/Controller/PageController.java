@@ -52,6 +52,7 @@ public class PageController {
 		mv.addObject("title", "Home");
 		mv.addObject("userClickedHome", true);
 		mv.addObject("categories", categoryDAO.list());
+		mv.addObject("productList",productDAO.listActiveProducts());
 		mv.addObject("bOrderItems", true);
 		
 		return mv;
@@ -82,7 +83,7 @@ public class PageController {
 	
 	
 	/*
-	 * Methods to load all the products based on category
+	 * Methods to load all the products
 	 * */
 	@RequestMapping(value = { "/show/subcategory/{id}/products" })
 	public ModelAndView showCategoryProducts(@PathVariable("id") int id) {
@@ -94,9 +95,10 @@ public class PageController {
 		
 		mv.addObject("title", subcategory.getName());
 		mv.addObject("subcategory", subcategory);
+		mv.addObject("category", categoryDAO.get(subcategory.getCategoryId()));
 		mv.addObject("productList", productDAO.listActiveProductsByCategory(id));
 		
-		mv.addObject("userClickedCategoryProducts", true);
+		mv.addObject("showAllProducts", true);
 		return mv;
 	}
 	
@@ -117,7 +119,7 @@ public class PageController {
 		mv.addObject("subcategoryList", subcategoryDAO.listActiveSubcategoriesByCategory(id));
 		logger.info( "subcategoryDAO.listActiveSubcategoriesByCategory() Size" + subcategoryDAO.listActiveSubcategoriesByCategory(id).size());
 		
-		mv.addObject("userClickedSubCategory", true);
+		mv.addObject("showAllSubCategories", true);
 		return mv;
 	}
 	

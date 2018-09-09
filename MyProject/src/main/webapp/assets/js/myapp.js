@@ -560,7 +560,7 @@ $(function() {
 		});
 	}
 	
-
+	
 	//------------------------------Login form validation----------------------------
 	var $loginForm = $('#loginForm');
 	if($loginForm.length){
@@ -593,26 +593,22 @@ $(function() {
 		});
 	}
 	
+	//--------------------- Cart bar functionality ---------------------------------------------
 	// Key-down function - Waiting for scanner input. 
 	var barcode='';
     $(document).keypress(function(e) {
         var code = (e.keyCode ? e.keyCode : e.which);
         if(code==13)// Enter key hit
         {
-        	var request = $.ajax({
-        		url: '/search/products',
-        		type: "POST",
-        		data: { code: barcode },
-        		success: function(product)
-        		{
-        			console.log("Mapping Successful" + product.id);
-        			addProduct(product.id,product.unit_price,product.name);
-        		},
-        		
-        		error: function (error) {
-        			console.log("Error : " + error);
-        		}
-        	});
+        	var $cartTable = $('#cartTable');
+        	if($('#cartTable').length)
+        	{
+        		addScannedItemToCart();
+        	}
+        	else if($('#adminProductTable').length)
+    		{
+        		addScannedItemToProductList();
+    		}
         	
             barcode = '';
         }
@@ -625,7 +621,100 @@ $(function() {
             barcode = barcode + String.fromCharCode(code);
         }
     });
+    
+    function addScannedItemToProductList()
+    {
+    	var barCodeEdit = document.getElementById("code");
+		if(barCodeEdit == null){
+			console.log("Faild to find barcode box");
+			return;
+		}
+		
+		console.log("Succesfully found barcode box");
+		barCodeEdit.value = barcode;
+    }
+    
+    function addScannedItemToCart()
+    {
+    	var request = $.ajax({
+    		url: '/search/products',
+    		async: false,
+    		type: "POST",
+    		data: { code: barcode },
+    		success: function(product)
+    		{        			
+    			console.log("Mapping Successful" + product.id);
+    			if(product.id != null)
+				{
+    				addProduct(product.id,product.unit_price,product.name);
+				}
+    			else
+				{
+    				if($('#searchProductTable').length)
+    				{
+    					updateCodeEditDialog(barcode,"","","","");
+    					$('#productsModal').modal('show');
+    				}
+				}
+    		},
+    		
+    		error: function (error) {
+    			console.log("Error : " + error);
+    		}
+    	});
+    }
+    
+  //--------------------- Search button click for barcode from the modal dialog ---------------------------------------------
+    $(document).on('click','#productNotFoundSearch',function(){
+    	var userEnteredCode = searchProductTable.rows[1].cells[0].children[0].value;
+    	var request = $.ajax({
+    		url: '/search/products',
+    		async: false,
+    		type: "POST",
+    		data: { code: userEnteredCode },
+    		success: function(product)
+    		{        			
+    			console.log("Mapping Successful" + product.id);
+    			(product.id != null) ? updateCodeEditDialog(userEnteredCode,product.name,product.brand,product.unit_price,product.id) :
+    				updateCodeEditDialog(userEnteredCode,"","","","");
+    		},
+    		
+    		error: function (error) {
+    			console.log("Error : " + error);
+    		}
+    	});
+	});
+    
+    function updateCodeEditDialog(code,name,brand,price,productId){
+    	$("#searchProductTable tbody").html("");
+		$("#searchProductTable").append('<tbody>' +
+			'<tr>' +
+				'<td> <input type="text" style="color:blue;width: 100%;" autofocus value="' + code + '" spellcheck="false" onfocus="var temp_value=this.value; this.value=\'\'; this.value=temp_value"></td>' + 
+				'<td>' + name + '</td>' + 
+				'<td>' + brand + '</td>' + 
+				'<td>' + price + '</td>' + 
+				'<td style="display:none">' + productId + '</td>' + 
+			'</tr>' +
+			'</tbody>');
+		if(!name){
+			$("#productNoFoundWarning").show();
+			$('#productNotFoundAddBtn').prop('disabled', true);
+		}
+		else{
+			$("#productNoFoundWarning").hide();
+			$('#productNotFoundAddBtn').prop('disabled', false);
+		}
+    }
+    
+  //--------------------- Add to cart button from the Modal dialog ---------------------------------------------
+    $(document).on('click','#productNotFoundAddBtn',function(){
+    	addProduct(searchProductTable.rows[1].cells[4].innerHTML,
+    			searchProductTable.rows[1].cells[2].innerHTML,
+    			searchProductTable.rows[1].cells[1].innerHTML);
+    	$('#productsModal').modal('toggle');
+	});
 
+  //--------------------- Add to cart from the button product(listproducts.jsp) ---------------------------------------------
 	$(document).on('click','#buttonProduct',function(){
 		var user = $(this);
 		if(user != null)
