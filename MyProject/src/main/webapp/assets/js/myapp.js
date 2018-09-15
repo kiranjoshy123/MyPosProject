@@ -1,5 +1,5 @@
 $(function() {
-	
+	var tableMega;
 	switch(menu){
 		case 'All Products' :
 			$('#listProducts').addClass('active');
@@ -16,6 +16,42 @@ $(function() {
 		default:
 			break;
 	}
+	
+	var getCartItemsUrl = window.contextRoot + '/cart/show/json';
+	$.ajax({ type: "GET",   
+        url: getCartItemsUrl,   
+        async: false,
+        success : function(response)
+        {
+        	var jsonArrayList = JSON.parse(response);
+        	jsonArrayList.forEach(
+        			function(cartItems){
+        				var productCount = parseInt(cartItems.productCount, 10);
+        				if(productCount>0){
+        					for(var i=0;i<productCount; i++)
+        						addProduct(cartItems.productId, cartItems.productValue, cartItems.productName);
+        				}
+        				else
+        					addProduct(cartItems.productId, cartItems.productValue, cartItems.productName);
+        			});
+        }
+	});
+
+	/*$.ajax({
+		type: "POST", 
+		url: getCartItemsUrl,
+		dataType: "json",
+		success : function(response){
+			var existingCartItems = response;
+			var jsonArrayList = JSON.parse(existingCartItems);
+		}
+	});*/
+	/*$.post(getCartItemsUrl, function(response ){
+		var existingCartItems = response;
+		var jsonArrayList = JSON.parse(existingCartItems);
+		
+		
+	});*/
 	
 	// Adding the csrf token
 	var token = $('meta[name="_csrf"]').attr('content');
@@ -720,11 +756,21 @@ $(function() {
 		if(user != null)
 		{
 			addProduct($(user).attr("productId"),$(user).attr("value"),$(user).text());
+			var actURL = window.contextRoot + '/cart/add/product/' + $(user).attr("productId");
+			/*$.post(actURL, function( data ){
+				
+			});*/
+			$.ajax({ 
+				type: "GET",
+		        url: actURL,   
+		        async: false
+			});
 		}
 	});
 	
 	function addProduct(productId, productValue, productName){
 		
+		console.log(tableMega);
 		var tableCart = document.getElementById("cartTable").getElementsByTagName('tbody')[0];
 		if((tableCart == null) || (productId == null) || (productValue == null) ||(productName == null)){
 			return;
@@ -779,6 +825,7 @@ $(function() {
 	        var currentCartVal = parseInt($('#cartTotal').text(), 10);
 	        var newItemPrice = parseInt(productValue, 10);
 	        $('#cartTotal').text(currentCartVal+newItemPrice);
+			tableMega=tableCart;
 		}else{
 			// Product exists. Increase the count of existing product.
 			incrementProductCount(row);
@@ -791,7 +838,13 @@ $(function() {
 		var currentCartVal = parseInt($('#cartTotal').text(), 10);
 		var itemRemoved = parseInt($(this).closest('tr').children('td.totalItemPrice').text(), 10);
 		$('#cartTotal').text(currentCartVal-itemRemoved);
-		
+		var productId = $(this).closest('tr')[0].attributes.getNamedItem("productId").value;
+		var actURL = window.contextRoot + '/cart/remove/product/' + productId;
+		$.ajax({ 
+			type: "GET",
+	        url: actURL,   
+	        async: false
+		});
 		// Finally remove the item.
 		$(this).closest('tr').remove();
 	});
@@ -799,6 +852,16 @@ $(function() {
 	$(document).on('click','#itemCountPlus',function(){
 		
 		incrementProductCount($(this));
+		var productId = $(this).closest('tr')[0].attributes.getNamedItem("productId").value;
+		var actURL = window.contextRoot + '/cart/add/product/' + productId;
+		/*$.post(actURL, function( data ){
+			
+		});*/
+		$.ajax({ 
+			type: "GET",
+	        url: actURL,   
+	        async: false
+		});
 	});
 	
 	
@@ -819,9 +882,21 @@ $(function() {
 	};
 	
 	$(document).on('click','#itemCountMinus:enabled',function(){
+		var productId = $(this).closest('tr')[0].attributes.getNamedItem("productId").value;
+		var actURL = window.contextRoot + '/cart/reduce/product/' + productId;
+		/*$.post(actURL, function( data ){
+			
+		});*/
+		$.ajax({ 
+			type: "GET",
+	        url: actURL,   
+	        async: false
+		});
+		
 		var curItemCount = parseInt($(this).closest('tr').find('.labelQuantity').text(), 10);
 		var itemPrice = parseInt($(this).closest('tr').find('.itemPrice').text(), 10);
 		var currentCartVal = parseInt($('#cartTotal').text(), 10);
+		var productId = parseInt($(this).closest('tr').attr('productid'), 10);
 		
 		$(this).closest('tr').find('.labelQuantity').html( '&nbsp;&nbsp;' + (curItemCount-1) + '&nbsp;&nbsp;');
 		$(this).closest('tr').find('.totalItemPrice').text( itemPrice*(curItemCount-1));
