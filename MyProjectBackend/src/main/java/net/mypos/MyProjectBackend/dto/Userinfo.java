@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -27,7 +28,8 @@ public class Userinfo {
 	private String role;
 	private boolean enabled = true;
 	
-	@NotBlank(message = "Please enter a valid password!")
+	@NotBlank(message = "Please enter a valid passcode. Only numbers allowed!")
+	@Size(min = 4, max = 10, message = "Passcode lenght should be in minimum 4 and maximum 10.")
 	private String password;
 	
 	@NotBlank(message = "Please enter the email!")

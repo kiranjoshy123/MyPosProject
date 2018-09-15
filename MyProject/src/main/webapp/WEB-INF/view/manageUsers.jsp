@@ -29,7 +29,7 @@
 					
 					<!-- Form Elements -->
 					
-					<sf:form class="form-horizontal" modelAttribute="user" 
+					<sf:form autocomplete="off" class="form-horizontal" modelAttribute="user" 
 						action="${contextRoot}/manage/users"
 						method="POST"
 						>
@@ -66,9 +66,9 @@
 						</div>
 						
 						<div class="form-group">
-							<label class="control-label col-md-4" for="password">Password : </label>
+							<label class="control-label col-md-4" for="password">Passcode : </label>
 							<div class="col-md-8">
-								<sf:input type="text" path="password" id="password" placeholder="Enter a valid password." class="form-control"/>
+								<sf:input type="number" path="password" id="password" placeholder="Enter a valid passcode(Only numbers)" class="form-control"/>
 								<sf:errors path="password" cssClass="help-block" element="em"/>
 							</div>
 						</div>

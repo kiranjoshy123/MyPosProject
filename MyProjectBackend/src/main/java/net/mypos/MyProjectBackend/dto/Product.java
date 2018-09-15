@@ -18,6 +18,8 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
+	@NotBlank(message = "Please enter the Product Code!")
 	private String code;
 	
 	@NotBlank(message = "Please enter the Product Name!")
@@ -44,7 +46,7 @@ public class Product {
 	
 	// Default constructor
 	public Product() {
-		this.code = "PRD" + UUID.randomUUID().toString().substring(26).toUpperCase();
+		this.code = "";//"PRD" + UUID.randomUUID().toString().substring(26).toUpperCase();
 	}
 	
 	public int getId() {

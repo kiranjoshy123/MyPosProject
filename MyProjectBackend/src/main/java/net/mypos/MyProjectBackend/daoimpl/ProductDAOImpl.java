@@ -107,6 +107,16 @@ public class ProductDAOImpl implements ProductDAO {
 							.setParameter("subcategoryID", subcategoryID)
 								.getResultList();
 	}
+	
+	@Override
+	public List<Product> listActiveProductsByCode(String code){
+		String selectActiveProducts = "FROM Product WHERE code = :code";
+		return sessFactory
+				.getCurrentSession()
+					.createQuery(selectActiveProducts,Product.class)
+						.setParameter("code", code)
+							.getResultList();
+	}
 
 	@Override
 	public List<Product> getLatestActiveProducts(int count) {
@@ -120,4 +130,6 @@ public class ProductDAOImpl implements ProductDAO {
 									.getResultList();
 	}
 
+	
+	
 }

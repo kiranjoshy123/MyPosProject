@@ -29,7 +29,7 @@
 					
 					<!-- Form Elements -->
 					
-					<sf:form class="form-horizontal" modelAttribute="product" 
+					<sf:form autocomplete="off" class="form-horizontal" modelAttribute="product" 
 						action="${contextRoot}/manage/products"
 						method="POST"
 						>
@@ -58,6 +58,14 @@
 						</div>
 						
 						<div class="form-group">
+							<label class="control-label col-md-4" for="Bar Code">Bar code :</label>
+							<div class="col-md-8">
+								<sf:input type="text" path="code" id="code" placeholder="Bar Code of the item." class="form-control"/>
+								<sf:errors path="code" cssClass="help-block" element="em"/>
+							</div>
+						</div>
+						
+						<div class="form-group">
 							<label class="control-label col-md-4" for="unitPrice">Unit Price : </label>
 							<div class="col-md-8">
 								<sf:input type="number" path="unit_price" id="unitPrice" placeholder="Price of each item." class="form-control"/>
@@ -73,7 +81,7 @@
 						</div>
 						
 						<div class="form-group">
-							<label class="control-label col-md-4" for="subcategoryId">Select Category : </label>
+							<label class="control-label col-md-4" for="subcategoryId">Select Sub-category : </label>
 							<div class="col-md-8">
 								<sf:select class="form-control" id="subcategoryId" path="subcategory_id" 
 									items="${subcategories}" 
@@ -89,7 +97,6 @@
 								
 								<!-- Hidden fields for product -->
 								<sf:hidden path="id"/>
-								<sf:hidden path="code"/>
 								<sf:hidden path="supplier_id"/>
 								<sf:hidden path="purchases"/>
 								<sf:hidden path="views"/>

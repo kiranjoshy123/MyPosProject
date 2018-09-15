@@ -13,6 +13,7 @@
 		window.open(href, "_self");
 	});
 </script>
+
 <table class="table table-hover table-bordered" id="cartTable">
 	<thead>
 		<tr>

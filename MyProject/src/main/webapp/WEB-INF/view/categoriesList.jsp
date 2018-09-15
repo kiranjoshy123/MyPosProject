@@ -2,23 +2,36 @@
 
 <div class="contaier-fluid">
 
-	<c:if test="${userClickedAllProducts == true or userClickedHome == true}">
+	<!-- Display all the available categories + hot products -->
+	<c:if test="${showAllCategories == true or userClickedHome == true}">
 		<c:forEach items="${categories}" var="category">
-			<a href="${contextRoot}/show/category/${category.id}/subcategory"
-				class="btn btn-primary btn-item">${category.name}</a>
+			<a href="${contextRoot}/show/category/${category.id}/subcategory" class="btn btn-primary btn-item" style="line-height: 50px;">${category.name}</a>
+		</c:forEach>
+		<br/>
+		<br/>
+		<br/>
+		<c:forEach items="${productList}" var="product">
+			<button type="button" class="btn btn-primary btn-item btn-item-product" id="buttonProduct" value="${product.unit_price}" productId="${product.id}">
+				<span class="button-left-top" >${product.name}</span>
+				<span class="button-left-bottom" >${product.unit_price}</span>
+			</button>
 		</c:forEach>
 	</c:if>
 	
-	<c:if test="${userClickedSubCategory == true}">
+	<!-- Display all the sub-categories for a category -->
+	<c:if test="${showAllSubCategories == true}">
 		<c:forEach items="${subcategoryList}" var="subcategory">
-			<a href="${contextRoot}/show/subcategory/${subcategory.id}/products"
-				class="btn btn-primary btn-item">${subcategory.name}</a>
+			<a href="${contextRoot}/show/subcategory/${subcategory.id}/products" class="btn btn-primary btn-item" style="line-height: 50px;">${subcategory.name}</a>
 		</c:forEach>
 	</c:if>
 
-	<c:if test="${userClickedCategoryProducts == true}">
+	<!-- Display all the available products under a category. -->
+	<c:if test="${showAllProducts == true}">
 		<c:forEach items="${productList}" var="product">
-			<button type="button" class="btn btn-primary btn-item" id="buttonProduct" value="${product.unit_price}" productId="${product.id}">${product.name}</button>
+			<button type="button" class="btn btn-primary btn-item btn-item-product" id="buttonProduct" value="${product.unit_price}" productId="${product.id}">
+				<span class="button-left-top" >${product.name}</span>
+				<span class="button-left-bottom" >${product.unit_price}</span>
+			</button>
 		</c:forEach>
 	</c:if>
 	
