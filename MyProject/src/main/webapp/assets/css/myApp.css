@@ -339,6 +339,14 @@ div.CartBarHeading{
     font-size: 75px;
 }
 
+.glyphicon.glyphicon-shopping-cart{
+	font-size: 30px; 
+	color:white; 
+	height:100%; 
+	vertical-align:middle; 
+	padding: 3px 0px 0px 0px; 	/* to make it center*/
+}
+
 
 .panel-default{
     Background: #fff;

@@ -1,5 +1,4 @@
 $(function() {
-	var tableMega;
 	switch(menu){
 		case 'All Products' :
 			$('#listProducts').addClass('active');
@@ -920,13 +919,12 @@ $(function() {
 		 if(row.attr('selectedItem') != 'true')
 		{
 			 removeCurrentSelection();
-			 handleSelection(row);
+			 selectRow(row);
 		}
 			
 	 });
 	
 	function addProduct(productId, productValue, productName){
-		console.log(tableMega);
 		var tableCart = document.getElementById("cartTable").getElementsByTagName('tbody')[0];
 		if((tableCart == null) || (productId == null) || (productValue == null) ||(productName == null)){
 			return;
@@ -980,10 +978,7 @@ $(function() {
 	        //tableCart.appendChild(newRow);
 	        
 	        // Update the cart total.
-	        var currentCartVal = parseInt($('#cartTotal').text(), 10);
-	        var newItemPrice = parseInt(productValue, 10);
-	        $('#cartTotal').text(currentCartVal+newItemPrice);
-			tableMega=tableCart;
+	        updateCartValues(productValue,1,true);
 			
 			//$("cartTable tr:last").scrollintoview();
 			//var rowpos = $('#cartTable tr:last').position();
@@ -993,12 +988,33 @@ $(function() {
 		}else{
 			// Product exists. Increase the count of existing product.
 			incrementProductCount(row);
-			handleSelection(row);
+			selectRow(row);
 		}
-		
 	}
 	
-	function handleSelection(updatedRow){
+	function updateCartValues(productValue, itemCountToUpdate, addItem)
+	{
+		var updatedCartTotal = "";
+		var updatedItemCount = "";
+		var currentCartVal = parseInt($('#cartTotal').text(), 10);
+		var currentItemCount = parseInt($('#itemsInCart').text(), 10);
+		if(addItem)
+		{
+	        var newItemPrice = parseInt(productValue, 10);
+	        updatedCartTotal = currentCartVal+newItemPrice;
+	        updatedItemCount = currentItemCount+itemCountToUpdate;
+		}
+		else
+		{
+			updatedCartTotal = currentCartVal-productValue;
+			updatedItemCount = currentItemCount-itemCountToUpdate;
+		}
+		
+		$('#cartTotal').text(updatedCartTotal);
+		$('#itemsInCart').text(updatedItemCount);
+	}
+	
+	function selectRow(updatedRow){
 		updatedRow.attr('selectedItem', true);
 		updatedRow.attr('class', "bg-info");
 		updatedRow.attr('height', 90);
@@ -1006,6 +1022,7 @@ $(function() {
 	    var curItemCount = parseInt(updatedRow.closest('tr').find('.labelQuantity').text(), 10);
 	    updatedRow.children('td').eq(1).html(getProductQuantityColumn(curItemCount));
 	    updatedRow.children('td').eq(4).html(getDeleteProductColumn());
+	    enableDecrementButton(updatedRow);
 	}
 	
 	function getProductQuantityColumn(count){
@@ -1039,9 +1056,9 @@ $(function() {
 	
 	$(document).on('click','#removeCartItemBtn',function(){
 		// Reduce the price of item removed.
-		var currentCartVal = parseInt($('#cartTotal').text(), 10);
 		var itemRemoved = parseInt($(this).closest('tr').children('td.totalItemPrice').text(), 10);
-		$('#cartTotal').text(currentCartVal-itemRemoved);
+		var curItemCount = parseInt($(this).closest('tr').find('.labelQuantity').text(), 10);
+		updateCartValues(itemRemoved,curItemCount,false);
 		$(this).closest('tr').remove();
 	});
 	
@@ -1055,14 +1072,10 @@ $(function() {
 			
 		var curItemCount = parseInt(row.closest('tr').find('.labelQuantity').text(), 10);
 		var itemPrice = parseInt(row.closest('tr').find('.itemPrice').text(), 10);
-		var currentCartVal = parseInt($('#cartTotal').text(), 10);
-		
 		row.closest('tr').find('.labelQuantity').html( '&nbsp;&nbsp;' + (curItemCount+1) + '&nbsp;&nbsp;');
 		row.closest('tr').find('.totalItemPrice').text( itemPrice*(curItemCount+1));
-		$('#cartTotal').html(currentCartVal+itemPrice);
-		
-		// Enable the minus button.
-		row.closest('tr').find('#itemCountMinus').removeAttr('disabled');
+		updateCartValues(itemPrice,1,true);
+		enableDecrementButton(row);
 	};
 	
 	function enableCartButtons(){
@@ -1071,21 +1084,28 @@ $(function() {
 		$("#pay").removeClass('disabled');
 	}
 	
+	function enableDecrementButton(row){
+		// Disable the minus button if count is <= 1 
+		var curItemCount = parseInt(row.closest('tr').find('.labelQuantity').text(), 10);
+		if((curItemCount) <= 1){
+			row.closest('tr').find('#itemCountMinus').attr('disabled','disabled');
+		}
+		else{
+			row.closest('tr').find('#itemCountMinus').removeAttr('disabled');
+		}
+	}
+	
+	
 	$(document).on('click','#itemCountMinus:enabled',function(){
 		var curItemCount = parseInt($(this).closest('tr').find('.labelQuantity').text(), 10);
 		var itemPrice = parseInt($(this).closest('tr').find('.itemPrice').text(), 10);
-		var currentCartVal = parseInt($('#cartTotal').text(), 10);
 		
 		$(this).closest('tr').find('.labelQuantity').html( '&nbsp;&nbsp;' + (curItemCount-1) + '&nbsp;&nbsp;');
 		$(this).closest('tr').find('.totalItemPrice').text( itemPrice*(curItemCount-1));
-		$('#cartTotal').html(currentCartVal-itemPrice);
-		
-		// Disable the minus button if count is <= 1 
-		if((curItemCount-1) <= 1)
-		{
-			$(this).closest('tr').find('#itemCountMinus').attr('disabled','disabled');
-		}
+		updateCartValues(itemPrice,1,false);
+		enableDecrementButton();
 	});
+	
 	
 	$(document).on('click','#clearCartBtn',function(){
 		// Remove all the rows in cart.
@@ -1105,6 +1125,7 @@ $(function() {
 					'</tbody>';
 			
 			$('#cartTotal').text("0.0");
+			$('#itemsInCart').text("0");
 		}
 	});
 	

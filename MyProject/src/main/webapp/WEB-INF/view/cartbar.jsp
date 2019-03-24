@@ -1,44 +1,60 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="CartBarHeading">
-    <h4 style="color:white;" >Cart</h4>
+<div class="CartBarHeading" style="vertical-align:middle">
+    <!-- <h4 style="color:white;" >Cart</h4> -->
+    <span class="glyphicon glyphicon-shopping-cart"></span>
 </div>
+
 <script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- <script>
-	$(document).on('click', '#pay', function() {
-		var ctx = "${pageContext.request.contextPath}";
-		var currentCartVal = parseInt($('#cartTotal').text(), 10);
-		var href = ctx + "/order/pay?name=" + currentCartVal;
-		window.open(href, "_self");
-	});
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 </script>
--->
+
 <div style="height:70vh; overflow-y:auto;">
-<table class="table table-borderless table-hover table-responsive" style="table-layout:fixed; overflow:auto" id="cartTable">
-	<thead>
-		<tr>
-			<th style="width:30%;">Product</th>
-			<th style="width:25%;  text-align:center">Quantity</th>
-			<th style="width:15%;">Price</th>
-			<th style="width:15%;">Total</th>
-			<th style="width:15%;"> </th>
-		</tr>
-	</thead>
-	<tbody>
-	</tbody>
-</table>
+	<table class="table table-borderless table-hover table-responsive" style="table-layout:fixed; overflow:auto" id="cartTable">
+		<thead>
+			<tr>
+				<th style="width:30%;">Product</th>
+				<th style="width:25%; text-align:center">Quantity</th>
+				<th style="width:15%;">Price</th>
+				<th style="width:15%;">Total</th>
+				<th style="width:15%;"> </th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
 </div>
 
 <!-- Cart pay/hold/delete -->
 <div class="cartFooter" style="height:10vh;" >
-	<div style="position: fixed; bottom:1%; width:30vw;">
-		<div class="col-md-offset-8">
+	<hr style="border-color:green; margin:10px 0px 0px 0px;">
+	
+	<div class="col-md-6">
+		<div class="col-md-6">
+			<div><h6><span>Items </span></h6></div>
+			<div><h6><span>Discount </span></h6></div>
+		</div>
+		
+		<div class="col-md-6">
+			<div><h6><span id="itemsInCart">0</span></h6></div>
+			<div><h6><span>&euro; </span><span id="discount">0</span></h6></div>
+		</div>		
+	</div>
+
+	<div class="col-md-6">
+		<div class="col-md-4">
 			<h4>
-				<span>Total </span> <span id="cartTotal">0.0</span>
+				<span>Total </span>
 			</h4>
 		</div>
+		<div class="col-md-8">
+			<h4>
+				<span>&euro; </span><span id="cartTotal">0.0</span>
+			</h4>
+		</div>
+	</div>
 	
+	<div style="position: fixed; bottom:1%; width:30vw;">
 		<div class="col-md-3">
 			<a href="#" class="btn btn-danger btn-block" id="clearCartBtn"> 
 			    <span class="glyphicon glyphicon-trash"></span> <span>Clear</span>
