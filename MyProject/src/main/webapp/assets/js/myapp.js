@@ -940,23 +940,28 @@ $(function() {
 		{
 	        var tdProduct = document.createElement("td");
 	        tdProduct.className = "col-md-4 Product";
+	        tdProduct.setAttribute('style', "vertical-align:middle");
 	        //tdProduct.innerHTML = '<h5 style="font-size: 15px; color:black" >' + productName + '</h5>';
 	        tdProduct.innerHTML = productName.trim();
 	        
 	        var tdQuantity = document.createElement("td");
 	        tdQuantity.className = "col-md-5 text-center quantity";
+	        tdQuantity.setAttribute('style', "vertical-align:middle");
 	        tdQuantity.innerHTML = getProductQuantityColumn(1);
 	        
 	        var tdPrice = document.createElement("td");
 	        tdPrice.className = "col-md-1 itemPrice";
+	        tdPrice.setAttribute('style', "vertical-align:middle");
 	        tdPrice.innerHTML = productValue;
 	        
 	        var tdTotal = document.createElement("td");
 	        tdTotal.className = "col-md-1 totalItemPrice";
+	        tdTotal.setAttribute('style', "vertical-align:middle");
 	        tdTotal.innerHTML = productValue;
 	        
 	        var tdRemove = document.createElement("td");
 	        tdRemove.className = "col-md-1 removeItem";
+	        tdRemove.setAttribute('style', "vertical-align:middle");
 	        tdRemove.innerHTML = getDeleteProductColumn();
 	        
 	        var newRow = document.createElement("tr");
@@ -995,7 +1000,7 @@ $(function() {
 	
 	function handleSelection(updatedRow){
 		updatedRow.attr('selectedItem', true);
-		updatedRow.className="bg-info";
+		updatedRow.attr('class', "bg-info");
 		updatedRow.attr('height', 90);
 	    
 	    var curItemCount = parseInt(updatedRow.closest('tr').find('.labelQuantity').text(), 10);
