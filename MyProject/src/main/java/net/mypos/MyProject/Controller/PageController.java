@@ -1,9 +1,13 @@
 package net.mypos.MyProject.Controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,53 +104,73 @@ public class PageController {
 		return mv;
 	}
 	
-	
-	/*
-	 * Methods to load all the products
-	 * */
-	@RequestMapping(value = { "/show/subcategory/{id}/products" })
-	public ModelAndView showCategoryProducts(@PathVariable("id") int id) {
-		ModelAndView mv = new ModelAndView("page");
-		
-		// categorydao to fetch a single category
-		Subcategory subcategory = null;
-		subcategory = subcategoryDAO.get(id);
-		
-		mv.addObject("title", subcategory.getName());
-		mv.addObject("subcategory", subcategory);
-		mv.addObject("category", categoryDAO.get(subcategory.getCategoryId()));
-		mv.addObject("productList", productDAO.listActiveProductsByCategory(id));
-		
-		mv.addObject("showAllProducts", true);
-		return mv;
+	@RequestMapping(value = "get/categories", method = RequestMethod.GET)
+	@ResponseBody
+    public String getCategories() {
+		logger.info("Retrieving categories..");
+		List<Category> categories = categoryDAO.list();
+		logger.info("Total Categories retrieved : " + categories.size());
+		List<JSONObject> jsonList = new ArrayList<JSONObject>();
+		for(Category categoryItem : categories)
+		{
+			JSONObject json = new JSONObject();
+			json.put("id", categoryItem.getId());
+			json.put("name",categoryItem.getName());
+			jsonList.add(json);
+		}
+		return jsonList.toString();
 	}
 	
-	/*
-	 * Methods to load all the sub categories from category
-	 * */
-	@RequestMapping(value = { "/show/category/{id}/subcategory" })
-	public ModelAndView showSubCategories(@PathVariable("id") int id) {
-		logger.info("showSubCategories is " + id);
-		ModelAndView mv = new ModelAndView("page");
-		
-		// subcategorydao to fetch a single category
-		Category category = null;
-		category = categoryDAO.get(id);
-		
-		mv.addObject("title", category.getName());
-		mv.addObject("category", category);
-		mv.addObject("subcategoryList", subcategoryDAO.listActiveSubcategoriesByCategory(id));
-<<<<<<< HEAD
-		logger.info( "subcategoryDAO.listActiveSubcategoriesByCategory() Size" + subcategoryDAO.listActiveSubcategoriesByCategory(id).size());
-		
-		mv.addObject("showAllSubCategories", true);
-=======
-		logger.info("subcategoryDAO.listActiveSubcategoriesByCategory() Size"
-				+ subcategoryDAO.listActiveSubcategoriesByCategory(id).size());
-
-		mv.addObject("userClickedSubCategory", true);
->>>>>>> 8063b5b6f29486f3600939750fc00f38886083c7
-		return mv;
+	@RequestMapping(value = "get/subcategories", method = RequestMethod.GET)
+	@ResponseBody
+    public String getSubCategories(@ModelAttribute("id") int id) {
+		logger.info("Category id is " + id);
+		List<Subcategory> subcategories = subcategoryDAO.listActiveSubcategoriesByCategory(id);
+		logger.info("Total SubCategories retrieved : " + subcategories.size());
+		List<JSONObject> jsonList = new ArrayList<JSONObject>();
+		for(Subcategory subcategoryItem : subcategories)
+		{
+			JSONObject json = new JSONObject();
+			json.put("id", subcategoryItem.getId());
+			json.put("name",subcategoryItem.getName());
+			jsonList.add(json);
+		}
+		return jsonList.toString();
+	}
+	
+	@RequestMapping(value = "/get/products", method = RequestMethod.GET)
+	@ResponseBody
+    public String getProducts(@ModelAttribute("id") int id) {
+		logger.info("SubCategory id is " + id);
+		List<Product> products = productDAO.listActiveProductsByCategory(id);
+		logger.info("Total Products retrieved : " + products.size());
+		List<JSONObject> jsonList = new ArrayList<JSONObject>();
+		for(Product productItem : products)
+		{
+			JSONObject json = new JSONObject();
+			json.put("id", productItem.getId());
+			json.put("name",productItem.getName());
+			json.put("price", productItem.getUnit_price());
+			jsonList.add(json);
+		}
+		return jsonList.toString();
+	}
+	
+	@RequestMapping(value = "/get/hotProducts", method = RequestMethod.GET)
+	@ResponseBody
+    public String gethotProducts() {
+		List<Product> products = productDAO.listActiveProducts();// Change it to hot products configured.
+		logger.info("Hot Products retrieved : " + products.size());
+		List<JSONObject> jsonList = new ArrayList<JSONObject>();
+		for(Product productItem : products)
+		{
+			JSONObject json = new JSONObject();
+			json.put("id", productItem.getId());
+			json.put("name",productItem.getName());
+			json.put("price", productItem.getUnit_price());
+			jsonList.add(json);
+		}
+		return jsonList.toString();
 	}
 	
 	

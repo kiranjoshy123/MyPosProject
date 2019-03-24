@@ -17,7 +17,7 @@ $(function() {
 			break;
 	}
 	
-	var getCartItemsUrl = window.contextRoot + '/cart/show/json';
+	/*var getCartItemsUrl = window.contextRoot + '/cart/show/json';
 	$.ajax({ type: "GET",   
         url: getCartItemsUrl,   
         async: false,
@@ -35,22 +35,6 @@ $(function() {
         					addProduct(cartItems.productId, cartItems.productValue, cartItems.productName);
         			});
         }
-	});
-
-	/*$.ajax({
-		type: "POST", 
-		url: getCartItemsUrl,
-		dataType: "json",
-		success : function(response){
-			var existingCartItems = response;
-			var jsonArrayList = JSON.parse(existingCartItems);
-		}
-	});*/
-	/*$.post(getCartItemsUrl, function(response ){
-		var existingCartItems = response;
-		var jsonArrayList = JSON.parse(existingCartItems);
-		
-		
 	});*/
 	
 	// Adding the csrf token
@@ -742,10 +726,116 @@ $(function() {
 		}
     }
     
+    //----------------- Category button click ---------------------------------------------------------------
+    $(document).on('click','#buttonCategory',function(){
+		var catButton = $(this);
+		if(catButton != null)
+		{
+			getAndDisplaySubCategories($(catButton).text(),$(catButton).attr("categoryId"));
+		}
+	});
+    
+  //----------------- Sub-Category button click ---------------------------------------------------------------
+    $(document).on('click','#buttonSubCategory',function(){
+		var subCatButton = $(this);
+		if(subCatButton != null)
+		{
+			var subcategoryName = $(subCatButton).text();
+			var subcategoryId = $(subCatButton).attr("subcategoryId");
+			$.ajax({ 
+				url: '/get/products',
+	    		async: false,
+	    		type: "GET",
+		        data: { id: $(subCatButton).attr("subcategoryId") },
+		        success : function(response)
+		        {
+		        	var jsonArrayList = JSON.parse(response);
+		        	populateProducts(jsonArrayList,subcategoryName);
+		        },
+				error: function (error) {
+	    			console.log("Error : " + error);
+	    		}
+			});
+		}
+	});
+    
+    $(document).on('click','#brdCmbShowSubCategory',function(){
+		var breadcrumbCmpt = $(this);
+		if(breadcrumbCmpt != null)
+		{
+			getAndDisplaySubCategories($(breadcrumbCmpt).text(),$(breadcrumbCmpt).attr("categoryId"));
+		}
+	});
+    
+    $(document).on('click','#brdCmbShowCategory',function(){
+		var breadcrumbCmpt = $(this);
+		if(breadcrumbCmpt != null)
+		{
+			var categoryAndProductsDiv = 
+				'<div id="catSubCatProductdiv" style="height:30vh;"> </div>' + 
+				'<br> <br> <br>' +
+				'<div id="Productdiv" style="height:30vh;"> </div>';
+			$('#posMainDiv').html(categoryAndProductsDiv);
+			
+			getAndDisplayCategories();
+			getAndDisplayHotProducts();
+		}
+	});
+    
+    function getAndDisplaySubCategories(categoryName,categoryId){
+		$.ajax({ 
+			url: '/get/subcategories',
+    		async: false,
+    		type: "GET",
+	        data: { id: categoryId },
+	        success : function(response)
+	        {
+	        	var jsonArrayList = JSON.parse(response);
+	        	populateSubCategories(jsonArrayList,categoryName,categoryId);
+	        },
+			error: function (error) {
+    			console.log("Error : " + error);
+    		}
+		});
+    }
+    
+    function getAndDisplayCategories(){
+    	$.ajax({ 
+			url: '/get/categories',
+    		async: false,
+    		type: "GET",
+	        success : function(response)
+	        {
+	        	var jsonArrayList = JSON.parse(response);
+	        	populateCategories(jsonArrayList);
+	        },
+			error: function (error) {
+    			console.log("Error : " + error);
+    		}
+		});
+    }
+    
+    function getAndDisplayHotProducts(){
+    	$.ajax({ 
+			url: '/get/hotProducts',
+    		async: false,
+    		type: "GET",
+	        success : function(response)
+	        {
+	        	var jsonArrayList = JSON.parse(response);
+	        	populateHotProducts(jsonArrayList);
+	        },
+			error: function (error) {
+    			console.log("Error : " + error);
+    		}
+		});
+    }
+    
+    
   //--------------------- Add to cart button from the Modal dialog ---------------------------------------------
     $(document).on('click','#productNotFoundAddBtn',function(){
     	addProduct(searchProductTable.rows[1].cells[4].innerHTML,
-    			searchProductTable.rows[1].cells[2].innerHTML,
+    			searchProductTable.rows[1].cells[3].innerHTML,
     			searchProductTable.rows[1].cells[1].innerHTML);
     	$('#productsModal').modal('toggle');
 	});
@@ -756,25 +846,93 @@ $(function() {
 		if(user != null)
 		{
 			addProduct($(user).attr("productId"),$(user).attr("value"),$(user).text());
-			var actURL = window.contextRoot + '/cart/add/product/' + $(user).attr("productId");
-			/*$.post(actURL, function( data ){
-				
-			});*/
-			$.ajax({ 
-				type: "GET",
-		        url: actURL,   
-		        async: false
-			});
 		}
 	});
 	
-	function addProduct(productId, productValue, productName){
+	function populateCategories(categoryArrayList){
+		enableCartButtons();
+		var newDivContent = '';
+		categoryArrayList.forEach(
+    			function(category){
+    				var catbtnContent = '<button type="button" class="btn btn-primary btn-item btn-item-product" categoryid="' + category.id + '" id="buttonCategory">' + category.name +'</button>';
+    				newDivContent += catbtnContent;
+    			});
+		$('#catSubCatProductdiv').html(newDivContent);
 		
+		var breadcrumbCnt = '<ol class="breadcrumb clearfix">' + 
+								'<li class="active">Home</li>' +
+							'</ol>';
+		$('#breadcrumbDiv').html(breadcrumbCnt);
+	}
+	
+	function populateSubCategories(subcategoryArrayList,categoryName,categoryId){
+		var newDivContent = '';
+		subcategoryArrayList.forEach(
+    			function(subcategory){
+    				var subCatbtnContent = '<button type="button" class="btn btn-primary btn-item btn-item-product" id="buttonSubCategory" subcategoryId="' + subcategory.id + '">' + subcategory.name + '</button>';
+    				newDivContent += subCatbtnContent;
+    			});
+		$('#catSubCatProductdiv').html(newDivContent);
+		
+		var breadcrumbCnt = '<ol class="breadcrumb">' + 
+								'<li id="brdCmbShowCategory"><a href="#">Home</a></li>' +
+								'<li id="brdCmbShowSubCategory" categoryId="' + categoryId + '" class="active">' + categoryName + '</li>' +
+							'</ol>';
+		$('#breadcrumbDiv').html(breadcrumbCnt);
+	}
+	
+	function populateProducts(productList,subcategoryName){
+		var newDivContent = '';
+		productList.forEach(
+    			function(product){
+    			var productBtnCnt = '<button type="button" class="btn btn-primary btn-item btn-item-product" id="buttonProduct" value="' + product.price + '"productId="' + product.id + '">' + 
+    								 	'<span class="button-left-top" >' + product.name + '</span>' + 
+    								 	'<span class="button-left-bottom" >' + product.price + '</span>' +
+    								 '</button>';
+    				newDivContent += productBtnCnt;
+    			});
+		$('#catSubCatProductdiv').html(newDivContent);
+		
+		var breadcrumbCnt = '<ol class="breadcrumb">' + 
+								'<li id="brdCmbShowCategory"><a href="#">Home</a></li>' +
+								'<li id="brdCmbShowSubCategory" categoryId="' + $('#brdCmbShowSubCategory').attr("categoryId") + '" ><a href="#">' + $('#brdCmbShowSubCategory').text() + '</a></li>' +
+								'<li id="brdCmbShowProducts" class="active">' + subcategoryName + '</li>' +
+							'</ol>';				
+		$('#breadcrumbDiv').html(breadcrumbCnt);
+	}
+	
+	function populateHotProducts(productList){
+		enableCartButtons();
+		var newDivContent = '';
+		productList.forEach(
+			function(product){
+				var productBtnCnt = '<button type="button" class="btn btn-primary btn-item btn-item-product" id="buttonProduct" value="' + product.price + '"productId="' + product.id + '">' + 
+									 	'<span class="button-left-top" >' + product.name + '</span>' + 
+									 	'<span class="button-left-bottom" >' + product.price + '</span>' +
+									 '</button>';
+				newDivContent += productBtnCnt;
+			});
+		$('#Productdiv').html(newDivContent);
+	}
+	
+	 $('#cartTable').on('click', 'tbody tr', function () {
+		 var row = $(this);
+		 if(row.attr('selectedItem') != 'true')
+		{
+			 removeCurrentSelection();
+			 handleSelection(row);
+		}
+			
+	 });
+	
+	function addProduct(productId, productValue, productName){
 		console.log(tableMega);
 		var tableCart = document.getElementById("cartTable").getElementsByTagName('tbody')[0];
 		if((tableCart == null) || (productId == null) || (productValue == null) ||(productName == null)){
 			return;
 		}
+		
+		removeCurrentSelection();
 		
 		// Check whether the product already exists using the productId.
 		var row = $('tr[productId="' + productId + '"]');
@@ -782,20 +940,11 @@ $(function() {
 		{
 	        var tdProduct = document.createElement("td");
 	        tdProduct.className = "col-md-4 Product";
-	        tdProduct.innerHTML = '<div >' + 
-				'<div >' + 
-				'<h5 style="font-size: 15px;" >' + productName + '</h5>' + 
-	        	'</div>	</div>';
+	        tdProduct.innerHTML = '<h5 style="font-size: 15px;" >' + productName + '</h5>';
 	        
 	        var tdQuantity = document.createElement("td");
 	        tdQuantity.className = "col-md-5 text-center quantity";
-	        tdQuantity.innerHTML = '<a type="button" class="btn btn-info btn-circle" id="itemCountMinus" disabled="disabled">' +
-				'<span class="glyphicon glyphicon-minus"></span>' +
-				'</a>' +
-				'<label class="labelQuantity">&nbsp;&nbsp;1&nbsp;&nbsp;</label>' +
-				'<a type="button" class="btn btn-info btn-circle" id="itemCountPlus" >' +
-					'<span class="glyphicon glyphicon-plus"></span>' +
-				'</a>';
+	        tdQuantity.innerHTML = getProductQuantityColumn(1);
 	        
 	        var tdPrice = document.createElement("td");
 	        tdPrice.className = "col-md-1 text-center itemPrice";
@@ -807,63 +956,89 @@ $(function() {
 	        
 	        var tdRemove = document.createElement("td");
 	        tdRemove.className = "col-md-1 removeItem";
-	        tdRemove.innerHTML = '<a  type="button" class="btn icon-btn btn-danger" id="removeCartItemBtn">' + 
-								'<span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span></a>';
+	        tdRemove.innerHTML = getDeleteProductColumn();
 	        
 	        var newRow = document.createElement("tr");
-	        newRow.setAttribute("height", 80);
+	        newRow.setAttribute("height", 90);
 	        newRow.setAttribute('productId', productId);
+	        newRow.setAttribute('selectedItem', true);
+	        newRow.setAttribute('align', "center");
 	        newRow.appendChild(tdProduct);
 	        newRow.appendChild(tdQuantity);
 	        newRow.appendChild(tdPrice);
 	        newRow.appendChild(tdTotal);
 	        newRow.appendChild(tdRemove);
 	        
-	        tableCart.appendChild(newRow);
+	        tableCart.prepend(newRow);
+	        //tableCart.appendChild(newRow);
 	        
 	        // Update the cart total.
 	        var currentCartVal = parseInt($('#cartTotal').text(), 10);
 	        var newItemPrice = parseInt(productValue, 10);
 	        $('#cartTotal').text(currentCartVal+newItemPrice);
 			tableMega=tableCart;
+			
+			//$("cartTable tr:last").scrollintoview();
+			//var rowpos = $('#cartTable tr:last').position();
+			//$('#container').scrollTop(rowpos.top);
+			//row = newRow;
+			
 		}else{
 			// Product exists. Increase the count of existing product.
 			incrementProductCount(row);
+			handleSelection(row);
 		}
+		
 	}
 	
+	function handleSelection(updatedRow){
+		updatedRow.attr('selectedItem', true); 
+		updatedRow.attr('height', 90);
+	    
+	    var curItemCount = parseInt(updatedRow.closest('tr').find('.labelQuantity').text(), 10);
+	    updatedRow.children('td').eq(1).html(getProductQuantityColumn(curItemCount));
+	    updatedRow.children('td').eq(4).html(getDeleteProductColumn());
+	}
+	
+	function getProductQuantityColumn(count){
+		return '<a type="button" class="btn btn-info btn-circle" id="itemCountMinus" disabled="disabled">' +
+		'<span class="glyphicon glyphicon-minus"></span>' +
+		'</a>' +
+		'<label class="labelQuantity">&nbsp;&nbsp;' + count + '&nbsp;&nbsp;</label>' +
+		'<a type="button" class="btn btn-info btn-circle" id="itemCountPlus" >' +
+			'<span class="glyphicon glyphicon-plus"></span>' +
+		'</a>'
+	}
+	
+	function getDeleteProductColumn(){
+		return '<a  type="button" class="btn icon-btn btn-danger" id="removeCartItemBtn">' + 
+		'<span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span></a>';
+	}
+	
+	function removeCurrentSelection(){
+		var row = $('tr[selectedItem="' + true + '"]');
+		if(row.index() != -1)
+		{
+			row.attr('selectedItem', false);
+			row.attr('height', 40);
+			
+			var curItemCount = parseInt(row.closest('tr').find('.labelQuantity').text(), 10);
+			row.children('td').eq(1).html('<label class="labelQuantity">&nbsp;&nbsp;' + curItemCount + '&nbsp;&nbsp;</label>');
+			row.children('td').eq(4).html('');
+		}
+	}
 	
 	$(document).on('click','#removeCartItemBtn',function(){
 		// Reduce the price of item removed.
 		var currentCartVal = parseInt($('#cartTotal').text(), 10);
 		var itemRemoved = parseInt($(this).closest('tr').children('td.totalItemPrice').text(), 10);
 		$('#cartTotal').text(currentCartVal-itemRemoved);
-		var productId = $(this).closest('tr')[0].attributes.getNamedItem("productId").value;
-		var actURL = window.contextRoot + '/cart/remove/product/' + productId;
-		$.ajax({ 
-			type: "GET",
-	        url: actURL,   
-	        async: false
-		});
-		// Finally remove the item.
 		$(this).closest('tr').remove();
 	});
 	
 	$(document).on('click','#itemCountPlus',function(){
-		
 		incrementProductCount($(this));
-		var productId = $(this).closest('tr')[0].attributes.getNamedItem("productId").value;
-		var actURL = window.contextRoot + '/cart/add/product/' + productId;
-		/*$.post(actURL, function( data ){
-			
-		});*/
-		$.ajax({ 
-			type: "GET",
-	        url: actURL,   
-	        async: false
-		});
 	});
-	
 	
 	function incrementProductCount(row){
 		if(row === undefined)
@@ -881,22 +1056,16 @@ $(function() {
 		row.closest('tr').find('#itemCountMinus').removeAttr('disabled');
 	};
 	
+	function enableCartButtons(){
+		$("#clearCartBtn").removeClass('disabled');
+		$("#cartHoldBtn").removeClass('disabled');
+		$("#pay").removeClass('disabled');
+	}
+	
 	$(document).on('click','#itemCountMinus:enabled',function(){
-		var productId = $(this).closest('tr')[0].attributes.getNamedItem("productId").value;
-		var actURL = window.contextRoot + '/cart/reduce/product/' + productId;
-		/*$.post(actURL, function( data ){
-			
-		});*/
-		$.ajax({ 
-			type: "GET",
-	        url: actURL,   
-	        async: false
-		});
-		
 		var curItemCount = parseInt($(this).closest('tr').find('.labelQuantity').text(), 10);
 		var itemPrice = parseInt($(this).closest('tr').find('.itemPrice').text(), 10);
 		var currentCartVal = parseInt($('#cartTotal').text(), 10);
-		var productId = parseInt($(this).closest('tr').attr('productid'), 10);
 		
 		$(this).closest('tr').find('.labelQuantity').html( '&nbsp;&nbsp;' + (curItemCount-1) + '&nbsp;&nbsp;');
 		$(this).closest('tr').find('.totalItemPrice').text( itemPrice*(curItemCount-1));
@@ -916,11 +1085,11 @@ $(function() {
 		{
 			tableCart.innerHTML = '<thead>' + 
 					'<tr>' + 
-						'<th>Product</th>' + 
-						'<th style="text-align:center">Quantity</th>' + 
-						'<th class="text-center">Price</th>' + 
-						'<th class="text-center">Total</th>' + 
-						'<th></th>' + 
+						'<th style="width:30%; text-align:center">Product</th>' + 
+						'<th style="width:25%; text-align:center">Quantity</th>' + 
+						'<th style="width:15%; text-align:center">Price</th>' + 
+						'<th style="width:15%; text-align:center">Total</th>' + 
+						'<th style="width:15%;"></th>' + 
 					'</tr>' + 
 					'</thead>' +
 					'<tbody>' +

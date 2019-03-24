@@ -5,7 +5,7 @@
 		<div class="col-md-8">
 			<!-- Added breadcrumb component -->
 			<div class="row" >
-				<div class="col-md-12">
+				<div class="col-md-12" id="breadcrumbDiv">
 					<c:if test="${showAllCategories == true or userClickedHome == true}" >
 						<script>
 							window.categoryName = '';
@@ -15,25 +15,6 @@
 						</ol>
 						
 					</c:if>
-					
-					<c:if test="${showAllSubCategories == true}" >
-						<script>
-							window.categoryName = '${category.name}';
-						</script>
-						<ol class="breadcrumb">
-							<li><a href="${contextRoot}/home">Home</a></li>
-							<li class="active">${category.name}</li>
-						</ol>
-					</c:if>
-					
-					<c:if test="${showAllProducts == true}" >
-						<ol class="breadcrumb">
-							<li><a href="${contextRoot}/home">Home</a></li>
-							<li><a href="${contextRoot}/show/category/${category.id}/subcategory">${category.name}</a></li>							
-							<li class="active">${subcategory.name}</li>
-						</ol>
-					</c:if>
-					
 				</div>
 			</div>
 		
@@ -47,7 +28,7 @@
 		</div>
 		
 		<!-- Cart bar -->
-		<div class="col-md-4">
+		<div class="col-md-4" style="padding-right:0px;"> <!-- Removing this padding so that cart bar extends till end of page. -->
 			<%@include file="cartbar.jsp" %>
 		</div>
 		

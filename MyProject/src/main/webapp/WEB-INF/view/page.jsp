@@ -118,6 +118,7 @@
 		
 		<!-- Self coded javascript -->
 		<script src="${js}/myapp.js"></script>
+		<script src="${js}/paymentpage.js"></script>
 	</div>
 	
 </body>

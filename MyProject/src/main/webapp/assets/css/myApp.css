@@ -4,7 +4,7 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
-html {
+.html {
 	height:100%;
 }
 body {
@@ -183,13 +183,6 @@ Round button.
 
 
 /*
-Cart total bar
-*/
-.cartFooter {
-	
-}
-
-/*
 User button in login page
 */
 
@@ -319,6 +312,13 @@ div.CartBarHeading{
     vertical-align: middle;
 }
 
+.table > tbody > tr > td {
+    max-width: 98%;
+	white-space: nowrap;
+  	overflow: hidden !important;
+  	text-overflow: ellipsis;
+}
+	
 .table-bordered > tbody > tr > td,
 .table-bordered > thead > tr > td,
 .table-bordered {
@@ -391,7 +391,10 @@ cursor: pointer;
 }  
 
 
-
+div.cartTable{
+	background: transparent;
+	background-color:#ccc;
+}
 
 
 /*
