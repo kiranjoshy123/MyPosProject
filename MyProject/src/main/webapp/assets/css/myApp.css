@@ -318,6 +318,13 @@ div.CartBarHeading{
   	overflow: hidden !important;
   	text-overflow: ellipsis;
 }
+
+.table > tbody tr:hover,
+.table > tbody tr.bg-info
+{
+    color: black !important;
+    background-color: white !important;
+}
 	
 .table-bordered > tbody > tr > td,
 .table-bordered > thead > tr > td,

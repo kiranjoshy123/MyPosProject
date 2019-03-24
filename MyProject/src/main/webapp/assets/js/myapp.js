@@ -940,18 +940,19 @@ $(function() {
 		{
 	        var tdProduct = document.createElement("td");
 	        tdProduct.className = "col-md-4 Product";
-	        tdProduct.innerHTML = '<h5 style="font-size: 15px;" >' + productName + '</h5>';
+	        //tdProduct.innerHTML = '<h5 style="font-size: 15px; color:black" >' + productName + '</h5>';
+	        tdProduct.innerHTML = productName.trim();
 	        
 	        var tdQuantity = document.createElement("td");
 	        tdQuantity.className = "col-md-5 text-center quantity";
 	        tdQuantity.innerHTML = getProductQuantityColumn(1);
 	        
 	        var tdPrice = document.createElement("td");
-	        tdPrice.className = "col-md-1 text-center itemPrice";
+	        tdPrice.className = "col-md-1 itemPrice";
 	        tdPrice.innerHTML = productValue;
 	        
 	        var tdTotal = document.createElement("td");
-	        tdTotal.className = "col-md-1 text-center totalItemPrice";
+	        tdTotal.className = "col-md-1 totalItemPrice";
 	        tdTotal.innerHTML = productValue;
 	        
 	        var tdRemove = document.createElement("td");
@@ -959,10 +960,11 @@ $(function() {
 	        tdRemove.innerHTML = getDeleteProductColumn();
 	        
 	        var newRow = document.createElement("tr");
+	        newRow.className = "bg-info";	// To display color on selected item.
 	        newRow.setAttribute("height", 90);
 	        newRow.setAttribute('productId', productId);
 	        newRow.setAttribute('selectedItem', true);
-	        newRow.setAttribute('align', "center");
+	        //newRow.setAttribute('align', "center");
 	        newRow.appendChild(tdProduct);
 	        newRow.appendChild(tdQuantity);
 	        newRow.appendChild(tdPrice);
@@ -992,7 +994,8 @@ $(function() {
 	}
 	
 	function handleSelection(updatedRow){
-		updatedRow.attr('selectedItem', true); 
+		updatedRow.attr('selectedItem', true);
+		updatedRow.className="bg-info";
 		updatedRow.attr('height', 90);
 	    
 	    var curItemCount = parseInt(updatedRow.closest('tr').find('.labelQuantity').text(), 10);
@@ -1020,6 +1023,7 @@ $(function() {
 		if(row.index() != -1)
 		{
 			row.attr('selectedItem', false);
+			row.removeClass('bg-info');
 			row.attr('height', 40);
 			
 			var curItemCount = parseInt(row.closest('tr').find('.labelQuantity').text(), 10);
@@ -1085,10 +1089,10 @@ $(function() {
 		{
 			tableCart.innerHTML = '<thead>' + 
 					'<tr>' + 
-						'<th style="width:30%; text-align:center">Product</th>' + 
+						'<th style="width:30%;">Product</th>' + 
 						'<th style="width:25%; text-align:center">Quantity</th>' + 
-						'<th style="width:15%; text-align:center">Price</th>' + 
-						'<th style="width:15%; text-align:center">Total</th>' + 
+						'<th style="width:15%;">Price</th>' + 
+						'<th style="width:15%;">Total</th>' + 
 						'<th style="width:15%;"></th>' + 
 					'</tr>' + 
 					'</thead>' +

@@ -18,10 +18,10 @@
 <table class="table table-borderless table-hover table-responsive" style="table-layout:fixed; overflow:auto" id="cartTable">
 	<thead>
 		<tr>
-			<th style="width:30%; text-align:center">Product</th>
-			<th style="width:25%; text-align:center">Quantity</th>
-			<th style="width:15%; text-align:center">Price</th>
-			<th style="width:15%; text-align:center">Total</th>
+			<th style="width:30%;">Product</th>
+			<th style="width:25%;  text-align:center">Quantity</th>
+			<th style="width:15%;">Price</th>
+			<th style="width:15%;">Total</th>
 			<th style="width:15%;"> </th>
 		</tr>
 	</thead>
