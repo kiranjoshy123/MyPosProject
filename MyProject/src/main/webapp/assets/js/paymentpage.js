@@ -32,7 +32,8 @@ $(function() {
 			 		'</div>' +
 				'</div>' +
 			'</div>';
-	
+		
+		var classItemDisabled = (totalAmout == 0 ) ? " disabled" : "";
 		var numPadDiv = 
 			'<div class="col-md-6">' +
 				'<h3>Amount to be paid</h3>' +
@@ -55,9 +56,9 @@ $(function() {
 					'<li class="delete lastitem"></li>' + 
 					'<li class="letter smallBtn">$55</li>' +
 				'</ul>' +
-				'<a href="${contextRoot}/order/payment/cash" type="button" class="btn btn-primary btn-item">Cash</a>' +
-				'<a href="${contextRoot}/order/payment/card" type="button" class="btn btn-primary btn-item">Credit/Debit Card</a>' +
-				'<a href="#" type="button" class="btn btn-primary btn-item">Gift Card</a>' +
+				'<a href="' + window.contextRoot + '/order/payment/cash" type="button" class="btn btn-primary btn-item' + classItemDisabled + '">Cash</a>' +
+				'<a href="' + window.contextRoot + '/order/payment/card" type="button" class="btn btn-primary btn-item' + classItemDisabled + '">Credit/Debit Card</a>' +
+				'<a href="#" type="button" class="btn btn-primary btn-item' + classItemDisabled + '">Gift Card</a>' +
 			'</div>';
 		$('#posMainDiv').html((breakupText+numPadDiv));
 	

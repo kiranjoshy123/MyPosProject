@@ -16,26 +16,6 @@ $(function() {
 			break;
 	}
 	
-	/*var getCartItemsUrl = window.contextRoot + '/cart/show/json';
-	$.ajax({ type: "GET",   
-        url: getCartItemsUrl,   
-        async: false,
-        success : function(response)
-        {
-        	var jsonArrayList = JSON.parse(response);
-        	jsonArrayList.forEach(
-        			function(cartItems){
-        				var productCount = parseInt(cartItems.productCount, 10);
-        				if(productCount>0){
-        					for(var i=0;i<productCount; i++)
-        						addProduct(cartItems.productId, cartItems.productValue, cartItems.productName);
-        				}
-        				else
-        					addProduct(cartItems.productId, cartItems.productValue, cartItems.productName);
-        			});
-        }
-	});*/
-	
 	// Adding the csrf token
 	var token = $('meta[name="_csrf"]').attr('content');
 	var header = $('meta[name="_csrf_header"]').attr('content');

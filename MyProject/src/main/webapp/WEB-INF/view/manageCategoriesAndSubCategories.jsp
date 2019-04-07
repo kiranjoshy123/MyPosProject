@@ -33,7 +33,7 @@
 						<%@include file="ManageCategory.jsp"%>
 					</div>
 				
-					<div role="tabpanel" class="tab-pane fade in active" id="Section2">
+					<div role="tabpanel" class="tab-pane fade" id="Section2">
 						<%@include file="ManageSubCategory.jsp"%>
 					</div>
 				

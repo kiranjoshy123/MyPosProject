@@ -29,10 +29,7 @@
 					
 					<!-- Form Elements -->
 					
-					<sf:form autocomplete="off" class="form-horizontal" modelAttribute="product" 
-						action="${contextRoot}/manage/products"
-						method="POST"
-						>
+					<sf:form autocomplete="off" class="form-horizontal" modelAttribute="product" action="${contextRoot}/manage/products" method="POST" >
 						<div class="form-group">
 							<label class="control-label col-md-4" for="name">Product Name :</label>
 							<div class="col-md-8">

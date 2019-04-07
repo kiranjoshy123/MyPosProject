@@ -295,7 +295,7 @@ public class ManagementController {
 		// Handle password encryption.
 		modifiedUserinfo.setPassword(passwordEncoder.encode(modifiedUserinfo.getPassword()));
 		
-		// id = 0 means, product doesn't exists. Hence add a new one,else update the existing one
+		// id = 0 means, user doesn't exists. Hence add a new one,else update the existing one
 		if(modifiedUserinfo.getId() == 0) {
 			userinfoDAO.add(modifiedUserinfo, modifiedUserinfo.getRole());
 		}
