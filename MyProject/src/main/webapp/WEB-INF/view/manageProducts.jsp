@@ -65,7 +65,7 @@
 						<div class="form-group">
 							<label class="control-label col-md-4" for="unitPrice">Unit Price : </label>
 							<div class="col-md-8">
-								<sf:input type="number" path="unit_price" id="unitPrice" placeholder="Price of each item." class="form-control"/>
+								<sf:input type="number" step=".01" path="unit_price" id="unitPrice" placeholder="Price of each item." class="form-control"/>
 								<sf:errors path="unit_price" cssClass="help-block" element="em"/>
 							</div>
 						</div>

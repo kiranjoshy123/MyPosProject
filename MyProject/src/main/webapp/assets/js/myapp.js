@@ -974,19 +974,19 @@ $(function() {
 	
 	function updateCartValues(productValue, itemCountToUpdate, addItem)
 	{
-		var updatedCartTotal = "";
-		var updatedItemCount = "";
-		var currentCartVal = parseInt($('#cartTotal').text(), 10);
+		var updatedCartTotal = 0.0;
+		var updatedItemCount = 0;
+		var currentCartVal = parseFloat($('#cartTotal').text(), 10);
 		var currentItemCount = parseInt($('#itemsInCart').text(), 10);
 		if(addItem)
 		{
-	        var newItemPrice = parseInt(productValue, 10);
-	        updatedCartTotal = currentCartVal+newItemPrice;
+	        var newItemPrice = parseFloat(productValue, 10);
+	        updatedCartTotal = precise_round((currentCartVal+newItemPrice),2);
 	        updatedItemCount = currentItemCount+itemCountToUpdate;
 		}
 		else
 		{
-			updatedCartTotal = currentCartVal-productValue;
+			updatedCartTotal = precise_round((currentCartVal-productValue),2);
 			updatedItemCount = currentItemCount-itemCountToUpdate;
 		}
 		
@@ -1036,7 +1036,7 @@ $(function() {
 	
 	$(document).on('click','#removeCartItemBtn',function(){
 		// Reduce the price of item removed.
-		var itemRemoved = parseInt($(this).closest('tr').children('td.totalItemPrice').text(), 10);
+		var itemRemoved = parseFloat($(this).closest('tr').children('td.totalItemPrice').text(), 10);
 		var curItemCount = parseInt($(this).closest('tr').find('.labelQuantity').text(), 10);
 		updateCartValues(itemRemoved,curItemCount,false);
 		$(this).closest('tr').remove();
@@ -1051,9 +1051,9 @@ $(function() {
 			return;
 			
 		var curItemCount = parseInt(row.closest('tr').find('.labelQuantity').text(), 10);
-		var itemPrice = parseInt(row.closest('tr').find('.itemPrice').text(), 10);
+		var itemPrice = parseFloat(row.closest('tr').find('.itemPrice').text(), 10);
 		row.closest('tr').find('.labelQuantity').html( '&nbsp;&nbsp;' + (curItemCount+1) + '&nbsp;&nbsp;');
-		row.closest('tr').find('.totalItemPrice').text( itemPrice*(curItemCount+1));
+		row.closest('tr').find('.totalItemPrice').text( precise_round(itemPrice*(curItemCount+1),2));
 		updateCartValues(itemPrice,1,true);
 		enableDecrementButton(row);
 	};
@@ -1078,10 +1078,10 @@ $(function() {
 	
 	$(document).on('click','#itemCountMinus:enabled',function(){
 		var curItemCount = parseInt($(this).closest('tr').find('.labelQuantity').text(), 10);
-		var itemPrice = parseInt($(this).closest('tr').find('.itemPrice').text(), 10);
+		var itemPrice = parseFloat($(this).closest('tr').find('.itemPrice').text(), 10);
 		
 		$(this).closest('tr').find('.labelQuantity').html( '&nbsp;&nbsp;' + (curItemCount-1) + '&nbsp;&nbsp;');
-		$(this).closest('tr').find('.totalItemPrice').text( itemPrice*(curItemCount-1));
+		$(this).closest('tr').find('.totalItemPrice').text( precise_round(itemPrice*(curItemCount-1),2));
 		updateCartValues(itemPrice,1,false);
 		enableDecrementButton();
 	});
@@ -1108,5 +1108,10 @@ $(function() {
 			$('#itemsInCart').text("0");
 		}
 	});
+	
+	function precise_round(num,decimals) {
+	    var sign = num >= 0 ? 1 : -1;
+	    return (Math.round((num*Math.pow(10,decimals)) + (sign*0.001)) / Math.pow(10,decimals)).toFixed(decimals);
+	}
 	
 });

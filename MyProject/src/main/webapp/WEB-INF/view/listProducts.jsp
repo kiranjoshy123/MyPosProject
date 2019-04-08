@@ -9,6 +9,7 @@
 					<c:if test="${showAllCategories == true or userClickedHome == true}" >
 						<script>
 							window.categoryName = '';
+							window.currencyIcon = '${currencyIcon}';
 						</script>
 						<ol class="breadcrumb clearfix">
 							<li class="active">Home</li>

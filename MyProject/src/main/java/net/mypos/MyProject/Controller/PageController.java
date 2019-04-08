@@ -68,7 +68,7 @@ public class PageController {
 		mv.addObject("categories", categoryDAO.list());
 		mv.addObject("productList",productDAO.listActiveProducts());
 		mv.addObject("bOrderItems", true);
-
+		mv.addObject("currencyIcon", "&#163;");
 		return mv;
 	}
 
@@ -150,7 +150,7 @@ public class PageController {
 			JSONObject json = new JSONObject();
 			json.put("id", productItem.getId());
 			json.put("name",productItem.getName());
-			json.put("price", productItem.getUnit_price());
+			json.put("price", String.valueOf(productItem.getUnit_price()));
 			jsonList.add(json);
 		}
 		return jsonList.toString();
@@ -167,7 +167,7 @@ public class PageController {
 			JSONObject json = new JSONObject();
 			json.put("id", productItem.getId());
 			json.put("name",productItem.getName());
-			json.put("price", productItem.getUnit_price());
+			json.put("price", String.valueOf(productItem.getUnit_price()));
 			jsonList.add(json);
 		}
 		return jsonList.toString();

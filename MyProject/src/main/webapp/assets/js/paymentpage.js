@@ -7,8 +7,8 @@ $(function() {
 		$("#pay").addClass('disabled');
 		
 		$("#catSubCatProductdiv").empty();
-		var totalAmout = parseInt($('#cartTotal').text(), 10);
-		
+		var totalAmout = precise_round(parseFloat($('#cartTotal').text(), 10),2);
+		var currencyIcon = window.currencyIcon + ' ';
 		var breakupText = 
 			'<div class="col-md-2"></div>' +
 			'<div class="col-md-4">' +
@@ -16,18 +16,19 @@ $(function() {
 					'<div id="whiteSquareBox" class="panel panel-default">' +
 			    		'<div class="panel-body">' +
 							'<h4 style="color:black">Amount Due</h4>' +
-							'<h6 style="color:black"><strong>' + totalAmout + '</strong></h6>' +
+							'<h6 style="color:black"><strong>' + currencyIcon + totalAmout + '</strong></h6>' +
 							'<br/>' +
 					
 							'<h4 style="color:black">Total Tax</h4>' +
-							'<h6 style="color:black"><strong>$ 0.0</strong></h6>' +
-					
+							'<h6 style="color:black"><strong>' + currencyIcon + '0.0</strong></h6>' +
+							'<br/>' +
+							
 							'<h4 style="color:black">Total Discount</h4>' +
-							'<h6 style="color:black"><strong>$ 0.0</strong></h6>' +
+							'<h6 style="color:black"><strong>' + currencyIcon + '0.0</strong></h6>' +
 							'<br/>' +
 					
 							'<h4 style="color:black">Points earned</h4>' +
-							'<h6 style="color:black"><strong>$ 0.0</strong></h6>' +
+							'<h6 style="color:black"><strong>' + currencyIcon + '0.0</strong></h6>' +
 						'</div>' +
 			 		'</div>' +
 				'</div>' +
@@ -68,4 +69,8 @@ $(function() {
 		$('#breadcrumbDiv').html(breadcrumbCnt);
 	});
 
+	function precise_round(num,decimals) {
+	    var sign = num >= 0 ? 1 : -1;
+	    return (Math.round((num*Math.pow(10,decimals)) + (sign*0.001)) / Math.pow(10,decimals)).toFixed(decimals);
+	}
 });

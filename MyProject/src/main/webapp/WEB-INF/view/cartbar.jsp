@@ -37,7 +37,7 @@
 		
 		<div class="col-md-6">
 			<div><h6><span id="itemsInCart">0</span></h6></div>
-			<div><h6><span>&euro; </span><span id="discount">0</span></h6></div>
+			<div><h6><span>${currencyIcon} </span><span id="discount">0</span></h6></div>
 		</div>		
 	</div>
 
@@ -49,7 +49,7 @@
 		</div>
 		<div class="col-md-8">
 			<h4>
-				<span>&euro; </span><span id="cartTotal">0.0</span>
+				<span>${currencyIcon} </span><span id="cartTotal">0.0</span>
 			</h4>
 		</div>
 	</div>
