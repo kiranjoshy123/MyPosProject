@@ -30,7 +30,7 @@
 	<hr style="border-color:green; margin:10px 0px 0px 0px;">
 	
 	<div class="col-md-6">
-		<div class="col-md-6">
+		<div class="col-md-6" style="padding:0px 0px 0px 0px;">
 			<div><h6><span>Items </span></h6></div>
 			<div><h6><span>Discount </span></h6></div>
 		</div>
@@ -41,13 +41,13 @@
 		</div>		
 	</div>
 
-	<div class="col-md-6">
-		<div class="col-md-4">
+	<div class="col-md-6" style="padding:0px 15px 0px 0px;">
+		<div class="col-md-4" style="padding:0px 0px 0px 0px;">
 			<h4>
 				<span>Total </span>
 			</h4>
 		</div>
-		<div class="col-md-8">
+		<div class="col-md-8" style="padding:0px 0px 0px 0px;">
 			<h4>
 				<span>${currencyIcon} </span><span id="cartTotal">0.0</span>
 			</h4>

@@ -107,7 +107,9 @@
 							<div class="col-md-offset-5 col-md-7">
 								<input type="submit" name="submit" id="submit" value="Save" class="btn btn-primary"/>
 								
-								
+								<!-- Hidden fields for user -->
+								<sf:hidden path="id"/>
+								<sf:hidden path="enabled"/>
 							</div>
 						</div>
 						
@@ -143,6 +145,7 @@
 								<th>User Name</th>
 								<th>Email</th>
 								<th>Contact Number</th>
+								<th>Role</th>
 								<th>Enable</th>
 								<th>Edit</th>
 							</tr>
@@ -151,10 +154,6 @@
 				</div>
 			</div>
 		</div>
-		
-	
 	</div>
 	
-	
-
 </div>

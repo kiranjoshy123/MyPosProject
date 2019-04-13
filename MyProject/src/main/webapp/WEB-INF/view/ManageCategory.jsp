@@ -31,7 +31,7 @@
 				<div class="col-md-offset-5 col-md-7">
 					<input type="submit" name="submit" id="submit" value="Save" class="btn btn-primary" />
 
-					<!-- Hidden fields for product -->
+					<!-- Hidden fields for category -->
 					<sf:hidden path="id" />
 					<sf:hidden path="active" />
 

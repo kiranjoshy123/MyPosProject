@@ -303,6 +303,9 @@ $(function() {
 					data : 'contactNumber',
 				},
 				{
+					data : 'role',
+				},
+				{
 					data : 'enabled',
 					bSortable : false,
 					mRender : function(data,type,row){

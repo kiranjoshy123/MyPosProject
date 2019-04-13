@@ -73,12 +73,12 @@ public class Subcategory {
 		this.active = active;
 	}
 
-	public int getCategoryId() {
+	public int getSubCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+	public void setSubCategoryId(int subcategoryId) {
+		this.categoryId = subcategoryId;
 	}
 
 	@Override

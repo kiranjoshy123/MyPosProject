@@ -29,7 +29,7 @@ public class Userinfo {
 	private boolean enabled = true;
 	
 	@NotBlank(message = "Please enter a valid passcode. Only numbers allowed!")
-	@Size(min = 4, max = 10, message = "Passcode lenght should be in minimum 4 and maximum 10.")
+	//@Size(min = 4, max = 60, message = "Passcode length should be in minimum 4 and maximum 10.")
 	private String password;
 	
 	@NotBlank(message = "Please enter the email!")
