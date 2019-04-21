@@ -98,6 +98,11 @@
 				<%@include file="manageUsers.jsp"%>
 			</c:if>
 			
+			<!-- Show only when user clicks a Settings -->
+			<c:if test="${userClickedSettings == true }">
+				<%@include file="settings.jsp"%>
+			</c:if>
+			
 			<!-- Modal dialog for product search -->
 			<%@include file="productSearch.jsp"%>
 

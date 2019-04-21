@@ -69,14 +69,11 @@ public class SubcategoryDAOImpl implements SubcategoryDAO{
 		}
 	}
 	
-	
-
 	@Override
 	public List<Subcategory> listActiveSubcategories() {
 		String selectActiveCategory = "FROM Subcategory WHERE active =:active";
 		Query query = sessFactory.getCurrentSession().createQuery(selectActiveCategory);
 		query.setParameter("active", true);
-		
 		return query.getResultList();
 	}
 

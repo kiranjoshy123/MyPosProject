@@ -27,6 +27,17 @@
 					<sf:errors path="description" cssClass="help-block" element="em" />
 				</div>
 			</div>
+			
+			<div class="form-group">
+				<label class="control-label col-md-4" for="categoryId">Select Category : </label>
+				<div class="col-md-8">
+					<sf:select class="form-control" id="categoryId" path="id" 
+						items="${categories}" 
+						itemLabel="name" 
+						itemValue="id"								
+					/>
+				</div>
+			</div>
 
 			<div class="form-group">
 				<div class="col-md-offset-5 col-md-7">

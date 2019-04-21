@@ -137,6 +137,15 @@ CREATE TABLE sales(
 	CONSTRAINT pk_sales_id PRIMARY KEY(id)
 );	
 
+
+CREATE TABLE settings(
+	id INT AUTO_INCREMENT,
+	shopName VARCHAR(255),
+    CONSTRAINT pk_settings_id PRIMARY KEY (id)
+);
+
+INSERT INTO settings (id,shopname) VALUES (1,'Value Mart' );
+
 INSERT INTO category (name, description,image_url,is_active) VALUES ('Grocery', 'This is description for Grocery category!', 'CAT_1.png', true);
 INSERT INTO category (name, description,image_url,is_active) VALUES ('Electronic', 'This is description for Electronic category!', 'CAT_2.png', true);
 INSERT INTO category (name, description,image_url,is_active) VALUES ('Vegetables', 'This is description for Vegetables category!', 'CAT_3.png', true);
@@ -167,21 +176,21 @@ INSERT INTO subcategory (name, description,image_url,is_active,category_id) VALU
 
 INSERT INTO userinfo 
 (first_name, last_name, role, enabled, password, email, user_name, address, contact_number) 
-VALUES ('Virat', 'Kohli', 'ADMIN', true, '$2a$10$yvjrz1qy66/TQ8sigm4.b.knJRqnfc9cvqo2n5TAMR6JWLRnxm/GO', 'vk@gmail.com', 'viratKohli', 'Address', '9752435255');
+VALUES ('Virat', 'Kohli', 'ADMIN', true, '$2a$10$lKD7aRuNah5iGxJi9hciQOQE6os84kni9tq4avHayJDIVaU.bqHZq', 'vk@gmail.com', 'viratKohli', 'Address', '9752435255');
 INSERT INTO admin 
 (enabled, email, address, contact_number, person_id) 
 VALUES (true, 'vk@gmail.com', 'Address', '9752435255', 1);
 
 INSERT INTO userinfo 
 (first_name, last_name, role, enabled, password, email, user_name, address, contact_number) 
-VALUES ('Ravindra', 'Jadeja', 'STAFF', true, '$2a$10$Gb3J2Go.s5ZKHK4hSobRyuCZZC6w/wMdNetqzNtw.JR9oj4oo1EB.', 'rj@gmail.com', 'RavindraJadeja', 'Address', '9876363544');
+VALUES ('Ravindra', 'Jadeja', 'STAFF', true, '$2a$10$G3JNNY5XOrQwQboPPDeSye3WUF0Mrp0lWDgtF9IDk0E/EcJkvRnXO', 'rj@gmail.com', 'RavindraJadeja', 'Address', '9876363544');
 INSERT INTO staff 
 (enabled, email, address, contact_number, person_id) 
 VALUES (true, 'rj@gmail.com', 'Address', '9876363544', 2);
 
 INSERT INTO userinfo 
 (first_name, last_name, role, enabled, password, email, user_name, address, contact_number) 
-VALUES ('Ravichandra', 'Ashwin', 'CUSTOMER', true, '$2a$10$75SvWVBBP35esShVRoUsKOVhae.uxopQoFYt.wK0/oh0vJqrNIz3G',  'ra@gmail.com', 'RavichandraAshwin', 'Address', '9765243566');
+VALUES ('Ravichandra', 'Ashwin', 'CUSTOMER', true, '$2a$10$8oTZ8OXcKjLprkF6c2dJl.C6DR0KBIvDpLnYMJKo4czZ3vauYJv9G',  'ra@gmail.com', 'RavichandraAshwin', 'Address', '9765243566');
 INSERT INTO customer 
 (enabled, email, address, contact_number, person_id) 
 VALUES (true, 'ra@gmail.com', 'Address', '9765243566', 3);

@@ -3,7 +3,6 @@
 <!-- Sliding side bar -->
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#">Settings</a>
   <a href="#">Reporting</a>
   <a href="${contextRoot}/history">History</a>
   <a href="#">Calc</a>
@@ -38,15 +37,21 @@
 			<ul class="nav navbar-nav navbar-right">				
 				<!-- Show 'Manage Products', 'Manage Category' and 'Manage Users' only for AMIN -->
 				<security:authorize access="hasAuthority('ADMIN')">
-					<li id="manageProducts">
-						<a href="${contextRoot}/manage/products">Manage Products</a>
+					<li id="settings">
+						<a href="${contextRoot}/settings">Settings</a>
 					</li>
-					<li id="manageCategory">
-						<a href="${contextRoot}/manage/categories">Manage Category</a>
-					</li>
-					<li id="manageUsers">
-						<a href="${contextRoot}/manage/users">Manage Users</a>
-					</li>
+			        
+			        <li class="dropdown" style="display:inline-flex; flex-direction:column;">
+				        <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          Manage
+				          <span class="caret"></span>
+				        </a>
+				        <ul class="dropdown-menu">
+				            <li style="flex: 1"><a id="manageProducts" href="${contextRoot}/manage/products">Products</a></li>
+				          	<li style="flex: 1"><a id="manageCategory" href="${contextRoot}/manage/categories">Category</a></li>
+				          	<li style="flex: 1"><a id="manageUsers" href="${contextRoot}/manage/users">Users</a></li>
+				        </ul>
+			    	</li>
 				</security:authorize>
 				
 				<security:authorize access="isAnonymous()">
@@ -56,10 +61,8 @@
 				</security:authorize>
 				<security:authorize access="isAuthenticated()">
 					<li class="dropdown">
-						<a  href="javascript:void(0)"
-							class="btn btn-default dropdown-toggle"
-							data-toggle="dropdown">
-								${userModel.fullName}
+						<a href="javascript:void(0)" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+							${userModel.fullName}
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">

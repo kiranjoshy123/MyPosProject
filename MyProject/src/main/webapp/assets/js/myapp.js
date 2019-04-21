@@ -240,7 +240,7 @@ $(function() {
 	    },
 			columns : [
 				{
-					data : 'categoryId',
+					data : 'category_Id',
 					visible : false,
 				},
 				{

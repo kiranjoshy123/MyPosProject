@@ -59,6 +59,9 @@ public class PageController {
 
 	@Autowired
 	private UserinfoDAO userinfoDAO;
+	
+	//@Autowired
+	//private SettingsDAO settingsDAO;
 
 	@RequestMapping(value = { "/", "/home", "/index" })
 	public ModelAndView index() {
@@ -67,7 +70,10 @@ public class PageController {
 		mv.addObject("userClickedHome", true);
 		mv.addObject("categories", categoryDAO.list());
 		mv.addObject("productList",productDAO.listActiveProducts());
+		
+		//Settings curSettings = settingsDAO.get();
 		mv.addObject("bOrderItems", true);
+		//mv.addObject("ShopName", curSettings.getShopName());
 		mv.addObject("currencyIcon", "&#163;");
 		return mv;
 	}
@@ -103,6 +109,15 @@ public class PageController {
 		mv.addObject("title", "History");
 		return mv;
 	}
+	
+	@RequestMapping(value = { "/settings" })
+	public ModelAndView showSettings() {
+		ModelAndView mv = new ModelAndView("page");
+		mv.addObject("title", "History");
+		mv.addObject("userClickedSettings", true);
+		return mv;
+	}
+	
 	
 	@RequestMapping(value = "get/categories", method = RequestMethod.GET)
 	@ResponseBody

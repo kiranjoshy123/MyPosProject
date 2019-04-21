@@ -11,4 +11,5 @@ drop table if exists product;
 drop table if exists cart;
 drop table if exists cart_line;
 drop table if exists sales;
+drop table if exists settings;
 SET FOREIGN_KEY_CHECKS = 1;

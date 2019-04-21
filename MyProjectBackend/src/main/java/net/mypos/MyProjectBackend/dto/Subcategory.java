@@ -30,8 +30,8 @@ public class Subcategory {
 	@Column(name = "is_active")
 	private boolean active = true;
 	
-	@Column(name = "category_id")
-	private int categoryId;
+	//@Column(name = "category_id")
+	private int category_id;
 
 	public int getId() {
 		return id;
@@ -73,18 +73,18 @@ public class Subcategory {
 		this.active = active;
 	}
 
-	public int getSubCategoryId() {
-		return categoryId;
+	public int getCategory_id() {
+		return category_id;
 	}
 
-	public void setSubCategoryId(int subcategoryId) {
-		this.categoryId = subcategoryId;
+	public void setCategory_id(int category_id) {
+		this.category_id = category_id;
 	}
 
 	@Override
 	public String toString() {
 		return "Subcategory [id=" + id + ", name=" + name + ", description=" + description + ", imageURL=" + imageURL
-				+ ", active=" + active + ", categoryId=" + categoryId + "]";
+				+ ", active=" + active + ", categoryId=" + category_id + "]";
 	}
 	
 }

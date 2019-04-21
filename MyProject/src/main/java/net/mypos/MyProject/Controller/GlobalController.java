@@ -49,7 +49,6 @@ public class GlobalController {
 				userModel.setId(user.getId());
 				userModel.setEmail(user.getEmail());
 				userModel.setRole(user.getRole());
-				userModel.setCart(userinfoDAO.getCart(user.getId()));
 				userModel.setFullName(user.getFirstName() + " " + user.getLastName());
 				
 				/*if(user.getRole() == "STAFF") 
