@@ -914,6 +914,7 @@ $(function() {
 		}
 		
 		removeCurrentSelection();
+		removeAddToCartImage();
 		
 		// Check whether the product already exists using the productId.
 		var row = $('tr[productId="' + productId + '"]');
@@ -972,6 +973,23 @@ $(function() {
 			// Product exists. Increase the count of existing product.
 			incrementProductCount(row);
 			selectRow(row);
+		}
+	}
+	
+	function removeAddToCartImage()
+	{
+		if ($('#divAddToCartToStartTranscation').children().length && $('#imageAddToCartToStartTranscation').length){
+			$('#divAddToCartToStartTranscation').empty();
+		}
+	}
+	
+	function insertAddToCartImage()
+	{
+		var cartItemCount = $("#cartTable tbody").children().length;
+		if(cartItemCount == 0)
+		{
+			var imageItem = '<img id="imageAddToCartToStartTranscation" src="' + window.contextRoot + '/resources/images' + '/additemstocart.png" class="img-responsive" style="width:80%;height:80%; display: block; margin: auto;" />'; 
+			$('#divAddToCartToStartTranscation').prepend(imageItem);
 		}
 	}
 	
@@ -1043,6 +1061,7 @@ $(function() {
 		var curItemCount = parseInt($(this).closest('tr').find('.labelQuantity').text(), 10);
 		updateCartValues(itemRemoved,curItemCount,false);
 		$(this).closest('tr').remove();
+		insertAddToCartImage();
 	});
 	
 	$(document).on('click','#itemCountPlus',function(){
@@ -1086,7 +1105,7 @@ $(function() {
 		$(this).closest('tr').find('.labelQuantity').html( '&nbsp;&nbsp;' + (curItemCount-1) + '&nbsp;&nbsp;');
 		$(this).closest('tr').find('.totalItemPrice').text( precise_round(itemPrice*(curItemCount-1),2));
 		updateCartValues(itemPrice,1,false);
-		enableDecrementButton();
+		enableDecrementButton($(this).closest('tr'));
 	});
 	
 	
@@ -1106,6 +1125,8 @@ $(function() {
 					'</thead>' +
 					'<tbody>' +
 					'</tbody>';
+			
+			insertAddToCartImage();
 			
 			$('#cartTotal').text("0.0");
 			$('#itemsInCart').text("0");

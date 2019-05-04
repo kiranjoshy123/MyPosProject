@@ -23,6 +23,11 @@
 		<tbody>
 		</tbody>
 	</table>
+	
+	<div id="divAddToCartToStartTranscation">
+		<img id="imageAddToCartToStartTranscation" src="${images}/additemstocart.png" class="img-responsive" style="width:80%;height:80%; display: block; margin: auto;" />
+	</div>
+	
 </div>
 
 <!-- Cart pay/hold/delete -->
